@@ -1,0 +1,20 @@
+<?php
+// Ympäristömuuttujat tulevat suoraan Dockerista
+$host = $_ENV['DB_HOST'] ?? null;
+$dbName = $_ENV['DB_NAME'] ?? null;
+$user = $_ENV['DB_USER'] ?? null;
+$pass = $_ENV['DB_PASS'] ?? null;
+
+// Tarkistetaan, että pakolliset muuttujat ovat määritelty
+if (!$host || !$dbName || !$user || !$pass) {
+    die('Ympäristömuuttujia puuttuu! Tarkista Docker Compose -määritykset.');
+}
+
+// Luodaan yhteys tietokantaan
+$conn = new mysqli($host, $user, $pass, $dbName);
+
+if ($conn->connect_error) {
+    error_log("Yhteys epäonnistui: " . $conn->connect_error);
+    die("Yhteys epäonnistui: " . $conn->connect_error);
+}
+?>

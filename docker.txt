@@ -1,0 +1,2 @@
+Buildaa container:
+    -docker-compose up --build
