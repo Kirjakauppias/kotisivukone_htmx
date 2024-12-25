@@ -23,8 +23,10 @@
         <label for="password">Salasana:</label>
         <input type="password" id="password" name="password" required>
 
-        <button type="submit">Kirjaudu</button>
+        <input type="submit" value="Kirjaudu">
     </form>
-    <div id="response"><!-- Tässä näytetään mahdolliset virheilmoitukset --></div>
+    <div id="response">
+        <!-- Tässä näytetään mahdolliset virheilmoitukset -->
+    </div>
 </body>
 </html>

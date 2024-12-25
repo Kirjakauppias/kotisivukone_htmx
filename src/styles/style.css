@@ -1,0 +1,7 @@
+
+#result.success {       /*Näytetään onnistuneet syötteet*/
+    color: green;
+}
+#result.error {         /*Näytetään epäonnistuneet syötteet*/
+    color: red;
+}
