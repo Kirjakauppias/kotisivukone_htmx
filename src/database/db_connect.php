@@ -1,4 +1,8 @@
 <?php
+// db_connect.php
+// kaikki SQL -virheet raportoidaan:
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 // Ympäristömuuttujat tulevat suoraan Dockerista
 $host = $_ENV['DB_HOST'] ?? null;
 $dbName = $_ENV['DB_NAME'] ?? null;

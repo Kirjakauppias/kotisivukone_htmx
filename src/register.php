@@ -77,19 +77,10 @@
           <div class="row">
             <input type="submit" value="Tallenna">
           </div>
-          <div id="response" aria-live="polite" role="alert">
+          <div id="response" hx-target="this" aria-live="polite" role="alert">
             <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut rekisteröinti -->
           </div>
         </form>        
     </div><!--/container-->
-<script>
-    // Painikkeeseen lisätty odotustilan indikointi
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function() {
-        const submitButton = form.querySelector('input[type="submit"]');
-        submitButton.value = "Lähetetään...";
-        submitButton.disabled = true;
-    });
-</script>
 </body>
 </html>

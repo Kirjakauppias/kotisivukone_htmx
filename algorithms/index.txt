@@ -1,0 +1,42 @@
+HTML-tiedoston alku:
+Aloitetaan HTML-dokumentin rakenne määrittelemällä kieli (lang="en") ja merkistö (UTF-8).
+
+Sivun otsikko:
+Lisätään dokumentin otsikko <title>Kirjautuminen</title>, joka näkyy selainvälilehdessä.
+
+Responsiivisuus ja tyylit:
+
+    Lisätään <meta name="viewport" content="width=device-width, initial-scale=1.0"> varmistaen, että sivu skaalautuu hyvin eri laitteilla.
+    Linkitetään ulkoinen CSS-tyylitiedosto <link rel="stylesheet" href="./styles/style.css">, joka määrittelee ulkoasun.
+    Lisätään JavaScript-tiedosto HTMX-kirjastoa varten <script src="htmx.js" defer></script>.
+
+Sivun runko:
+
+    Aloitetaan <body>-osio, jossa näkyy kirjautumislomake ja siihen liittyvä toiminnallisuus.
+
+Kirjautumislomake:
+
+    Lomake määritetään <form>-elementillä.
+        Lomakkeessa käytetään HTMX-attribuutteja:
+            hx-post="login.php" lähettää lomaketiedot palvelimelle login.php-sivulle.
+            hx-target="#response" osoittaa, että palvelimelta saadut vastaukset näytetään #response-elementissä.
+            hx-swap="outerHTML" korvaa koko #response-elementin palvelimelta saadulla vastauksella.
+    Lomakkeeseen lisätään seuraavat kentät:
+        Käyttäjätunnus:
+            Tekstikenttä käyttäjätunnuksen syöttämiseksi.
+            <label for="username">Käyttäjätunnus:</label> määrittää kentän kuvauksen.
+            <input type="text" id="username" name="username" required> määrittelee itse syöttökentän.
+        Salasana:
+            Salasanakenttä salasanan syöttämiseksi.
+            <label for="password">Salasana:</label> määrittää kentän kuvauksen.
+            <input type="password" id="password" name="password" required> määrittelee itse syöttökentän.
+    Lopuksi lisätään kirjautumispainike:
+        <input type="submit" value="Kirjaudu">.
+
+Vastausalue:
+
+    Luodaan elementti div id="response" virheilmoitusten tai palvelimen vastausten näyttämiseksi.
+    HTMX päivittää tämän elementin sisällön lomakkeen lähetyksen jälkeen.
+
+HTML-tiedoston loppu:
+Suljetaan kaikki avatut elementit (esim. <body> ja <html>), varmistaen HTML:n eheys.
