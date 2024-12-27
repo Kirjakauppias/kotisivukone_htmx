@@ -1,3 +1,4 @@
+<!-- register.php -->
 <!-- Sivu jossa käyttäjä voi luoda tunnuksen itselleen -->
 <html lang="en">
 <head>

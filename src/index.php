@@ -1,5 +1,13 @@
-<!-- index.html -->
-<!-- KIRJAUTUMIS-SIVU -->
+<?php
+// index.php
+session_start(); // Aloitetaan sessio
+$loggedIn = isset($_SESSION['user_id']); // Alustetaan muuttuja.
+// Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,25 +17,35 @@
     <script src="htmx.js" defer></script>
 </head>
 <body>
-    <!-- Kirjautumislomake -->
-    <!-- hx-post: lomake lähetetään login.php-sivulle 
-         hx-target: HTMX:n vastaus liitetään #response-diviin 
-         hx-swap:="outerHTNL" koko #response-div päivitetään vastauksella -->
-    <form 
-        hx-post="login.php"
-        hx-targer="#response"
-        hx-swap="outerHTML"
-    >
-        <label for="username">Käyttäjätunnus:</label>
-        <input type="text" id="username" name="username" required>
+    <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
+    <?php if(!$loggedIn): ?>
+        <!-- Kirjautumislomake -->
+        <!-- hx-post: lomake lähetetään login.php-sivulle 
+             hx-target: HTMX:n vastaus liitetään #response-diviin 
+             hx-swap:="outerHTNL" koko #response-div päivitetään vastauksella -->
+        <form 
+            hx-post="login.php"
+            hx-target="#response"
+            hx-swap="outerHTML"
+        >
+            <label for="username">Käyttäjätunnus:</label>
+            <input type="text" id="username" name="username" autocomplete="off" required>
 
-        <label for="password">Salasana:</label>
-        <input type="password" id="password" name="password" required>
+            <label for="password">Salasana:</label>
+            <input type="password" id="password" name="password" autocomplete="off" required>
 
-        <input type="submit" value="Kirjaudu">
-    </form>
-    <div id="response">
-        <!-- Tässä näytetään mahdolliset virheilmoitukset -->
-    </div>
+            <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
+            <input type="submit" value="Kirjaudu">
+        </form>
+        <div id="response" aria-live="polite" role="alert">
+            <!-- Tässä näytetään mahdolliset virheilmoitukset -->
+        </div>
+    <?php else: ?>
+        <div class="welcome">
+            <p>Tervetuloa, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
+        </div>
+    <?php endif; ?>
 </body>
 </html>

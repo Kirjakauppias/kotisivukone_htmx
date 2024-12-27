@@ -1,4 +1,5 @@
 <?php
+// register_check.php
 // Suoritetaan tilin luonnin tarkistus
 // Tarkistetaan, että pyyntö on lähetetty POST -metodilla
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
