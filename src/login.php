@@ -19,10 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = htmlspecialchars(trim($_POST['username'] ?? ''));
     $password = trim($_POST['password']);
 
-    if(empty($username) || empty($password)) {
+    if (empty($username) || empty($password)) {
         echo "<div id='response'><p class='error'>Täytä kaikki kentät.</p></div>";
         exit();
     }
+
+    // Haetaan käyttäjän tiedot tietokannasta.
+    $user = getUserByUsername($conn, $username);
+    if (!$user) {
+        echo "<div id='response'><p class='error'>Käyttäjätunnusta ei löytynyt.</p></div>";
+        exit();
+    }
+
+    // Varmistetaan salasanan oikeellisuus.
+    if (password_verify($password, $user['password'])) {
+        // Käyttäjä kirjautuu sisään, asetetaan sessiotiedot.
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['status'] = $user['status'];
+        echo "<div id='response'><p class='success'>Kirjautuminen onnistui! Tervetuloa, {$user['username']}.</p></div>";
+    } else {
+        echo "<div id='response'><p class='error'>Virheellinen salasana.</p></div>";
+    }
+
 } else {
     // Jos ei ole POST-pyyntöä, palautetaan virheilmoitus.
     header('HTTP/1.1 405 Method Not Allowed');

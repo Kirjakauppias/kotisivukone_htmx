@@ -43,4 +43,13 @@ function checkUserEmailExists($conn, $email) {
 
     return fetchStmt($stmt);
 }
+
+// Funktio joka hakee käyttäjän tiedot
+function getUserByUsername($conn, $username) {
+    $stmt = $conn->prepare("SELECT user_id, username, password, status FROM user WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
 ?>

@@ -1,42 +1,41 @@
-HTML-tiedoston alku:
-Aloitetaan HTML-dokumentin rakenne määrittelemällä kieli (lang="en") ja merkistö (UTF-8).
+Ympäristön asetukset:
 
-Sivun otsikko:
-Lisätään dokumentin otsikko <title>Kirjautuminen</title>, joka näkyy selainvälilehdessä.
+    Ota käyttöön virheiden raportointi:
+        Näytä virheet kehitysympäristössä.
+    Aseta turvaheadereita:
+        X-Frame-Options: DENY estää clickjackingin.
+        Content-Security-Policy: default-src 'self'; script-src 'self' rajoittaa resurssien lähteitä.
 
-Responsiivisuus ja tyylit:
+Istunnon turvallisuusasetukset:
 
-    Lisätään <meta name="viewport" content="width=device-width, initial-scale=1.0"> varmistaen, että sivu skaalautuu hyvin eri laitteilla.
-    Linkitetään ulkoinen CSS-tyylitiedosto <link rel="stylesheet" href="./styles/style.css">, joka määrittelee ulkoasun.
-    Lisätään JavaScript-tiedosto HTMX-kirjastoa varten <script src="htmx.js" defer></script>.
+    Pakota HTTPS evästeille (session.cookie_secure).
+    Suojaa evästeet JavaScriptiltä (session.cookie_httponly).
+    Ota käyttöön SameSite-strategia evästeille (session.cookie_samesite).
+    Aloita PHP-istunto.
 
-Sivun runko:
+CSRF-suojaus:
 
-    Aloitetaan <body>-osio, jossa näkyy kirjautumislomake ja siihen liittyvä toiminnallisuus.
+    Tarkista, onko istunnossa CSRF-tunnus.
+    Jos ei, luo uusi tunnus käyttäen random_bytes-funktiota.
 
-Kirjautumislomake:
+Käyttöliittymän logiikka:
 
-    Lomake määritetään <form>-elementillä.
-        Lomakkeessa käytetään HTMX-attribuutteja:
-            hx-post="login.php" lähettää lomaketiedot palvelimelle login.php-sivulle.
-            hx-target="#response" osoittaa, että palvelimelta saadut vastaukset näytetään #response-elementissä.
-            hx-swap="outerHTML" korvaa koko #response-elementin palvelimelta saadulla vastauksella.
-    Lomakkeeseen lisätään seuraavat kentät:
-        Käyttäjätunnus:
-            Tekstikenttä käyttäjätunnuksen syöttämiseksi.
-            <label for="username">Käyttäjätunnus:</label> määrittää kentän kuvauksen.
-            <input type="text" id="username" name="username" required> määrittelee itse syöttökentän.
-        Salasana:
-            Salasanakenttä salasanan syöttämiseksi.
-            <label for="password">Salasana:</label> määrittää kentän kuvauksen.
-            <input type="password" id="password" name="password" required> määrittelee itse syöttökentän.
-    Lopuksi lisätään kirjautumispainike:
-        <input type="submit" value="Kirjaudu">.
+    Tarkista, onko käyttäjä kirjautunut sisään:
+        Jos ei ole:
+            Näytä kirjautumislomake.
+            Lisää lomakkeeseen HTMX-attribuutit (hx-post, hx-target, hx-swap).
+            Lisää piilotettu kenttä CSRF-tunnukselle.
+        Jos on:
+            Näytä tervetulotoivotus.
+            Näytä uloskirjautumislinkki.
 
-Vastausalue:
+Turvatoimenpiteet:
 
-    Luodaan elementti div id="response" virheilmoitusten tai palvelimen vastausten näyttämiseksi.
-    HTMX päivittää tämän elementin sisällön lomakkeen lähetyksen jälkeen.
+    Käytä htmlspecialchars-funktiota suojataksesi käyttäjän tiedot XSS-hyökkäyksiltä.
+    Hyödynnä CSRF-tunnusta estämään väärentämishyökkäykset.
+    Käytä Content-Security-Policyä estämään haitallisten resurssien lataus.
 
-HTML-tiedoston loppu:
-Suljetaan kaikki avatut elementit (esim. <body> ja <html>), varmistaen HTML:n eheys.
+Käytettävyysominaisuudet:
+
+    Paranna saavutettavuutta lisäämällä aria-live ja role="alert" lomakepalautteisiin.
+    Määritä lomakekenttien autocomplete-attribuutit käyttäjäystävällisyyden parantamiseksi.

@@ -1,0 +1,47 @@
+Istunnon aloitus:
+
+    Käynnistä PHP-istunto:
+
+    session_start();
+
+Tietokantayhteys:
+
+    Lataa tietokantayhteyden määrittelyt db_enquiry.php-tiedostosta:
+
+    require_once "database/db_enquiry.php";
+
+Pyynnön tarkistus:
+
+    Varmista, että pyyntö on HTTP POST:
+        Jos pyyntö ei ole POST, palauta 405 Method Not Allowed ja virheilmoitus.
+
+CSRF-tunnuksen tarkistus:
+
+    Hae CSRF-tunnus lomakkeen syötteistä.
+    Vertaa lomakkeen tunnusta istunnon tunnukseen:
+        Jos tunnukset eivät täsmää, palauta 403 Forbidden ja virheilmoitus.
+
+Syötteiden suodatus:
+
+    Hae käyttäjätunnus ja salasana lomakkeelta.
+    Trimmaa ja puhdista syötteet:
+        Käytä trim ja htmlspecialchars suojaamaan XSS-hyökkäyksiltä.
+    Tarkista, että kaikki kentät on täytetty:
+        Jos kentät ovat tyhjiä, palauta virheilmoitus.
+
+Käyttäjän tietojen haku:
+
+    Hae tietokannasta käyttäjän tiedot käyttäjätunnuksen perusteella.
+    Jos käyttäjää ei löydy, palauta virheilmoitus.
+
+Salasanan tarkistus:
+
+    Vertaile syötettyä salasanaa tietokannan hashattuun salasanaan käyttäen password_verify:
+        Jos salasana täsmää:
+            Aseta istuntomuuttujat (user_id, username, status).
+            Palauta onnistumisilmoitus.
+        Jos salasana ei täsmää, palauta virheilmoitus.
+
+Virhetilanteiden käsittely:
+
+    Jos jokin tarkistuksista epäonnistuu (esim. tyhjä kenttä, väärä salasana, virheellinen CSRF-tunnus), näytä sopiva virheilmoitus käyttäjälle.
