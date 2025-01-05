@@ -1,0 +1,27 @@
+Ota käyttöön SQL-virheiden raportointi:
+
+    Määritä, että kaikki SQL-virheet raportoidaan (käytetään MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT).
+
+Hae ympäristömuuttujat:
+
+    Lue ympäristömuuttujat, kuten DB_HOST, DB_NAME, DB_USER, ja DB_PASS, $_ENV-taulukosta.
+    Jos jokin muuttujista puuttuu, käytä oletuksena null-arvoa.
+
+Tarkista ympäristömuuttujat:
+
+    Varmista, että kaikki pakolliset ympäristömuuttujat (DB_HOST, DB_NAME, DB_USER, DB_PASS) on määritelty.
+    Jos jokin näistä puuttuu, lopeta ohjelman suoritus ja näytä virheilmoitus: "Ympäristömuuttujia puuttuu! Tarkista Docker Compose -määritykset."
+
+Luo yhteys tietokantaan:
+
+    Yritä muodostaa yhteys tietokantaan mysqli-luokan avulla, käyttäen ympäristömuuttujista luettuja arvoja.
+
+Tarkista yhteyden onnistuminen:
+
+    Jos yhteyden muodostaminen epäonnistuu:
+        Kirjoita virhe lokiin.
+        Lopeta ohjelman suoritus ja näytä käyttäjälle virheilmoitus, joka sisältää yhteysvirheen syyn.
+
+Jos yhteys onnistuu:
+
+    Jatka ohjelman suorittamista tietokantayhteyden avulla.
