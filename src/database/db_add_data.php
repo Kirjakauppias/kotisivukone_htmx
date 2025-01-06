@@ -4,16 +4,16 @@
 require_once "db_connect.php";
 
 // Funktio, jolla lisätään uusi käyttäjä tietokantaan
-function addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword, $status) {
+function addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword) {
     // SQL-lause uuden käyttäjän lisäämiseksi.
-    $sql = "INSERT INTO user(firstname, lastname, username, email, password, status)
-            VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user(firstname, lastname, username, email, password)
+            VALUES (?, ?, ?, ?, ?)";
 
     // Valmistellaan SQL-lause
     if ($stmt = $conn->prepare($sql)) { // Tarkistetaan, onnistuiko valmistelu.
         // Bindataan (sidotaan) parametrit, joilla täytetään SQL-lause.
         // Käytetään "ssssss" -tyyppimääritystä, koska kaikki arvot ovat merkkijonoja.
-        $stmt->bind_param("ssssss", $firstname, $lastname, $username, $email, $hashedPassword, $status);
+        $stmt->bind_param("sssss", $firstname, $lastname, $username, $email, $hashedPassword);
         // Suoritetaan kysely tietokantaan.
         $stmt->execute();               
         // Suljetaan valmisteltu lausunto, kun sitä ei enää tarvita.

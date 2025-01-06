@@ -48,9 +48,8 @@ Tulosta virheet (jos on):
 Lisää uusi käyttäjä (jos ei ole virheitä):
 
     Hashaa salasana turvallisesti password_hash-funktiolla.
-    Aseta oletusstatus arvoksi "customer".
     Lisää käyttäjä tietokantaan addUser-funktiolla käyttäen:
-        Etunimi, sukunimi, käyttäjätunnus, sähköposti, hashattu salasana ja status.
+        Etunimi, sukunimi, käyttäjätunnus, sähköposti, hashattu salasana.
 
 Ilmoita onnistuneesta rekisteröinnistä:
 

@@ -68,11 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Hashataan salasana turvallisesti.
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        // Lisätään uudelle käyttäjälle oletuksena customer -status.
-        $status = "customer";
         
         // Lisätään käyttäjä tietokantaan.
-        addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword, $status);
+        addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword);
         // Annetaan ilmoitus että käyttäjänimi on tallennettu tietokantaan onnistuneesti.
         echo "<div id='response'><p class='success'>Sinut on lisätty onnistuneesti!</p></div>";
         exit();

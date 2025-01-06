@@ -1,0 +1,19 @@
+Tarkistetaan taulun rakenne:
+    -SHOW CREATE TABLE `taulun_nimi`;
+
+Lisätään 'role' -sarake ENUM-tyyppisenä, jossa arvot "customer" ja "admin", "customer" = DEFAULT:
+    -ALTER TABLE `user`
+        ADD `role` ENUM('customer', 'admin') DEFAULT 'customer' AFTER `status`;
+
+Lisätään UNIQUE-indeksit username- ja email- kentille:
+    -ALTER TABLE `user`
+        ADD UNIQUE KEY `unique_username` (`username`),
+        ADD UNIQUE KEY `unique_email` (`email`);
+
+Muutetaan status-kenttä käyttämään ENUM-tyyppiä ja määritellään oletusarvo:
+    -ALTER TABLE `user`
+        MODIFY `status` ENUM('active', 'inactive', 'banned') DEFAULT 'active';
+
+Tietoturvan varmistus password-kentän pituuden varmistaminen hashien tallentamista varten:
+    -ALTER TABLE `user`
+        MODIFY `password` varchar(255) NOT NULL;

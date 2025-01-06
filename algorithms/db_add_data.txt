@@ -8,14 +8,13 @@ Funktiomääritelmä:
         $conn: Tietokantayhteysobjekti.
         $firstname, $lastname, $username, $email: Käyttäjän tiedot.
         $hashedPassword: Salasanan hashattu versio.
-        $status: Käyttäjän tilatieto.
 
 SQL-lauseen määrittely:
 
     Rakennetaan SQL-lause käyttäjän lisäämiseen user-tauluun:
 
-    INSERT INTO user(firstname, lastname, username, email, password, status)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO user(firstname, lastname, username, email, password)
+    VALUES (?, ?, ?, ?, ?)
 
     Kysymysmerkit toimivat paikkamerkkeinä parametrien arvoille.
 
@@ -24,7 +23,7 @@ SQL-lauseen valmistelu:
     Yritetään valmistella SQL-lause käyttämällä $conn->prepare($sql).
     Jos valmistelu onnistuu:
         Sidotaan funktiolle annetut parametrit SQL-lauseeseen:
-            Käytetään bind_param-metodia, jossa "ssssss" määrittää, että kaikki parametrit ovat merkkijonoja (string).
+            Käytetään bind_param-metodia, jossa "sssss" määrittää, että kaikki parametrit ovat merkkijonoja (string).
         Suoritetaan kysely tietokantaan käyttämällä execute-metodia.
         Suljetaan valmisteltu lausunto close-metodilla.
     Jos valmistelu epäonnistuu:
