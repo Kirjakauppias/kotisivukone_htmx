@@ -1,0 +1,18 @@
+Algoritmi käyttäjän kirjautumisen lopettamiseksi:
+
+    Aloita istunto:
+        Käytä session_start()-funktiota käynnistämään tai jatkamaan olemassa olevaa istuntoa.
+
+    Tyhjennä istuntomuuttujat:
+        Poista kaikki istunnossa tallennetut muuttujat käyttämällä session_unset()-funktiota.
+
+    Tuhoa istunto:
+        Sulje nykyinen istunto ja poista kaikki siihen liittyvät tiedot session_destroy()-funktiolla.
+
+    Ohjaa käyttäjä etusivulle:
+        Määritä selain siirtymään index.php-sivulle käyttäen header('Location: index.php').
+
+    Pysäytä käsittelyn suorittaminen:
+        Käytä exit()-funktiota estämään lisäkoodin suorittaminen ja varmista, että uudelleenohjaus tapahtuu heti.
+
+Funktionaalisuus: Tämä prosessi varmistaa, että kaikki käyttäjän istuntotiedot poistetaan ja käyttäjä ohjataan takaisin kirjautumissivulle (tai muulle määritellylle aloitussivulle).
