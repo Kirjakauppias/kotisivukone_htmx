@@ -2,6 +2,7 @@
 declare(strict_types=1);
 session_start();
 require_once "database/db_enquiry.php";
+require_once "database/db_add_data.php";
 require_once "funcs.php";
 
 // Tarkistetaan, onko lomake lähetetty index.php:sta.
@@ -36,29 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!empty($errors)) {
-        echo "
-            <form
-                class='login_form' 
-                hx-post='login.php'
-                hx-target='#login_container' 
-                hx-swap='innerHTML'
-                autocomplete='off'
-            >
-                <label for='username'>Käyttäjätunnus:</label>
-                <input type='text' id='username' name='username' autocomplete='username' required>
-
-                <label for='password'>Salasana:</label>
-                <input type='password' id='password' name='password' autocomplete='current-password' required>
-
-                <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
-                <input type='hidden' name='csrf_token' value='" . $_SESSION['csrf_token'] . "'>
-
-                <input type='submit' value='Kirjaudu'>
-            </form>
-        ";
         display_errors($errors);
         exit();
     } else {
+        // Päivitetään tietokantaan käyttäjän kirjautuminen
+        userLastLogin($conn, $user);
+
         // Asetetaan sessiotiedot
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];

@@ -27,3 +27,11 @@ function addUser($conn, $firstname, $lastname, $username, $email, $hashedPasswor
             ";
     }
 }
+
+// Funktio joka päivittää käyttäjän viimeisimmän kirjautumisen tietokantaan
+function userLastLogin($conn, $user) {
+    $stmt = $conn->prepare("UPDATE user SET last_login = NOW() WHERE user_id = ?");
+    $stmt->bind_param("i", $user['user_id']);
+    $stmt->execute();
+    $stmt->close();
+}

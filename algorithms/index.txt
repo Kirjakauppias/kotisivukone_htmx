@@ -1,41 +1,52 @@
-Ympäristön asetukset:
+Virheiden raportointi
 
-    Ota käyttöön virheiden raportointi:
-        Näytä virheet kehitysympäristössä.
-    Aseta turvaheadereita:
-        X-Frame-Options: DENY estää clickjackingin.
-        Content-Security-Policy: default-src 'self'; script-src 'self' rajoittaa resurssien lähteitä.
+    Kehitysympäristössä virheiden näyttö otetaan käyttöön:
+        Näytetään kaikki virheet (error_reporting(E_ALL)).
+        Asetetaan virheilmoitukset näkyviin selaimessa (ini_set('display_errors', '1')).
 
-Istunnon turvallisuusasetukset:
+Turvatoimenpiteet HTTP-otsikoilla
 
-    Pakota HTTPS evästeille (session.cookie_secure).
-    Suojaa evästeet JavaScriptiltä (session.cookie_httponly).
-    Ota käyttöön SameSite-strategia evästeille (session.cookie_samesite).
-    Aloita PHP-istunto.
+    Lisätään X-Frame-Options: DENY, joka estää Clickjacking-hyökkäykset.
+    Lisätään Content-Security-Policy, joka sallii oletuksena vain omat (self) resurssit.
 
-CSRF-suojaus:
+Sessioiden suojaaminen
 
-    Tarkista, onko istunnossa CSRF-tunnus.
-    Jos ei, luo uusi tunnus käyttäen random_bytes-funktiota.
+    Asetetaan evästeet turvallisiksi:
+        session.cookie_secure = 1: Evästeet välitetään vain HTTPS-yhteyksillä.
+        session.cookie_httponly = 1: Estetään JavaScriptin pääsy evästeisiin.
+        session.cookie_samesite = Strict: Evästeitä ei lähetetä kolmannen osapuolen pyynnöissä.
+    Aloitetaan sessio kutsumalla session_start().
 
-Käyttöliittymän logiikka:
+Kirjautumistilan tarkistus
 
-    Tarkista, onko käyttäjä kirjautunut sisään:
-        Jos ei ole:
-            Näytä kirjautumislomake.
-            Lisää lomakkeeseen HTMX-attribuutit (hx-post, hx-target, hx-swap).
-            Lisää piilotettu kenttä CSRF-tunnukselle.
-        Jos on:
-            Näytä tervetulotoivotus.
-            Näytä uloskirjautumislinkki.
+    Tarkistetaan, onko käyttäjä kirjautunut:
+        Määritetään $loggedIn muuttujaksi, joka tarkistaa, onko $_SESSION['user_id'] asetettu.
 
-Turvatoimenpiteet:
+CSRF-turva (Cross-Site Request Forgery)
 
-    Käytä htmlspecialchars-funktiota suojataksesi käyttäjän tiedot XSS-hyökkäyksiltä.
-    Hyödynnä CSRF-tunnusta estämään väärentämishyökkäykset.
-    Käytä Content-Security-Policyä estämään haitallisten resurssien lataus.
+    Jos CSRF-tokenia ei ole asetettu tai se on vanhentunut (yli 5 minuuttia):
+        Luodaan uusi token bin2hex(random_bytes(32)).
+        Token tallennetaan sessioon muuttujalla $_SESSION['csrf_token'].
+        Tokenille asetetaan aikaleima $_SESSION['csrf_token_time'].
 
-Käytettävyysominaisuudet:
+HTML-sivun rakenne
 
-    Paranna saavutettavuutta lisäämällä aria-live ja role="alert" lomakepalautteisiin.
-    Määritä lomakekenttien autocomplete-attribuutit käyttäjäystävällisyyden parantamiseksi.
+    HTML-dokumentti sisältää:
+        CSRF-tokenin <meta>-otsikkotietoihin (<meta name="csrf-token">).
+        HTMX-konfiguraation, joka asettaa CSRF-tokenin kaikkiin pyyntöihin.
+
+Kirjautumislomakkeen renderöinti
+
+    Jos käyttäjä ei ole kirjautunut ($loggedIn == false):
+        Näytetään kirjautumislomake:
+            Käyttäjänimi ja salasana kentät.
+            Piilotettu kenttä, joka sisältää CSRF-tokenin.
+            Lomake käyttää HTMX:ää lähetykseen (hx-post="login.php").
+            Virheilmoitukset näytetään <div id="errors">-elementissä.
+    Jos käyttäjä on kirjautunut ($loggedIn == true):
+        Näytetään tervetuloviesti käyttäjän nimellä.
+        Annetaan linkki uloskirjautumiseen (logout.php).
+
+Footer
+
+    Sivun lopussa on footer, joka ei vaikuta kirjautumisprosessiin.

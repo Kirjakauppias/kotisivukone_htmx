@@ -1,47 +1,62 @@
-Istunnon aloitus:
+Asetusten ja riippuvuuksien alustaminen
 
-    Käynnistä PHP-istunto:
+    session_start(): Aloitetaan PHP-sessio käyttäjän tietojen tallentamista varten.
+    require_once-komennot ladataan:
+        db_enquiry.php: Sisältää tietokantayhteyden ja tarvittavat kyselyt.
+        funcs.php: Sisältää hyötyfunktioita, kuten virheiden näyttämisen.
 
-    session_start();
+Lomakkeen lähetyksen tarkistaminen
 
-Tietokantayhteys:
+    Tarkistetaan, onko pyyntö lähetetty POST-metodilla:
+        Jos ei, palautetaan virhe:
+            HTTP-vastaus: 405 Method Not Allowed.
+            Tulostetaan virheilmoitus selaimeen.
 
-    Lataa tietokantayhteyden määrittelyt db_enquiry.php-tiedostosta:
+Syötteiden käsittely
 
-    require_once "database/db_enquiry.php";
+    Haetaan käyttäjän syöttämät tiedot:
+        $_POST['username']: Käyttäjänimi (siivotaan HTML-erikoismerkit ja ylimääräiset välilyönnit).
+        $_POST['password']: Salasana (trimmataan ylimääräiset välilyönnit).
+        $_POST['csrf_token']: CSRF-token.
 
-Pyynnön tarkistus:
+Virheiden hallinnan alustaminen
 
-    Varmista, että pyyntö on HTTP POST:
-        Jos pyyntö ei ole POST, palauta 405 Method Not Allowed ja virheilmoitus.
+    errors-taulukko alustetaan tyhjäksi. Tämä sisältää kaikki lomakkeen käsittelyn aikana havaitut virheet.
 
-CSRF-tunnuksen tarkistus:
+Turvallisuustarkistukset
 
-    Hae CSRF-tunnus lomakkeen syötteistä.
-    Vertaa lomakkeen tunnusta istunnon tunnukseen:
-        Jos tunnukset eivät täsmää, palauta 403 Forbidden ja virheilmoitus.
+    CSRF-tokenin tarkistaminen:
+        Varmistetaan, että $_POST['csrf_token'] vastaa sessiossa tallennettua tokenia:
+            Jos token on väärä, lisätään virheilmoitus.
+        Tarkistetaan tokenin voimassaoloaika (enintään 300 sekuntia):
+            Jos token on vanhentunut, lisätään virheilmoitus.
+    Syötekenttien tarkistaminen:
+        Varmistetaan, että käyttäjänimi ja salasana eivät ole tyhjiä.
+            Jos jokin kentistä on tyhjä, lisätään virheilmoitus.
 
-Syötteiden suodatus:
+Käyttäjän autentikointi
 
-    Hae käyttäjätunnus ja salasana lomakkeelta.
-    Trimmaa ja puhdista syötteet:
-        Käytä trim ja htmlspecialchars suojaamaan XSS-hyökkäyksiltä.
-    Tarkista, että kaikki kentät on täytetty:
-        Jos kentät ovat tyhjiä, palauta virheilmoitus.
+    Haetaan käyttäjä tietokannasta kutsumalla getUserByUsername($conn, $username):
+        Jos käyttäjää ei löydy tai salasana ei täsmää (käytetään password_verify-funktiota), lisätään virheilmoitus.
 
-Käyttäjän tietojen haku:
+Virheiden käsittely
 
-    Hae tietokannasta käyttäjän tiedot käyttäjätunnuksen perusteella.
-    Jos käyttäjää ei löydy, palauta virheilmoitus.
+    Jos virhelistassa on virheitä:
+        Näytetään virheet kutsumalla display_errors($errors).
+        Suoritus päätetään exit()-komennolla.
 
-Salasanan tarkistus:
+Onnistunut kirjautuminen
 
-    Vertaile syötettyä salasanaa tietokannan hashattuun salasanaan käyttäen password_verify:
-        Jos salasana täsmää:
-            Aseta istuntomuuttujat (user_id, username, status).
-            Palauta onnistumisilmoitus.
-        Jos salasana ei täsmää, palauta virheilmoitus.
+    Jos ei ole virheitä:
+        Päivitetään käyttäjän kirjautuminen userLastLogin($conn, $user)
+        Tallennetaan käyttäjän tiedot sessioon:
+            user_id, username, ja status.
+        Luodaan uusi CSRF-token tulevaa käyttöä varten ja tallennetaan se sessioon.
+        Käyttäjä ohjataan etusivulle (index.php) HTTP-headerilla HX-Redirect.
 
-Virhetilanteiden käsittely:
+Lopetus
 
-    Jos jokin tarkistuksista epäonnistuu (esim. tyhjä kenttä, väärä salasana, virheellinen CSRF-tunnus), näytä sopiva virheilmoitus käyttäjälle.
+    Varmistetaan, että jokainen pyyntö päättyy oikealla tavalla:
+        Virheellisellä pyynnöllä virhevastaukseen.
+        Onnistuneella kirjautumisella uudelleenohjaukseen.
+
