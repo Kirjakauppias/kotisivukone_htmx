@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 // Lisätään virheiden raportointi kehitysympäristössä
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -17,12 +16,14 @@ ini_set('session.cookie_samesite', 'Strict'); // Ei lähetä keksejä kolmannen 
 session_start(); // Aloitetaan sessio
 
 $loggedIn = isset($_SESSION['user_id']); // Alustetaan muuttuja.
+
 // Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
-if (!isset($_SESSION['csrf_token'])) {
+// Luodaan tokenille aikaraja.
+if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    $_SESSION['csrf_token_time'] = time();
 }
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,39 +32,42 @@ if (!isset($_SESSION['csrf_token'])) {
     <title>Kirjautuminen</title>
     <link rel="stylesheet" href="./styles/style.css">
     <script src="htmx.js" defer></script>
+    <script>
+        document.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        });
+    </script>
 </head>
 <body>
+    <div id="login_container">
     <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
-    <?php if(!$loggedIn): ?>
-        <!-- Kirjautumislomake -->
-        <!-- hx-post: lomake lähetetään login.php-sivulle 
-             hx-target: HTMX:n vastaus liitetään #response-diviin 
-             hx-swap:="outerHTNL" koko #response-div päivitetään vastauksella -->
-        <form 
-            hx-post="login.php"
-            hx-target="#response"
-            hx-swap="outerHTML"
-            autocomplete="off"
-        >
-            <label for="username">Käyttäjätunnus:</label>
-            <input type="text" id="username" name="username" autocomplete="username" required>
+        <?php if(!$loggedIn): ?>
+            <form
+                class="login_form" 
+                hx-post="login.php"
+                hx-target="#login_container" 
+                hx-swap="innerHTML"
+                autocomplete="off"
+            >
+                <label for="username">Käyttäjätunnus:</label>
+                <input type="text" id="username" name="username" autocomplete="username" required>
 
-            <label for="password">Salasana:</label>
-            <input type="password" id="password" name="password" autocomplete="current-password" required>
+                <label for="password">Salasana:</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
 
-            <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
-            <input type="submit" value="Kirjaudu">
-        </form>
-        <div id="response" aria-live="polite" role="alert">
-            <!-- Tässä näytetään mahdolliset virheilmoitukset -->
-        </div>
-    <?php else: ?>
-        <div class="welcome">
-            <p>Tervetuloa, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8'); ?>!</p>
+                <input type="submit" value="Kirjaudu">
+            </form>
+        <?php else: ?>
+            <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
             <a href="logout.php">Kirjaudu ulos</a>
-        </div>
-    <?php endif; ?>
+        <?php endif; ?>    
+    </div><!-- /login_container -->
+    <!-- Footer, joka ei vaikuta kirjautumisprosessiin -->
+    <footer>
+        <p>@ 2025 Mikko Lepistö</p>
+    </footer>
 </body>
 </html>
