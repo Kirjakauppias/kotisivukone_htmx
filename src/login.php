@@ -1,8 +1,11 @@
 <?php
 declare(strict_types=1);
 session_start();
+// getUserByUsername($conn, $username)
 require_once "database/db_enquiry.php";
+// userLastLogin($conn, $user)
 require_once "database/db_add_data.php";
+// display_errors($errors)
 require_once "funcs.php";
 
 // Tarkistetaan, onko lomake lähetetty index.php:sta.
@@ -13,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Tarkistetaan HTTP-header:
     $csrf_token = $_POST['csrf_token'] ?? '';
 
-    $errors = []; // Virheilmoitusten taulukko
+    // Virheilmoitusten taulukko, tyhjä.
+    $errors = []; 
 
     // Tarkistetaan CSRF-token
     if ($csrf_token !== $_SESSION['csrf_token']) {
@@ -36,6 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Virheellinen käyttäjätunnus tai salasana";
     }
 
+    // Jos errors-taulukko ei ole tyhjä, tulostetaan taulukon tiedot
+    // ja suljetaan ohjelma, muussa tapauksessa jatketaan kirjautumis-
+    // prosessia.
     if (!empty($errors)) {
         display_errors($errors);
         exit();

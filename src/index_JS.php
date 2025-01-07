@@ -53,19 +53,39 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 <body>
     <?php if(!$loggedIn): ?>
         <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
-        <button 
-            hx-get="login_modal.php" 
-            hx-target="#modal-container" 
-            hx-trigger="click"
-        >
-            Avaa Modal
-        </button>
+        <button onclick="openModal()">Kirjaudu</button>
     <?php else: ?>
         <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
         <a href="logout.php">Kirjaudu ulos</a>
     <?php endif; ?>
     
-   <div id="modal-container"></div>
+    <div id="loginModal">
+        <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+            <div id="login_container">
+                <form 
+                    hx-post="login.php"
+                    hx-target="#errors" 
+                    hx-swap="innerHTML"
+                    autocomplete="off"
+                >
+                    <label for="username">Käyttäjätunnus:</label>
+                    <input type="text" id="username" name="username" autocomplete="username" required>
+
+                    <label for="password">Salasana:</label>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
+
+                    <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
+                    <input type="submit" value="Kirjaudu">
+                </form>
+                <div id="errors">
+                    <!-- Tähän tulostetaan virheilmoitukset -->
+                </div>
+            </div><!-- /login_container -->
+        </div><!-- /modal-content -->
+    </div><!-- /loginModal-->
     <!-- Footer, joka ei vaikuta kirjautumisprosessiin -->
     <footer>
         <p>@ 2025 Mikko Lepistö</p>

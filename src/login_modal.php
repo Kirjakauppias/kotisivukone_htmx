@@ -1,0 +1,28 @@
+<?php
+session_start();
+// Palauttaa modaalin HTML-sisällön
+?>
+<div id="loginModal" style="display: block;">
+    <div class="modal-content">
+        <span class="close" hx-get="close_modal.php" hx-target="#modal-container">&times;</span>
+        <h2>Kirjautuminen</h2>
+        <form 
+            hx-post="login.php" 
+            hx-target="#errors" 
+            hx-swap="innerHTML"
+            autocomplete="off"
+        >
+            <label for="username">Käyttäjätunnus:</label>
+            <input type="text" id="username" name="username" autocomplete="username" required>
+
+            <label for="password">Salasana:</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+
+            <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
+            <input type="submit" value="Kirjaudu">
+        </form>
+        <div id="errors"></div>
+    </div>
+</div>

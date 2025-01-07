@@ -1,43 +1,61 @@
-.success {       /*Näytetään onnistuneet syötteet*/
-    color: green;
-}
-.error {         /*Näytetään epäonnistuneet syötteet*/
-    color: red;
+/* Nollaa oletustyylit kaikille elementeille */
+* {
+    margin: 0; /* Poistaa oletusmarginaalit */
+    padding: 0; /* Poistaa oletustäytteet */
+    box-sizing: border-box; /* Sisällyttää marginaalit ja reunukset elementin kokoon */
 }
 
-/* Modaalin tausta */
+/* Kehon (body) perusfontti */
+body {
+    font-family: 'Courier New', Courier, monospace; /* Asettaa monospace-fontin */
+}
+
+/* Onnistuneiden viestien tyylit */
+.success {
+    color: green; /* Asettaa tekstin väriksi vihreän */
+}
+
+/* Virheviestien tyylit */
+.error {
+    color: red; /* Asettaa tekstin väriksi punaisen */
+}
+
+/* Määritellään modaalin (popup-ikkunan) taustatyylit */
 #loginModal {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    display: none;
+    display: none; /* Piilottaa modaalin oletuksena */
+    position: fixed; /* Kiinnittää modaalin näkyvään ikkunaan riippumatta sivun vierityksestä */
+    z-index: 1000; /* Asettaa modaalin muiden elementtien päälle */
+    left: 0; /* Modaalin sijainti vasemmasta reunasta */
+    top: 0; /* Modaalin sijainti yläreunasta */
+    width: 100%; /* Modaalin taustan leveys on koko sivun leveys */
+    height: 100%; /* Modaalin taustan korkeus on koko sivun korkeus */
+    background-color: rgba(0, 0, 0, 0.4); /* Läpinäkyvä musta tausta */
 }
 
-/* Modaalin sisältö */
+/* Modaalin sisältöalueen (popup-ikkunan) tyylit */
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
+    position: relative; /* Sijainti suhteessa modaalin sisään */
+    margin: 15% auto; /* Keskittää modaalin sisältö vaakasuunnassa ja asettaa 15% marginaalin yläreunasta */
+    padding: 20px; /* Lisää täytettä sisällön ympärille */
+    width: 80%; /* Asettaa sisällön leveydeksi 80% ikkunan leveydestä */
+    max-width: 400px; /* Maksimileveys on 400 pikseliä */
+    background: #fff; /* Asettaa sisällön taustaväriksi valkoisen */
+    border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
 }
 
-/* Sulkemiskuvake */
+/* Modaalin sulkemiskuvakkeen tyylit */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    color: #aaa; /* Asettaa sulkemiskuvakkeen väriksi vaaleanharmaan */
+    float: right; /* Asettaa kuvakkeen oikeaan reunaan */
+    font-size: 28px; /* Kuvakkeen fonttikoko */
+    font-weight: bold; /* Kuvakkeen fontti lihavoituna */
 }
 
+/* Sulkemiskuvakkeen hover- ja focus-tyylit */
 .close:hover,
 .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+    color: black; /* Muuttaa värin mustaksi, kun kohdistin on kuvakkeen päällä tai se on valittu */
+    text-decoration: none; /* Poistaa alleviivauksen */
+    cursor: pointer; /* Muuttaa osoittimen kädeksi */
 }
