@@ -10,6 +10,54 @@ body {
     font-family: 'Courier New', Courier, monospace; /* Asettaa monospace-fontin */
 }
 
+/* Lomaketyylit */
+input[type=text], input[type=password], input[type=email] {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solic #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #c9840d;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+}
+
+button {
+    background-color: #9abe18;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+  
+button:hover {
+    opacity: 0.8;
+}
+
+/* Kirjautumislomakkeen avatar */
+.imgcontainer {
+    text-align: center; /* Keskitetään sisältö (kuva) */
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
 /* Onnistuneiden viestien tyylit */
 .success {
     color: green; /* Asettaa tekstin väriksi vihreän */

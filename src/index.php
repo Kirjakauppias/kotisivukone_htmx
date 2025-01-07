@@ -7,9 +7,8 @@ error_reporting(E_ALL);
 
 // Lisätään X-Frame-Options header estämään clickjacking
 header('X-Frame-Options: DENY');
-// HOX!!
-// CSP -header estää JavaScriptin suorittamisen, ratkaistaan myöhemmin. 
-// header("Content-Security-Policy: default-src 'self'; style-src 'self';");
+ 
+//header("Content-Security-Policy: default-src 'self'; style-src 'self';");
 
 ini_set('session.cookie_secure', '1'); // Vain HTTPS-yhteyksillä
 ini_set('session.cookie_httponly', '1'); // Estää JavaScriptin pääsyn kekseihin
@@ -26,49 +25,40 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 }
 ?>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token']; ?>">
-        <title>Kirjautuminen</title>
-        <link rel="stylesheet" href="./styles/style.css">
-        <script src="htmx.js" defer></script>
-        <script>
-            document.addEventListener('htmx:configRequest', (event) => {
-                event.detail.headers['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            });
-            
-            // JavaScript funktio modaalin avaamiseksi ja sulkemiseksi
-            function openModal() {
-                const modal = document.getElementById('loginModal');
-                modal.style.display = 'block';
-            }
-
-            function closeModal() {
-                const modal = document.getElementById('loginModal');
-                modal.style.display = 'none';
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token']; ?>">
+    <title>Kirjautuminen</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="htmx.js" defer></script>
+    <script>
+        document.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        });
     </script>
 </head>
 <body>
     <?php if(!$loggedIn): ?>
         <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
+        <!-- Nappula, joka avaa modalin -->
         <button 
             hx-get="login_modal.php" 
             hx-target="#modal-container" 
             hx-trigger="click"
         >
-            Avaa Modal
+            Kirjaudu
         </button>
     <?php else: ?>
         <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
         <a href="logout.php">Kirjaudu ulos</a>
     <?php endif; ?>
     
-   <div id="modal-container"></div>
-    <!-- Footer, joka ei vaikuta kirjautumisprosessiin -->
-    <footer>
-        <p>@ 2025 Mikko Lepistö</p>
-    </footer>
+    <div id="modal-container">
+        <!-- Modalin kontti -->
+    </div>
+<footer>
+    <p>@ 2025 Mikko Lepistö</p>
+</footer>
 </body>
 </html>

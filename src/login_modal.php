@@ -5,7 +5,9 @@ session_start();
 <div id="loginModal" style="display: block;">
     <div class="modal-content">
         <span class="close" hx-get="close_modal.php" hx-target="#modal-container">&times;</span>
-        <h2>Kirjautuminen</h2>
+        <div class="imgcontainer">
+            <img src="images/login_avatar.jpg" alt="Avatar" class="avatar">
+        </div>
         <form 
             hx-post="login.php" 
             hx-target="#errors" 
