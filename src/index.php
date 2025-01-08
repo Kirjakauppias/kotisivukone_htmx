@@ -53,12 +53,22 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
         <a href="logout.php">Kirjaudu ulos</a>
     <?php endif; ?>
-    
+    <button 
+        hx-get="register.php"
+        hx-target="#modal-container"
+        hx-trigger="click"
+        class="btn-register"
+    >
+        Uusi tili
+    </button>
     <div id="modal-container">
         <!-- Modalin kontti -->
     </div>
+<main>
+
+</main>
 <footer>
-    <p>@ 2025 Mikko Lepistö</p>
+    <p>@ 2025 Mikko Lepistö - metarktis@gmail.com</p>
 </footer>
 </body>
 </html>

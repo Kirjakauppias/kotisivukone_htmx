@@ -8,54 +8,63 @@
 /* Kehon (body) perusfontti */
 body {
     font-family: 'Courier New', Courier, monospace; /* Asettaa monospace-fontin */
+    min-height: 100vh; /* Määrittää kehon vähimmäiskorkeuden näytön korkeudeksi */
+}
+
+main {
+    /*min-height: 100vh; /* Asettaa pääsisällön vähimmäiskorkeuden näytön korkeudeksi */
 }
 
 /* Lomaketyylit */
 input[type=text], input[type=password], input[type=email] {
-    display: inline-block;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solic #ccc;
-    box-sizing: border-box;
+    display: inline-block; /* Asettaa elementin viivalohkoksi */
+    width: 100%; /* Elementti venyy koko rivin leveydelle */
+    padding: 12px 20px; /* Lisää sisäistä marginaalia */
+    margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
+    border: 1px solid #ccc; /* Luo harmaan kehyksen */
+    box-sizing: border-box; /* Sisällyttää reunukset ja täytteet elementin kokoon */
 }
 
 input[type=submit] {
-    background-color: #c9840d;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
+    background-color: #c9840d; /* Asettaa painikkeen taustaväriksi oranssin */
+    color: white; /* Asettaa tekstin väriksi valkoisen */
+    padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
+    margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
+    border: none; /* Poistaa reunuksen */
+    cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
+    font-size: 16px; /* Asettaa fonttikoon */
+    font-weight: bold; /* Asettaa lihavoidun fontin */
+    width: 100%; /* Venyy koko rivin leveydelle */
 }
 
 button {
-    background-color: #9abe18;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
+    background-color: #9abe18; /* Asettaa vihreän taustavärin */
+    color: white; /* Asettaa tekstin väriksi valkoisen */
+    padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
+    margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
+    border: none; /* Poistaa reunuksen */
+    cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
+    font-size: 16px; /* Asettaa fonttikoon */
+    font-weight: bold; /* Asettaa lihavoidun fontin */
 }
-  
+
 button:hover {
-    opacity: 0.8;
+    opacity: 0.8; /* Himmentää painikkeen taustaväriä hover-tilassa */
+}
+
+.btn-register {
+    float: right; /* Kohdistaa elementin oikeaan reunaan */
 }
 
 /* Kirjautumislomakkeen avatar */
 .imgcontainer {
     text-align: center; /* Keskitetään sisältö (kuva) */
-    margin: 24px 0 12px 0;
+    margin: 24px 0 12px 0; /* Lisää marginaalia ylä- ja alapuolelle */
 }
 
 img.avatar {
-    width: 40%;
-    border-radius: 50%;
+    width: 40%; /* Asettaa kuvan leveydeksi 40% vanhemman elementin leveydestä */
+    border-radius: 50%; /* Pyöristää kuvan reunat ympyräksi */
 }
 
 /* Onnistuneiden viestien tyylit */
@@ -78,12 +87,22 @@ img.avatar {
     width: 100%; /* Modaalin taustan leveys on koko sivun leveys */
     height: 100%; /* Modaalin taustan korkeus on koko sivun korkeus */
     background-color: rgba(0, 0, 0, 0.4); /* Läpinäkyvä musta tausta */
+    overflow-y: auto; /* Sallii pystysuoran vierityksen */
+}
+
+#loginModal::-webkit-scrollbar {
+    display: none; /* Piilottaa WebKit-selainten vierityspalkit */
+}
+
+#loginModal {
+    -ms-overflow-style: none; /* Poistaa vierityspalkit IE/Edge-selaimissa */
+    scrollbar-width: none; /* Poistaa vierityspalkit Firefox-selaimessa */
 }
 
 /* Modaalin sisältöalueen (popup-ikkunan) tyylit */
 .modal-content {
     position: relative; /* Sijainti suhteessa modaalin sisään */
-    margin: 15% auto; /* Keskittää modaalin sisältö vaakasuunnassa ja asettaa 15% marginaalin yläreunasta */
+    margin: 5% auto; /* Keskittää modaalin sisältö vaakasuunnassa ja asettaa 5% marginaalin yläreunasta */
     padding: 20px; /* Lisää täytettä sisällön ympärille */
     width: 80%; /* Asettaa sisällön leveydeksi 80% ikkunan leveydestä */
     max-width: 400px; /* Maksimileveys on 400 pikseliä */

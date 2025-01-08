@@ -1,87 +1,58 @@
+<?php
+  session_start();
+?>
 <!-- register.php -->
 <!-- Sivu jossa käyttäjä voi luoda tunnuksen itselleen -->
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tilin luonti</title>
-    <link rel="stylesheet" href="./styles/style.css">
-    <script src="htmx.js" defer></script>
-</head>
-<body>
-    <div class="container"> 
-        <h1>Rekisteröidy käyttäjäksi</h1>
-        <p>Oletko jo rekisteröitynyt? <a href="index.php" alt="kirjautumis linkki">Kirjaudu sisään täältä</a></p>
-        <hr></hr>
+
+<div id="loginModal" style="display: block;">
+  <div class="modal-content">
+  <span class="close" hx-get="close_modal.php" hx-target="#modal-container">&times;</span>
+  <div class="imgcontainer">
+    <img src="images/register_avatar.png" alt="Avatar" class="avatar">
+  </div>
         <form 
           hx-post="register_check.php" 
           hx-target="#response"
-          hx-swap="outerHTML"
+          hx-swap="innerHTML"
         >  
-          <div class="row">
-            <div class="col-25">
-              <label for="firstname" aria-label="Etunimi">Etunimi</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="firstname" name="firstname" placeholder="Etunimi.." required>
-            </div>
-          </div><!--/row-->
-          <div class="row">
-            <div class="col-25">
-              <label for="lastname">Sukunimi</label>
-            </div>
-            <div class="col-75">
-              <input type="text" id="lastname" name="lastname" placeholder="Sukunimi.." required>
-            </div>
-          </div><!--/row-->
-          <div class="row">
-            <div class="col-25">
-              <label for="username">Käyttäjätunnus</label>
-            </div>
-            <div class="col-75">
+              <label for="firstname" aria-label="Etunimi">Etunimi:</label>
+          
+              <input type="text" id="firstname" name="firstname" required>
+           
+              <label for="lastname">Sukunimi:</label>
+            
+              <input type="text" id="lastname" name="lastname" required>
+           
+              <label for="username">Käyttäjätunnus:</label>
+           
               <!-- Selainautomaatio estetty -->
-              <input type="text" id="username" name="username" placeholder="Käyttäjätunnus.." autocomplete="off" required>
-            </div>
-          </div><!--/row-->
-          <div class="row">
-            <div class="col-25">
-              <label for="email">Sähköposti</label>
-            </div>
-            <div class="col-75">
+              <input type="text" id="username" name="username" autocomplete="off" required>
+          
+              <label for="email">Sähköposti:</label>
+            
               <!-- E-mailin oikea muoto -->
-              <input type="email" id="email" name="email" placeholder="Sähköposti.." required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-            </div>
-          </div><!--/row-->
-          <div class="row">
-            <div class="col-25">
-              <label for="password">Salasana</label>
-            </div>
-            <div class="col-75">
+              <input type="email" id="email" name="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+          
+              <label for="password">Salasana:</label>
+           
               <!-- Salasanan minimipituus on 8 merkkiä -->
               <!-- Selainautomaatio estetty -->
-              <input type="password" id="password" name="password" placeholder="Salasanan on oltava vähintään 8 merkkiä pitkä.." autocomplete="off" required minlength="8">
-            </div>
-          </div><!--/row-->
-          <div class="row">
-            <div class="col-25">
-              <label for="re_password">Salasana uudelleen</label>
-            </div>
-            <div class="col-75">
+              <input type="password" id="password" name="password" autocomplete="off" required minlength="8">
+          
+              <label for="re_password">Salasana uudelleen:</label>
+          
               <!-- Salasanan minimipituus on 8 merkkiä -->
               <!-- Selainautomaatio estetty -->
-              <input type="password" id="re_password" name="re_password" placeholder="Salasana uudelleen.." autocomplete="off" required minlength="8">
-            </div>
-          </div><!--/row-->
+              <input type="password" id="re_password" name="re_password" autocomplete="off" required minlength="8">
+          
             <!-- Lisätään CSRF-token joka tarkistetaan palvelinpuolella -->
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-          <hr></hr>
-          <div class="row">
+          
             <input type="submit" value="Tallenna">
-          </div>
-          <div id="response" hx-target="this" aria-live="polite" role="alert">
+         
+          </form>
+          <div id="response" aria-live="polite" role="alert">
             <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut rekisteröinti -->
           </div>
-        </form>        
-    </div><!--/container-->
-</body>
-</html>
+  </div>        
+</div><!--/container-->
