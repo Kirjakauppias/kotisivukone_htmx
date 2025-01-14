@@ -14,6 +14,7 @@ ini_set('session.cookie_secure', '1'); // Vain HTTPS-yhteyksillä
 ini_set('session.cookie_httponly', '1'); // Estää JavaScriptin pääsyn kekseihin
 ini_set('session.cookie_samesite', 'Strict'); // Ei lähetä keksejä kolmannen osapuolen pyynnöissä
 session_start(); // Aloitetaan sessio
+require 'funcs.php';
 
 $loggedIn = isset($_SESSION['user_id']); // Alustetaan muuttuja.
 
@@ -23,6 +24,8 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     $_SESSION['csrf_token_time'] = time();
 }
+
+$isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
 ?>
 <html lang="en">
 <head>
@@ -31,6 +34,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token']; ?>">
     <title>Kirjautuminen</title>
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="htmx.js" defer></script>
     <script>
         document.addEventListener('htmx:configRequest', (event) => {
@@ -39,36 +43,64 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     </script>
 </head>
 <body>
-    <?php if(!$loggedIn): ?>
-        <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
-        <!-- Nappula, joka avaa modalin -->
-        <button 
-            hx-get="login_modal.php" 
-            hx-target="#modal-container" 
-            hx-trigger="click"
-        >
-            Kirjaudu
-        </button>
-    <?php else: ?>
-        <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
-        <a href="logout.php">Kirjaudu ulos</a>
-    <?php endif; ?>
-    <button 
-        hx-get="register.php"
-        hx-target="#modal-container"
-        hx-trigger="click"
-        class="btn-register"
-    >
-        Uusi tili
-    </button>
+    <div class="banner">
+        <div class="banner-text">
+            <h1 style="font-size:50px">KOTISIVUKONE</h1>
+            <p>Testauskäyttöön ainoastaan</p>
+            <?php if(!$loggedIn): ?>
+                <button 
+                hx-get="register.php"
+                hx-target="#modal-container"
+                hx-trigger="click"
+                class="btn-register"
+                >
+                Aloita tästä!
+            </button>
+            <?php endif; ?>
+            <?php if(!$loggedIn): ?>
+                <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
+                <!-- Nappula, joka avaa modalin -->
+                <button 
+                    hx-get="login_modal.php" 
+                    hx-target="#modal-container" 
+                    hx-trigger="click"
+                    class="btn-login"
+                >
+                    Kirjaudu
+                </button>
+            <?php else: ?>
+                <div class="logged-in">
+                    <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
+                    <button class="btn-logout"><a href="logout.php">Kirjaudu ulos</a></button>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Etusivu</a>
+        <a href="#contact">Yhteystiedot</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
     <div id="modal-container">
         <!-- Modalin kontti -->
     </div>
 <main>
-
 </main>
-<footer>
-    <p>@ 2025 Mikko Lepistö - metarktis@gmail.com</p>
+<footer id="contact">
+    <p>Opinnäytetyön muokattu versio @ 2025 Mikko Lepistö - metarktis@gmail.com</p>
 </footer>
+<script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+</script>
 </body>
 </html>

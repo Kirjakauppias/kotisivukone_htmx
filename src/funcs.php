@@ -9,3 +9,4 @@ function display_errors($errors) {
     }
     echo "</div>";
 }
+
