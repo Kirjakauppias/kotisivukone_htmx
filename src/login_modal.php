@@ -6,7 +6,7 @@ session_start();
     <div class="modal-content">
         <span class="close" hx-get="close_modal.php" hx-target="#modal-container">&times;</span>
         <div class="imgcontainer">
-            <img src="images/login_avatar.jpg" alt="Avatar" class="avatar">
+            <img src="images/login.png" alt="Avatar" class="avatar">
         </div>
         <form 
             hx-post="login.php" 

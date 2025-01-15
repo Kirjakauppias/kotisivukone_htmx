@@ -43,10 +43,12 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
     </script>
 </head>
 <body>
+    <!-- Banneri -->
     <div class="banner">
         <div class="banner-text">
             <h1 style="font-size:50px">KOTISIVUKONE</h1>
             <p>Testauskäyttöön ainoastaan</p>
+            <!-- Näytetään rekisteri -painike jos käyttäjä ei ole kirjautunu sisään. -->
             <?php if(!$loggedIn): ?>
                 <button 
                 hx-get="register.php"
@@ -71,12 +73,13 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
             <?php else: ?>
                 <div class="logged-in">
                     <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
+                    <!-- Uloskirjautumis -painike -->
                     <button class="btn-logout"><a href="logout.php">Kirjaudu ulos</a></button>
                 </div>
             <?php endif; ?>
         </div>
-    </div>
-    
+    </div> <!-- /Banneri-->
+    <!-- Responsiivinen navigointipalkki -->
     <div class="topnav" id="myTopnav">
         <a href="#home" class="active">Etusivu</a>
         <a href="#contact">Yhteystiedot</a>
@@ -88,6 +91,7 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
         <!-- Modalin kontti -->
     </div>
 <main>
+    <img src="images/stars_small.png" alt="5 stars" class="img-stars">
 </main>
 <footer id="contact">
     <p>Opinnäytetyön muokattu versio @ 2025 Mikko Lepistö - metarktis@gmail.com</p>

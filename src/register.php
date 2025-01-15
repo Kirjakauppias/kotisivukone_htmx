@@ -48,7 +48,7 @@
             <!-- Lisätään CSRF-token joka tarkistetaan palvelinpuolella -->
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
           
-            <input type="submit" value="Tallenna">
+            <input type="submit" value="Lisää tili">
          
           </form>
           <div id="response" aria-live="polite" role="alert">

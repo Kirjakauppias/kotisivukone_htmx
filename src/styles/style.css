@@ -24,6 +24,11 @@ main {
     min-height: 100vh; /* Asettaa pääsisällön vähimmäiskorkeuden näytön korkeudeksi */
 }
 
+footer {
+    background-color: black;
+    color: #fff;
+}
+
 .banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office.jpg");
     height: 25%;
@@ -191,6 +196,10 @@ img.avatar {
     text-decoration: none;
 }
 
+/* MAIN -OSIO */
+.img-stars{
+    
+}
 
   @media screen and (max-width: 600px) {
     .topnav a:not(:first-child) {display: none;}
@@ -213,3 +222,4 @@ img.avatar {
       text-align: left;
     }
   }
+
