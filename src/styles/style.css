@@ -11,7 +11,7 @@ h1 {
 
 /* Kehon (body) perusfontti */
 body {
-    font-family: 'Courier New', Courier, monospace; /* Asettaa monospace-fontin */
+    font-family:monospace; /* Asettaa monospace-fontin */
     min-height: 100vh; /* Määrittää kehon vähimmäiskorkeuden näytön korkeudeksi */
 }
 
@@ -197,8 +197,16 @@ img.avatar {
 }
 
 /* MAIN -OSIO */
-.img-stars{
-    
+.presentation {
+    margin-left: 25px;
+    color:#fff;
+}
+.presentation h1 {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+.orange {
+    color: #f3c670;
 }
 
   @media screen and (max-width: 600px) {

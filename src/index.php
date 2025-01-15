@@ -58,8 +58,7 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
                 >
                 Aloita tästä!
             </button>
-            <?php endif; ?>
-            <?php if(!$loggedIn): ?>
+          
                 <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
                 <!-- Nappula, joka avaa modalin -->
                 <button 
@@ -92,6 +91,11 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
     </div>
 <main>
     <img src="images/stars_small.png" alt="5 stars" class="img-stars">
+    <div class="presentation">
+        <h1>Luo omat kotisivut itsellesi tai yrityksellesi</h1>
+        <h1>Kotisivukoneella rakennat</h1>
+        <h1 class="orange">sivut itse helposti</h1>
+    </div>
 </main>
 <footer id="contact">
     <p>Opinnäytetyön muokattu versio @ 2025 Mikko Lepistö - metarktis@gmail.com</p>
