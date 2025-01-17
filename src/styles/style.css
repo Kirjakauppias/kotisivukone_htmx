@@ -20,7 +20,7 @@ main {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    /* position: relative;  Poissa jotta navbar sticky toimii */
     min-height: 100vh; /* Asettaa pääsisällön vähimmäiskorkeuden näytön korkeudeksi */
 }
 
@@ -48,10 +48,14 @@ footer {
 }
 
 /* NAVBAR */
-.topnav {
+
+
+#myTopnav {
     overflow: hidden;
     background-color: #333;
-  }
+    position: sticky;
+    top: 0;
+}
   
   .topnav a {
     float: left;
@@ -210,10 +214,17 @@ img.avatar {
 }
 
   @media screen and (max-width: 600px) {
+    .banner-text h1 {
+        font-size: 35px !important;
+    }
     .topnav a:not(:first-child) {display: none;}
     .topnav a.icon {
       float: right;
       display: block;
+    }
+
+    .presentation h1, .orange {
+        font-size: 16px;
     }
   }
   
@@ -231,3 +242,11 @@ img.avatar {
     }
   }
 
+  @media screen and (max-width: 420px){
+    .presentation {
+        margin: 5px;
+    }
+    .presentation h1, .orange {
+        font-size: 14px;
+    }
+  }

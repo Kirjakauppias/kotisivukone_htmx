@@ -44,7 +44,7 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
 </head>
 <body>
     <!-- Banneri -->
-    <div class="banner">
+    <div class="banner" id="home">
         <div class="banner-text">
             <h1 style="font-size:50px">KOTISIVUKONE</h1>
             <p>Testauskäyttöön ainoastaan</p>
