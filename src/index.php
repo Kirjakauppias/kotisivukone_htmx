@@ -91,11 +91,35 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
     </div>
 <main>
     <img src="images/stars_small.png" alt="5 stars" class="img-stars">
+    <!-- Esittelyotsikko -->
     <div class="presentation">
         <h1>Luo omat kotisivut itsellesi tai yrityksellesi</h1>
         <h1>Kotisivukoneella rakennat</h1>
         <h1 class="orange">sivut itse helposti</h1>
     </div>
+    <!-- Esittelylaatikot -->
+    <div class="row">
+      <div class="column">
+        <img src="images/webicon_small.png">
+        <h1>Helppokäyttöinen</h1>
+        <p>Luo ammattimaiset kotisivut helposti ilman koodaamista.</p>
+      </div>
+      <div class="column">
+        <img src="images/responsiveicon_small.png">
+        <h1>Mobiiliystävällinen</h1>
+        <p>Responsiivinen ulkoasu näyttää hyvältä kaikilla laitteilla.</p>
+      </div>
+      <div class="column">
+        <img src="images/safeicon_small.png">
+        <h1>Turvallinen</h1>
+        <p>Huolehdimme että tietoturva on parasta mahdollista. Jatkuvasti.</p>
+      </div>
+      <div class="column">
+        <img src="images/effecticon_small.png">
+        <h1>Kustannustehokas</h1>
+        <p>Kotisivukone-palvelulla tehdyt kotisivut ovat kustannustehokas tapa luoda näkyvyyttä ja lisätä yrityksen myyntiä.</p>
+      </div>
+    </div><!-- /row-->
 </main>
 <footer id="contact">
     <p>Opinnäytetyön muokattu versio @ 2025 Mikko Lepistö - metarktis@gmail.com</p>

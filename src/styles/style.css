@@ -12,7 +12,7 @@ h1 {
 /* Kehon (body) perusfontti */
 body {
     font-family:monospace; /* Asettaa monospace-fontin */
-    min-height: 100vh; /* Määrittää kehon vähimmäiskorkeuden näytön korkeudeksi */
+    /*min-height: 100vh; /* Määrittää kehon vähimmäiskorkeuden näytön korkeudeksi */
 }
 
 main {
@@ -204,6 +204,7 @@ img.avatar {
 .presentation {
     margin-left: 25px;
     color:#fff;
+    margin-bottom: 100px;
 }
 .presentation h1 {
     text-transform: uppercase;
@@ -212,6 +213,49 @@ img.avatar {
 .orange {
     color: #f3c670;
 }
+
+/* ESITTELY -GRID */
+.row {
+    display: flex;
+    justify-content: left;
+    margin-left: 16px;
+    
+}
+.column {
+    width: 20%;
+    padding: 10px;
+    height: 200px; 
+    border:rgba(6, 74, 0, 0.35); /* Poistaa reunuksen */
+    border-style: solid;
+    margin: 10px;
+    background-image: linear-gradient(rgba(241, 240, 240, 0.5), rgba(202, 197, 197, 0.5));
+}
+
+.column h1 {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color:#f9ff00;
+    letter-spacing: normal;
+}
+.column p {
+    font-family:monospace; /* Asettaa monospace-fontin */
+    color:#fff;
+    font-size: 17px;
+}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 855px) {
+    .column {
+      width: 100%;
+    }
+  }
 
   @media screen and (max-width: 600px) {
     .banner-text h1 {
