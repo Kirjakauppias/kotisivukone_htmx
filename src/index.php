@@ -129,8 +129,8 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
             <p>metarktis@gmail.com</p>
         </div>
         <div class="footer-contact">
-            <a href=""><img src="images/github_small.png"></a>
-            <a href=""><img src="images/linked_small.png"></a>
+            <a href="https://github.com/Kirjakauppias" alt="github" target="_blank"> <img src="images/github_small.png" alt="Github-Icon"></a>
+            <a href="https://www.linkedin.com/in/mikko-lepistö-38762966" alt="LinkedIn" target="_blank"><img src="images/linked_small.png" alt="LinkedIn-icon"></a>
         </div>
     </div>
 </footer>
