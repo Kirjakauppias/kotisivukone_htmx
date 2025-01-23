@@ -1,52 +1,77 @@
-Virheiden raportointi
+    Aseta kehitysympäristön virheraportointiasetukset
+        Salli virheiden ja varoitusten raportointi (display_errors, display_startup_errors ja error_reporting).
 
-    Kehitysympäristössä virheiden näyttö otetaan käyttöön:
-        Näytetään kaikki virheet (error_reporting(E_ALL)).
-        Asetetaan virheilmoitukset näkyviin selaimessa (ini_set('display_errors', '1')).
+    Aseta HTTP-otsikot tietoturvan parantamiseksi
+        Lisää X-Frame-Options: DENY -otsikko estämään clickjacking-hyökkäyksiä.
+        (Valinnaisesti) määrittele Content-Security-Policy, mutta se on kommentoitu pois.
 
-Turvatoimenpiteet HTTP-otsikoilla
+    Konfiguroi istunnon tietoturva-asetukset
+        Salli evästeiden lähettäminen vain HTTPS-yhteyksillä (session.cookie_secure).
+        Estä JavaScriptiä pääsemästä istuntoevästeisiin (session.cookie_httponly).
+        Aseta evästeille SameSite-arvo Strict, joka estää niiden lähettämisen kolmannen osapuolen pyynnöissä.
 
-    Lisätään X-Frame-Options: DENY, joka estää Clickjacking-hyökkäykset.
-    Lisätään Content-Security-Policy, joka sallii oletuksena vain omat (self) resurssit.
+    Käynnistä sessio
+        Kutsu session_start aloittaaksesi PHP-istunnon.
 
-Sessioiden suojaaminen
+    Sisällytä ulkoinen tiedosto funcs.php
+        Lataa tiedosto, joka sisältää apufunktioita (esim. käyttäjänhallintaan tai tietokantakäsittelyyn liittyviä toiminnallisuuksia).
 
-    Asetetaan evästeet turvallisiksi:
-        session.cookie_secure = 1: Evästeet välitetään vain HTTPS-yhteyksillä.
-        session.cookie_httponly = 1: Estetään JavaScriptin pääsy evästeisiin.
-        session.cookie_samesite = Strict: Evästeitä ei lähetetä kolmannen osapuolen pyynnöissä.
-    Aloitetaan sessio kutsumalla session_start().
+    Tarkista, onko käyttäjä kirjautunut sisään
+        Tarkista, onko $_SESSION['user_id'] määritelty.
+        Aseta $loggedIn-muuttuja totuusarvoon sen perusteella.
 
-Kirjautumistilan tarkistus
+    Luo CSRF-tunniste (token) sessiolle
+        Jos CSRF-tunnistetta ei ole tai se on vanhentunut (yli 5 minuuttia), tee seuraavat:
+            Luo satunnainen 32-tavun tunniste bin2hex(random_bytes(32)).
+            Tallenna se istuntoon avaimella csrf_token.
+            Tallenna sen luomisaika istuntoon avaimella csrf_token_time.
 
-    Tarkistetaan, onko käyttäjä kirjautunut:
-        Määritetään $loggedIn muuttujaksi, joka tarkistaa, onko $_SESSION['user_id'] asetettu.
+    Luo HTML-sivun pääosa
+        Määrittele HTML-sivun rakenne:
+            Lisää meta-tiedot, kuten sivun merkistökoodaus (UTF-8), näkymä (viewport), ja CSRF-tunniste meta-otsikkona.
+            Lisää ulkoisia resursseja, kuten CSS-tiedostot ja Font Awesome -kirjasto.
 
-CSRF-turva (Cross-Site Request Forgery)
+    Määrittele JavaScript-konfiguraatio htmx:lle
+        Lisää tapahtumankuuntelija htmx:configRequest, joka liittää kaikkiin htmx-pyyntöihin CSRF-tunnisteen HTTP-otsikkoon X-CSRF-Token.
 
-    Jos CSRF-tokenia ei ole asetettu tai se on vanhentunut (yli 5 minuuttia):
-        Luodaan uusi token bin2hex(random_bytes(32)).
-        Token tallennetaan sessioon muuttujalla $_SESSION['csrf_token'].
-        Tokenille asetetaan aikaleima $_SESSION['csrf_token_time'].
+    Luo sivun banneri (yläosa)
+        Näytä otsikko ja alateksti:
+            Jos käyttäjä ei ole kirjautunut sisään:
+                Näytä kaksi painiketta:
+                    Rekisteröitymisnappi, joka lataa dynaamisesti rekisteröitymislomakkeen register.php-tiedostosta.
+                    Kirjautumisnappi, joka lataa kirjautumislomakkeen login_modal.php-tiedostosta.
+            Jos käyttäjä on kirjautunut sisään:
+                Näytä käyttäjän nimi ($_SESSION['username']) ja uloskirjautumispainike, joka ohjaa logout.php-sivulle.
 
-HTML-sivun rakenne
+    Luo navigointipalkki (topnav)
+        Lisää navigointilinkit:
+            #home-ankkuri vie käyttäjän etusivun alkuun.
+            #contact-ankkuri vie käyttäjän yhteystiedot-osioon.
+        Lisää painike, joka tekee navigointipalkista responsiivisen pienillä näytöillä (JavaScript-funktio vaihtaa CSS-luokkaa responsive).
 
-    HTML-dokumentti sisältää:
-        CSRF-tokenin <meta>-otsikkotietoihin (<meta name="csrf-token">).
-        HTMX-konfiguraation, joka asettaa CSRF-tokenin kaikkiin pyyntöihin.
+    Luo modaalien kontti
+        Lisää tyhjä div-elementti id="modal-container", johon htmx voi ladata rekisteröinti- tai kirjautumislomakkeen sisällön dynaamisesti.
 
-Kirjautumislomakkeen renderöinti
+    Luo sivun pääsisältö (main)
+        Näytä kuva (5 tähteä) ja esittelyotsikko kolmessa osassa:
+            "Luo omat kotisivut itsellesi tai yrityksellesi."
+            "Kotisivukoneella rakennat."
+            "Sivut itse helposti" (korostettu oranssilla).
+        Esittele neljä ominaisuutta laatikoina (teksti ja kuvat):
+            Helppokäyttöisyys: Ammattimaiset kotisivut ilman koodaamista.
+            Mobiiliystävällisyys: Responsiivinen ulkoasu.
+            Turvallisuus: Paras mahdollinen tietoturva.
+            Kustannustehokkuus: Lisää yrityksen myyntiä edullisesti.
 
-    Jos käyttäjä ei ole kirjautunut ($loggedIn == false):
-        Näytetään kirjautumislomake:
-            Käyttäjänimi ja salasana kentät.
-            Piilotettu kenttä, joka sisältää CSRF-tokenin.
-            Lomake käyttää HTMX:ää lähetykseen (hx-post="login.php").
-            Virheilmoitukset näytetään <div id="errors">-elementissä.
-    Jos käyttäjä on kirjautunut ($loggedIn == true):
-        Näytetään tervetuloviesti käyttäjän nimellä.
-        Annetaan linkki uloskirjautumiseen (logout.php).
+    Luo alatunniste (footer)
+        Lisää teksti "Opinnäytetyön muokattu versio", tekijän nimi ja yhteystiedot.
+        Lisää kaksi kuvaketta:
+            Linkki GitHub-profiiliin.
+            Linkki LinkedIn-profiiliin.
 
-Footer
+    Lisää JavaScript-funktio navigoinnin responsiivisuuteen
+        JavaScript-toteutus, joka vaihtaa navigointipalkin luokkaa (responsive) pienillä näytöillä, kun käyttäjä klikkaa hamburger-ikonia.
 
-    Sivun lopussa on footer, joka ei vaikuta kirjautumisprosessiin.
+    Päättele HTML-sivu
+        Päätä kaikki avoimet HTML-elementit (div, footer, jne.) ja sulje HTML-tiedosto.
+

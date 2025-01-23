@@ -5,18 +5,22 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// Asetetaan HTTP-otsikot tietoturvan parantamiseksi
 // Lisätään X-Frame-Options header estämään clickjacking
 header('X-Frame-Options: DENY');
- 
 //header("Content-Security-Policy: default-src 'self'; style-src 'self';");
 
+// Konfiguroidaan istunnon tietoturva-asetukset
 ini_set('session.cookie_secure', '1'); // Vain HTTPS-yhteyksillä
 ini_set('session.cookie_httponly', '1'); // Estää JavaScriptin pääsyn kekseihin
 ini_set('session.cookie_samesite', 'Strict'); // Ei lähetä keksejä kolmannen osapuolen pyynnöissä
-session_start(); // Aloitetaan sessio
+
+// Käynnistetään sessio
+session_start(); 
 require 'funcs.php';
 
-$loggedIn = isset($_SESSION['user_id']); // Alustetaan muuttuja.
+// Alustetaan muuttuja.
+$loggedIn = isset($_SESSION['user_id']); 
 
 // Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
 // Luodaan tokenille aikaraja.
@@ -24,9 +28,8 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     $_SESSION['csrf_token_time'] = time();
 }
-
-$isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
 ?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -57,8 +60,7 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
                 class="btn-register"
                 >
                 Aloita tästä!
-            </button>
-          
+                </button>
                 <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
                 <!-- Nappula, joka avaa modalin -->
                 <button 
@@ -70,6 +72,7 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
                     Kirjaudu
                 </button>
             <?php else: ?>
+                <!-- Näytetään jos käyttäjä on kirjautunut sisään -->
                 <div class="logged-in">
                     <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
                     <!-- Uloskirjautumis -painike -->
@@ -135,6 +138,7 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
     </div>
 </footer>
 <script>
+    // Funktio navigoinnin responsiivisuuteen
     function myFunction() {
       var x = document.getElementById("myTopnav");
       if (x.className === "topnav") {
