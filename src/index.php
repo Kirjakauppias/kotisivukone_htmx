@@ -74,7 +74,6 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <?php else: ?>
                 <!-- Näytetään jos käyttäjä on kirjautunut sisään -->
                 <div class="logged-in">
-                    <p>Tervetuloa, <?php echo $_SESSION['username']; ?>!</p>
                     <!-- Uloskirjautumis -painike -->
                     <button class="btn-logout"><a href="logout.php">Kirjaudu ulos</a></button>
                 </div>
@@ -85,6 +84,16 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <div class="topnav" id="myTopnav">
         <a href="#home" class="active">Etusivu</a>
         <a href="#contact">Yhteystiedot</a>
+        <!-- 23.1.25: Jos käyttäjä on kirjautunut sisään, näytetään hallinta-navigaatio -->
+        <?php if($loggedIn): ?>
+            <a href="" alt="omat tiedot"
+                hx-get="userpage.php" 
+                hx-target="#modal-container" 
+                hx-trigger="click"
+            >
+                Omat tiedot
+            </a>
+        <?php endif; ?>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a>
@@ -93,36 +102,42 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <!-- Modalin kontti -->
     </div>
 <main>
-    <img src="images/stars_small.png" alt="5 stars" class="img-stars">
-    <!-- Esittelyotsikko -->
-    <div class="presentation">
-        <h1>Luo omat kotisivut itsellesi tai yrityksellesi</h1>
-        <h1>Kotisivukoneella rakennat</h1>
-        <h1 class="orange">sivut itse helposti</h1>
-    </div>
-    <!-- Esittelylaatikot -->
-    <div class="row">
-      <div class="column">
-        <img src="images/webicon_small.png">
-        <h1>Helppokäyttöinen</h1>
-        <p>Luo ammattimaiset kotisivut helposti ilman koodaamista.</p>
-      </div>
-      <div class="column">
-        <img src="images/responsiveicon_small.png">
-        <h1>Mobiiliystävällinen</h1>
-        <p>Responsiivinen ulkoasu näyttää hyvältä kaikilla laitteilla.</p>
-      </div>
-      <div class="column">
-        <img src="images/safeicon_small.png">
-        <h1>Turvallinen</h1>
-        <p>Huolehdimme että tietoturva on parasta mahdollista. Jatkuvasti.</p>
-      </div>
-      <div class="column">
-        <img src="images/effecticon_small.png">
-        <h1>Kustannustehokas</h1>
-        <p>Kotisivukone-palvelulla tehdyt kotisivut ovat kustannustehokas tapa luoda näkyvyyttä ja lisätä yrityksen myyntiä.</p>
-      </div>
-    </div><!-- /row-->
+    <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
+    <?php if(!$loggedIn): ?>
+        <img src="images/stars_small.png" alt="5 stars" class="img-stars">
+        <!-- Esittelyotsikko -->
+        <div class="presentation">
+            <h1>Luo omat kotisivut itsellesi tai yrityksellesi</h1>
+            <h1>Kotisivukoneella rakennat</h1>
+            <h1 class="orange">sivut itse helposti</h1>
+        </div>
+        <!-- Esittelylaatikot -->
+        <div class="row">
+          <div class="column">
+            <img src="images/webicon_small.png">
+            <h1>Helppokäyttöinen</h1>
+            <p>Luo ammattimaiset kotisivut helposti ilman koodaamista.</p>
+          </div>
+          <div class="column">
+            <img src="images/responsiveicon_small.png">
+            <h1>Mobiiliystävällinen</h1>
+            <p>Responsiivinen ulkoasu näyttää hyvältä kaikilla laitteilla.</p>
+          </div>
+          <div class="column">
+            <img src="images/safeicon_small.png">
+            <h1>Turvallinen</h1>
+            <p>Huolehdimme että tietoturva on parasta mahdollista. Jatkuvasti.</p>
+          </div>
+          <div class="column">
+            <img src="images/effecticon_small.png">
+            <h1>Kustannustehokas</h1>
+            <p>Kotisivukone-palvelulla tehdyt kotisivut ovat kustannustehokas tapa luoda näkyvyyttä ja lisätä yrityksen myyntiä.</p>
+          </div>
+        </div><!-- /row-->
+    <?php else: 
+        include_once "./dashboard.php";
+        endif;
+    ?>
 </main>
 <footer id="contact">
     <div class="footer-container">
