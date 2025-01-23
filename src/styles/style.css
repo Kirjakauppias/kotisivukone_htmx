@@ -29,6 +29,11 @@ footer {
     color: #fff;
 }
 
+footer img {
+    border: 3px solid #ccc; /* Luo harmaan kehyksen */
+    border-radius: 12px;
+}
+
 .banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office.jpg");
     height: 25%;
@@ -249,6 +254,18 @@ img.avatar {
     display: table;
     clear: both;
   }
+
+/* FOOTER CONTENT */
+.footer-container {
+    margin-left: 3px;
+}
+.footer-details {
+    padding: 3px;
+}
+
+.footer-contact {
+    padding: 3px;
+}
   
   @media screen and (max-width: 1514px) {
     .column {

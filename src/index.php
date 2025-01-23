@@ -122,7 +122,17 @@ $isResponsive = isset($_GET['responsive']) && $_GET['responsive'] == 'true';
     </div><!-- /row-->
 </main>
 <footer id="contact">
-    <p>Opinnäytetyön muokattu versio @ 2025 Mikko Lepistö - metarktis@gmail.com</p>
+    <div class="footer-container">
+        <div class="footer-details">
+            <h2>Opinnäytetyön muokattu versio</h2> 
+            <p>2025 Mikko Lepistö</p>
+            <p>metarktis@gmail.com</p>
+        </div>
+        <div class="footer-contact">
+            <a href=""><img src="images/github_small.png"></a>
+            <a href=""><img src="images/linked_small.png"></a>
+        </div>
+    </div>
 </footer>
 <script>
     function myFunction() {
