@@ -47,6 +47,8 @@
         Lisää navigointilinkit:
             #home-ankkuri vie käyttäjän etusivun alkuun.
             #contact-ankkuri vie käyttäjän yhteystiedot-osioon.
+            23.1.25: Jos käyttäjä on kirjautunut sisään:
+                23.1.25: Linkki omat tiedot, joka lataa käyttäjän muokattavat tiedot user_edit_modal.php
         Lisää painike, joka tekee navigointipalkista responsiivisen pienillä näytöillä (JavaScript-funktio vaihtaa CSS-luokkaa responsive).
 
     Luo modaalien kontti

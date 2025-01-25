@@ -35,3 +35,20 @@ function userLastLogin($conn, $user) {
     $stmt->execute();
     $stmt->close();
 }
+
+// Funktio joka päivittää käyttäjän tiedot
+function updateUserData($conn, $user_id, $firstname, $lastname, $email) {
+    // Valmistellaan SQL -lauseke
+    $sql = "UPDATE user SET firstname = ?, lastname = ?, email = ?, updated_at = NOW() WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssi", $firstname, $lastname, $email, $user_id);
+
+    // Suoritetaan statement ja palautetaan tulos
+    if($stmt->execute()) {
+        $stmt->close();
+        return "<div id='result'>Tiedot päivitetty onnistuneesti! Muutokset näkyvät kun kirjaudut palveluun uudestaan.</div>";
+    } else {
+        $stmt->close();
+        return "<div id='result'>Virhe tietojen päivittämisessä</div>";
+    }
+}

@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <div class="dashboard">
-    <h1>Tervetuloa, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
+    <h1>Tervetuloa, <?php echo htmlspecialchars($_SESSION['firstname'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
 </div>
 <div id="modal-container">
     <!-- Modalin kontti -->

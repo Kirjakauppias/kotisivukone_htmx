@@ -87,7 +87,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <!-- 23.1.25: Jos käyttäjä on kirjautunut sisään, näytetään hallinta-navigaatio -->
         <?php if($loggedIn): ?>
             <a href="" alt="omat tiedot"
-                hx-get="userpage.php" 
+                hx-get="user_edit_modal.php" 
                 hx-target="#modal-container" 
                 hx-trigger="click"
             >

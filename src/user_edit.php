@@ -1,0 +1,51 @@
+<?php
+session_start();
+// Määritellään muuttuja
+$user_id = $_SESSION['user_id'] ?? null;
+
+if (!isset($user_id) || !is_numeric($user_id)) {
+    header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
+    exit();
+}
+
+include_once "./database/db_add_data.php";
+
+// Tarkistetaan, että pyyntö on lähetetty POST -metodilla
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    // Muuttujiin arvot inputeista
+    $firstname = trim($_POST['firstname'] ?? '');
+    $lastname = trim($_POST['lastname'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+
+    // Virheiden tarkistus ja tulostus
+    $errors = [];
+
+    if (empty($firstname)) {
+        $errors[] = "Etunimi ei voi olla tyhjä.";
+    }
+    if (empty($lastname)) {
+        $errors[] = "Sukunimi ei voi olla tyhjä.";
+    }
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Virheellinen sähköposti.";
+    }
+
+    // Tulostetaan virheet
+    if (!empty($errors)) {
+        echo "<div id='result'><ul>";
+        foreach ($errors as $error) {
+            echo "<li>" . htmlspecialchars($error) . "</li>";
+        }
+        echo "</ul></div>";
+        exit;
+    }
+
+    echo updateUserData($conn, $user_id, $firstname, $lastname, $email);
+
+    $conn->close();
+} else {
+    header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
+    exit();
+}
+
+?>
