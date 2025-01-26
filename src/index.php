@@ -83,7 +83,9 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <!-- Responsiivinen navigointipalkki -->
     <div class="topnav" id="myTopnav">
         <a href="#home" class="active">Etusivu</a>
-        <a href="#contact">Yhteystiedot</a>
+        <?php if(!$loggedIn): ?>
+            <a href="#contact">Yhteystiedot</a>
+        <?php endif; ?>
         <!-- 23.1.25: Jos käyttäjä on kirjautunut sisään, näytetään hallinta-navigaatio -->
         <?php if($loggedIn): ?>
             <a href="" alt="omat tiedot"
@@ -92,6 +94,13 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                 hx-trigger="click"
             >
                 Omat tiedot
+            </a>
+            <a href="" alt="omat tiedot"
+                hx-get="password_modal.php" 
+                hx-target="#modal-container" 
+                hx-trigger="click"
+            >
+                Salasanan vaihto
             </a>
         <?php endif; ?>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">

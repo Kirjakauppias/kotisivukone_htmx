@@ -1,15 +1,17 @@
 <?php
-  session_start();
-  // getUserByUderId()
-  include_once './database/db_enquiry.php';
-  // Määritellään muuttuja
-  $user_id = $_SESSION['user_id'] ?? null;
-  // Tarkistetaan, onko käyttäjä kirjautunut sisään
-  if (!isset($_SESSION['user_id']) || !is_numeric($user_id)) {
-    header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
-    exit();
-  }
-  
+declare(strict_types=1);
+session_start();
+// Määritellään muuttuja
+$user_id = $_SESSION['user_id'] ?? null;
+// Tarkistetaan, onko käyttäjä kirjautunut sisään
+if (!isset($_SESSION['user_id']) || !is_numeric($user_id)) {
+  header('Location: index.php'); // Ohjataan takaisin etusivulle
+  exit();
+}
+// getUserByUderId()
+include_once './database/db_enquiry.php';
+
+
   // Määritellään muuttujat
   $userId = $_SESSION['user_id'];
   $userData = getUserByUserId($conn, $userId);
@@ -19,7 +21,6 @@
 ?>
 <!-- user_edit_modal.php -->
 <!-- Sivu jossa käyttäjä voi päivittää omia tietojaan -->
-
 
 <div id="loginModal" style="display: block;">
   <div class="modal-content">
@@ -48,8 +49,10 @@
               <input type="submit" value="Päivitä tietosi">
          
           </form>
+        
           <div id="response" aria-live="polite" role="alert">
             <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut päivitys -->
           </div>
   </div>        
 </div><!--/container-->
+
