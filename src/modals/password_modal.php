@@ -1,19 +1,17 @@
 <?php
-  session_start();
-  // getUserByUderId()
-  include_once './database/db_enquiry.php';
-  include_once './database/db_add_data.php';
-  // Määritellään muuttuja
-  $user_id = $_SESSION['user_id'] ?? null;
-  // Tarkistetaan, onko käyttäjä kirjautunut sisään
-  if (!isset($_SESSION['user_id']) || !is_numeric($user_id)) {
-    header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
-    exit();
-  }
-  
-  // Määritellään muuttujat
-  $userId = $_SESSION['user_id'];
-  $userData = getUserByUserId($conn, $userId);
+declare(strict_types=1);
+session_start();
+// getUserByUderId()
+include_once '../database/db_enquiry.php';
+// Määritellään muuttuja
+$user_id = $_SESSION['user_id'] ?? null;
+// Tarkistetaan, onko käyttäjä kirjautunut sisään
+if (!isset($_SESSION['user_id']) || !is_numeric($user_id)) {
+  header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
+  exit();
+}
+
+$userData = getUserByUserId($conn, $user_id);
 ?>
 <!-- password_modal.php -->
 <!-- Sivu jossa käyttäjä voi vaihtaa oman salasanan -->
@@ -26,17 +24,17 @@
     <img src="images/password_avatar.jpg" alt="Avatar" class="avatar">
   </div>
         <form 
-          hx-post="user_edit.php" 
+          hx-post="./verifications/password-vf.php" 
           hx-target="#response"
           hx-swap="innerHTML"
         >  
-            <label for="password">Salasana:</label>
+            <label for="password">Salasana (pakollinen):</label>
            
             <!-- Salasanan minimipituus on 8 merkkiä -->
             <!-- Selainautomaatio estetty -->
             <input type="password" id="password" name="password" autocomplete="off" required minlength="8">
 
-            <label for="re_password">Salasana uudelleen:</label>
+            <label for="re_password">Salasana uudelleen (pakollinen):</label>
 
             <!-- Salasanan minimipituus on 8 merkkiä -->
             <!-- Selainautomaatio estetty -->

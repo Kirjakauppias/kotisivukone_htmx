@@ -52,3 +52,20 @@ function updateUserData($conn, $user_id, $firstname, $lastname, $email) {
         return "<div id='result'>Virhe tietojen päivittämisessä</div>";
     }
 }
+
+// Funktio joka päivittää käyttäjän salasanan
+function updateUserPassword($conn, $user_id, $hashedPassword){
+    // Valmistellaan SQL -lauseke
+    $sql = "UPDATE user SET password = ?, updated_at = NOW() WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $hashedPassword, $user_id);
+
+    // Suoritetaan statement ja palautetaan tulos
+    if($stmt->execute()) {
+        $stmt->close();
+        return "<div id='result'>Tiedot päivitetty onnistuneesti! Muutokset näkyvät kun kirjaudut palveluun uudestaan.</div>";
+    } else {
+        $stmt->close();
+        return "<div id='result'>Virhe tietojen päivittämisessä</div>";
+    }
+}

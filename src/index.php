@@ -96,7 +96,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                 Omat tiedot
             </a>
             <a href="" alt="omat tiedot"
-                hx-get="password_modal.php" 
+                hx-get="modals/password_modal.php" 
                 hx-target="#modal-container" 
                 hx-trigger="click"
             >
