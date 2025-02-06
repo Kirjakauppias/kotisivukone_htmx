@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y libmariadb-dev
 RUN docker-php-ext-install mysqli
 
 ENV APACHE_RUN_PORT=8080
+ENV PORT=8080
 EXPOSE 8080
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
