@@ -15,3 +15,4 @@ RUN ls -lah /var/www/html
 # **TÄRKEÄ: Aseta Apache käyttämään index.php tai index.html**
 RUN echo "DirectoryIndex index.php index.html" > /etc/apache2/conf-available/custom-index.conf && \
     a2enconf custom-index
+RUN chmod -R 755 /var/www/html && chown -R www-data:www-data /var/www/html
