@@ -14,5 +14,3 @@ RUN ls -lah /var/www/html
 # **TÄRKEÄ: Aseta Apache käyttämään index.php tai index.html**
 RUN echo "DirectoryIndex index.php index.html" > /etc/apache2/conf-available/custom-index.conf && \
     a2enconf custom-index
-RUN echo "<Directory /var/www/html/> Options +Indexes </Directory>" > /etc/apache2/conf-available/debug.conf && \
-    a2enconf debug   
