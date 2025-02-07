@@ -4,10 +4,10 @@
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 // Valitaan tietokanta paikallisesti tai Railwaysta
-$host = $_ENV['DB_HOST'] ?? "localhost";
-$dbName = $_ENV['DB_NAME'] ?? "mydatabase";
+$host = $_ENV['DB_HOST'] ?? "railway.app";
+$dbName = $_ENV['DB_NAME'] ?? "railway";
 $user = $_ENV['DB_USER'] ?? "root";
-$pass = $_ENV['DB_PASS'] ?? "root";
+$pass = $_ENV['DB_PASS'] ?? "PNfRKwbpEQGdiVyTgALFlUKTbRtsZgsO";
 $port = $_ENV['PORT'] ?? 3306;
 
 // Ympäristömuuttujien tarkastus:
