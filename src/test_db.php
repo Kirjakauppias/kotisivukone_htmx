@@ -6,11 +6,19 @@ $pass = 'PNfRKwbpEQGdiVyTgALFlUKTbRtsZgsO';
 $dbName = 'railway';
 $port = 3306;*/
 
-$host = $_ENV['DB_HOST'] ?? $_SERVER['DB_HOST'] ?? 'mysql.railway.internal';  // Railwayn tietokannan isäntänimi (oletus)
+// NÄMÄ TOIMI
+/*$host = $_ENV['DB_HOST'] ?? $_SERVER['DB_HOST'] ?? 'mysql.railway.internal';  // Railwayn tietokannan isäntänimi (oletus)
 $dbName = $_ENV['DB_NAME'] ?? $_SERVER['DB_NAME'] ?? 'railway';  // Railwayn tietokannan nimi (oletus)
 $user = $_ENV['DB_USER'] ?? $_SERVER['DB_USER'] ?? 'root';  // Railwayn käyttäjätunnus (oletus)
 $pass = $_ENV['DB_PASS'] ?? $_SERVER['DB_PASS'] ?? 'PNfRKwbpEQGdiVyTgALFlUKTbRtsZgsO';  // Railwayn salasana (oletus)
 $port = $_ENV['PORT'] ?? $_SERVER['PORT'] ?? 3306;  // Portti, oletusarvo 3306
+*/
+
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$user = $_ENV['DB_USER'];
+$pass = $_ENV['DB_PASS'];
+$port = $_ENV['PORT'];
 
 // Tarkistetaan, että ympäristömuuttujat on asetettu oikein
 if (!$host || !$dbName || !$user || !$pass) {
