@@ -10,8 +10,9 @@ $user = $_ENV['DB_USER'] ?? "root";
 $pass = $_ENV['DB_PASS'] ?? "root";
 $port = $_ENV['PORT'] ?? 3306;
 
-var_dump($_ENV);
-die();
+// Ympäristömuuttujien tarkastus:
+// var_dump($_ENV);
+// die();
 
 
 // Tarkistetaan, että pakolliset muuttujat ovat määritelty
