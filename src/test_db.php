@@ -20,11 +20,12 @@ $user = $_ENV['DB_USER'];
 $pass = $_ENV['DB_PASS'];
 $port = $_ENV['PORT'];
 
+var_dump($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS'], $_ENV['PORT']);
 // Tarkistetaan, että ympäristömuuttujat on asetettu oikein
 if (!$host || !$dbName || !$user || !$pass) {
     die('Ympäristömuuttujia puuttuu! Tarkista ympäristön asetukset.');
 }
-var_dump($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS'], $_ENV['PORT']);
+
 
 // Luo yhteys
 $conn = new mysqli($host, $user, $pass, $dbName, $port);
