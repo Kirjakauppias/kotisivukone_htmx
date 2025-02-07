@@ -1,5 +1,5 @@
 <?php
-$host = 'kotisivukone_htmx.railway.internal';
+$host = 'mysql.railway.internal';
 $user = 'root';
 $pass = 'PNfRKwbpEQGdiVyTgALFlUKTbRtsZgsO';
 $dbName = 'railway';
