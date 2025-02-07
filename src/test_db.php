@@ -16,6 +16,7 @@ $port = $_ENV['PORT'] ?? 3306;  // Portti, oletusarvo 3306
 if (!$host || !$dbName || !$user || !$pass) {
     die('Ympäristömuuttujia puuttuu! Tarkista ympäristön asetukset.');
 }
+var_dump($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS'], $_ENV['PORT']);
 
 // Luo yhteys
 $conn = new mysqli($host, $user, $pass, $dbName, $port);
