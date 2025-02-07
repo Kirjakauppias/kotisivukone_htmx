@@ -19,7 +19,7 @@ function fetchStmt($stmt){
 // Funktio joka tarkistaa, onko käyttäjätunnus jo tietokannassa
 function checkUsernameExists($conn, $username) {
     // SQL-lause käyttäjänimen tarkistamiseksi
-    $sql = "SELECT username FROM USER WHERE username = ?";
+    $sql = "SELECT username FROM user WHERE username = ?";
 
     // Valmistellaan kysely
     $stmt = $conn->prepare($sql);
@@ -33,7 +33,7 @@ function checkUsernameExists($conn, $username) {
 // Funktio joka tarkistaa, onko sähköposti jo tietokannassa
 function checkUserEmailExists($conn, $email) {
     // SQL-lause käyttäjänimen tarkistamiseksi
-    $sql = "SELECT email FROM USER WHERE email = ?";
+    $sql = "SELECT email FROM user WHERE email = ?";
 
     // Valmistellaan kysely
     $stmt = $conn->prepare($sql);
@@ -46,7 +46,7 @@ function checkUserEmailExists($conn, $email) {
 
 // Funktio joka hakee käyttäjän tiedot usernamella
 function getUserByUsername($conn, $username) {
-    $stmt = $conn->prepare("SELECT user_id, username, firstname, password, status FROM USER WHERE username = ?");
+    $stmt = $conn->prepare("SELECT user_id, username, firstname, password, status FROM user WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -55,7 +55,7 @@ function getUserByUsername($conn, $username) {
 
 // Funktio joka hakee käyttäjän tiedot user_id:llä
 function getUserByUserId($conn, $userId) {
-    $stmt = $conn->prepare("SELECT user_id, firstname, lastname, username, email, password FROM USER WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT user_id, firstname, lastname, username, email, password FROM user WHERE user_id = ?");
     $stmt->bind_param("s", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
