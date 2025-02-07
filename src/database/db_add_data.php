@@ -6,7 +6,7 @@ require_once "db_connect.php";
 // Funktio, jolla lisätään uusi käyttäjä tietokantaan
 function addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword) {
     // SQL-lause uuden käyttäjän lisäämiseksi.
-    $sql = "INSERT INTO user(firstname, lastname, username, email, password)
+    $sql = "INSERT INTO USER(firstname, lastname, username, email, password)
             VALUES (?, ?, ?, ?, ?)";
 
     // Valmistellaan SQL-lause
@@ -30,7 +30,7 @@ function addUser($conn, $firstname, $lastname, $username, $email, $hashedPasswor
 
 // Funktio joka päivittää käyttäjän viimeisimmän kirjautumisen tietokantaan
 function userLastLogin($conn, $user) {
-    $stmt = $conn->prepare("UPDATE user SET last_login = NOW() WHERE user_id = ?");
+    $stmt = $conn->prepare("UPDATE USER SET last_login = NOW() WHERE user_id = ?");
     $stmt->bind_param("i", $user['user_id']);
     $stmt->execute();
     $stmt->close();
@@ -39,7 +39,7 @@ function userLastLogin($conn, $user) {
 // Funktio joka päivittää käyttäjän tiedot
 function updateUserData($conn, $user_id, $firstname, $lastname, $email) {
     // Valmistellaan SQL -lauseke
-    $sql = "UPDATE user SET firstname = ?, lastname = ?, email = ?, updated_at = NOW() WHERE user_id = ?";
+    $sql = "UPDATE USER SET firstname = ?, lastname = ?, email = ?, updated_at = NOW() WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssi", $firstname, $lastname, $email, $user_id);
 
@@ -56,7 +56,7 @@ function updateUserData($conn, $user_id, $firstname, $lastname, $email) {
 // Funktio joka päivittää käyttäjän salasanan
 function updateUserPassword($conn, $user_id, $hashedPassword){
     // Valmistellaan SQL -lauseke
-    $sql = "UPDATE user SET password = ?, updated_at = NOW() WHERE user_id = ?";
+    $sql = "UPDATE USER SET password = ?, updated_at = NOW() WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $hashedPassword, $user_id);
 
