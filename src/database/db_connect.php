@@ -4,10 +4,10 @@
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 // Ympäristömuuttujat tulevat suoraan Dockerista
-$host = $_ENV['DB_HOST'] ?? null;
-$dbName = $_ENV['DB_NAME'] ?? null;
-$user = $_ENV['DB_USER'] ?? null;
-$pass = $_ENV['DB_PASS'] ?? null;
+$host = $_ENV['DB_HOST'] ?? "mysql--ktz.railway.internal";
+$dbName = $_ENV['DB_NAME'] ?? "railway";
+$user = $_ENV['DB_USER'] ?? "root";
+$pass = $_ENV['DB_PASS'] ?? "PNfRKwbpEQGdiVyTgALFlUKTbRtsZgsO";
 
 // Tarkistetaan, että pakolliset muuttujat ovat määritelty
 if (!$host || !$dbName || !$user || !$pass) {
