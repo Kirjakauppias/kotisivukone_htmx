@@ -22,6 +22,7 @@ var_dump($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS'],
 $conn = new mysqli($host, $user, $pass, $dbName, $port);
 
 if ($conn->connect_error) {
+    error_log("Yhteys epäonnistui: " . $conn->connect_error);  // Lokitetaan virhe
     die("❌ Yhteys epäonnistui: " . $conn->connect_error);
 } else {
     echo "✅ Yhteys MySQL:ään onnistui!";
