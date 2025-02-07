@@ -3,11 +3,12 @@
 // kaikki SQL -virheet raportoidaan:
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-// Ympäristömuuttujat tulevat suoraan Dockerista
-$host = $_ENV['DB_HOST'] ?? "mysql--ktz.railway.internal";
-$dbName = $_ENV['DB_NAME'] ?? "railway";
+// Valitaan tietokanta paikallisesti tai Railwaysta
+$host = $_ENV['DB_HOST'] ?? "localhost";
+$dbName = $_ENV['DB_NAME'] ?? "mydatabase";
 $user = $_ENV['DB_USER'] ?? "root";
-$pass = $_ENV['DB_PASS'] ?? "PNfRKwbpEQGdiVyTgALFlUKTbRtsZgsO";
+$pass = $_ENV['DB_PASS'] ?? "root";
+$port = $_ENV['PORT'] ?? 3306;
 
 // Tarkistetaan, että pakolliset muuttujat ovat määritelty
 if (!$host || !$dbName || !$user || !$pass) {
