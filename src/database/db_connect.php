@@ -11,8 +11,8 @@ $pass = $_ENV['DB_PASS'] ?? "PNfRKwbpEQGdiVyTgALFlUKTbRtsZgsO";
 $port = $_ENV['PORT'] ?? 3306;
 
 // Ympäristömuuttujien tarkastus:
-// var_dump($_ENV);
-// die();
+ var_dump($_ENV);
+ die();
 
 
 // Tarkistetaan, että pakolliset muuttujat ovat määritelty
