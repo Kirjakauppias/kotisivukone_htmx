@@ -37,11 +37,5 @@ if ($conn->connect_error) {
     echo "✅ Yhteys MySQL:ään onnistui!";
 }
 
-// Funktio joka hakee käyttäjän tiedot usernamella
-function getUserByUsername($conn, $username) {
-    $stmt = $conn->prepare("SELECT user_id, username, firstname, password, status FROM user WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_assoc();
-}
+// Tulostetaan käytössä oleva tietokanta
+echo "Käytössä oleva tietokanta: " . $conn->query("SELECT DATABASE()")->fetch_row()[0];
