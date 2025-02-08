@@ -34,6 +34,7 @@ footer img {
     border-radius: 12px;
 }
 
+/*BANNER*/
 .banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office.jpg");
     height: 25%;
@@ -50,6 +51,11 @@ footer img {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+}
+
+.btn-register {
+    background-color: #fdfdfc;
+    color: black;
 }
 
 /* NAVBAR */
