@@ -1,5 +1,5 @@
 <?php
-require_once "db_connect.php";
+require_once "database/db_connect.php";
 
 $conn->query("UPDATE USER SET status = 'ACTIVE' WHERE status = 'active'");
 $conn->query("UPDATE USER SET role = 'CUSTOMER' WHERE role = 'customer'");
