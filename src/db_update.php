@@ -1,13 +1,11 @@
 <?php
 require_once "database/db_connect.php";
 
-// Päivitetään vanhat arvot, jotta niissä ei ole ongelmallisia tietoja
-$conn->query("UPDATE USER SET status = 'ACTIVE' WHERE status IS NULL OR status = 'active'");
-$conn->query("UPDATE USER SET role = 'CUSTOMER' WHERE role IS NULL OR role = 'customer'");
+// Päivitetään kaikki NULL tai tyhjät arvot nykyiseen aikaleimaan
+$conn->query("UPDATE USER SET created_at = NOW() WHERE created_at IS NULL OR created_at = ''");
 
-// Muutetaan sarakkeiden tietotyyppi VARCHAR(50), jotta voidaan asettaa oletusarvot
-$conn->query("ALTER TABLE USER MODIFY COLUMN status VARCHAR(50) NOT NULL DEFAULT 'ACTIVE'");
-$conn->query("ALTER TABLE USER MODIFY COLUMN role VARCHAR(50) NOT NULL DEFAULT 'CUSTOMER'");
+// Muutetaan sarake niin, että oletusarvona on CURRENT_TIMESTAMP
+$conn->query("ALTER TABLE USER MODIFY COLUMN created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
 
 echo "✅ Päivitys valmis!";
 ?>
