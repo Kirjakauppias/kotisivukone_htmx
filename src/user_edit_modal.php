@@ -47,6 +47,14 @@ include_once './database/db_enquiry.php';
               <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email);?>" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
           
               <input type="submit" value="Päivitä tietosi">
+
+              <!-- 9.2. Lisätty peruuta -painike joka sulkee lomakkeen -->
+              <button type="submit" class="btn-cancel" 
+              hx-get="close_modal.php" 
+              hx-target="#modal-container"
+              >
+                Peruuta
+              </button>
          
           </form>
         

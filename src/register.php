@@ -49,6 +49,14 @@
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
           
             <input type="submit" value="Lisää tili">
+            
+            <!-- 9.2. Lisätty peruuta -painike joka sulkee lomakkeen -->
+            <button type="submit" class="btn-cancel" 
+              hx-get="close_modal.php" 
+              hx-target="#modal-container"
+            >
+                Peruuta
+            </button>
          
           </form>
           <div id="response" aria-live="polite" role="alert">

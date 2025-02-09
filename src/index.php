@@ -50,7 +50,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <div class="banner" id="home">
         <div class="banner-text">
             <h1 style="font-size:50px">KOTISIVUKONE</h1>
-            <p>Testauskäyttöön ainoastaan</p>
+            <p>Showcase Demo</p>
             <!-- Näytetään rekisteri -painike jos käyttäjä ei ole kirjautunu sisään. -->
             <?php if(!$loggedIn): ?>
                 <button 

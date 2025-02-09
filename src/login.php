@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Tarkistetaan tokenin voimassaolo:
     if (time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
-        $errors[] = "CSRF -token vanhentunut. Lataa sivu uudelleen.";
+        $errors[] = "Istunto on vanhentunut. Lataa sivu uudelleen.";
     }
 
     // Tarkistetaan, että kentät eivät ole tyhjiä

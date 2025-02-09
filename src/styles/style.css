@@ -102,12 +102,13 @@ input[type=text], input[type=password], input[type=email] {
     box-sizing: border-box; /* Sisällyttää reunukset ja täytteet elementin kokoon */
 }
 
-input[type=submit] {
+input[type=submit], .btn-cancel {
     background-color: #212422; /* Asettaa painikkeen taustaväriksi oranssin */
     color: white; /* Asettaa tekstin väriksi valkoisen */
     padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
     margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
     border: none; /* Poistaa reunuksen */
+    border-radius: 0; /* Poistaa reunapyöristyksen .btn-cancelista */
     cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
     font-size: 16px; /* Asettaa fonttikoon */
     font-weight: bold; /* Asettaa lihavoidun fontin */
@@ -127,7 +128,7 @@ button {
     font-weight: bold; /* Asettaa lihavoidun fontin */
 }
 
-button:hover {
+button:hover, input[type=submit]:hover {
     opacity: 0.8; /* Himmentää painikkeen taustaväriä hover-tilassa */
 }
 

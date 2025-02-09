@@ -41,6 +41,13 @@ $userData = getUserByUserId($conn, $user_id);
             <input type="password" id="re_password" name="re_password" autocomplete="off" required minlength="8">
             <input type="submit" value="Vaihda salasana">
 
+            <!-- 9.2. Lisätty peruuta -painike joka sulkee lomakkeen -->
+            <button type="submit" class="btn-cancel" 
+              hx-get="close_modal.php" 
+              hx-target="#modal-container"
+            >
+                Peruuta
+            </button>
         </form>
           
         <div id="response" aria-live="polite" role="alert">

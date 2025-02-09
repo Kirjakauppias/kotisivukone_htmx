@@ -1,0 +1,6 @@
+9.2.24:
+    -user_edit_modal.php, login_modal.php, password_modal.php, register.php:
+        -Lisätty peruuta painike (btn-cancel) ja sen toiminnot.
+    style.css:
+        -Peruuta -painikkeen tyylit lisätty, yhdessä input[type=submit].
+        -input[type=submit]:hover lisätty.
