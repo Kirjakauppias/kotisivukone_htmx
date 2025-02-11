@@ -93,6 +93,9 @@ footer img {
   }
 
 /* Lomaketyylit */
+label {
+    font-weight: bold;
+}
 input[type=text], input[type=password], input[type=email] {
     display: inline-block; /* Asettaa elementin viivalohkoksi */
     width: 100%; /* Elementti venyy koko rivin leveydelle */

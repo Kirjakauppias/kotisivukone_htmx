@@ -28,13 +28,13 @@ $userData = getUserByUserId($conn, $user_id);
           hx-target="#response"
           hx-swap="innerHTML"
         >  
-            <label for="password">Salasana (pakollinen):</label>
-           
+            <label for="password">Uusi salasana</label>
+        
             <!-- Salasanan minimipituus on 8 merkkiä -->
             <!-- Selainautomaatio estetty -->
             <input type="password" id="password" name="password" autocomplete="off" required minlength="8">
-
-            <label for="re_password">Salasana uudelleen (pakollinen):</label>
+            <p class="password-guide">8 merkkiä pitkä 1 erikoismerkki 1 iso kirjain</p>
+            <label for="re_password">Uusi salasana uudelleen</label>
 
             <!-- Salasanan minimipituus on 8 merkkiä -->
             <!-- Selainautomaatio estetty -->

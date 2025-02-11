@@ -33,15 +33,15 @@ include_once './database/db_enquiry.php';
           hx-target="#response"
           hx-swap="innerHTML"
         >  
-              <label for="firstname" aria-label="Etunimi">Etunimi: </label>
+              <label for="firstname" aria-label="Etunimi">Etunimi </label>
           
               <input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($firstname);?>" required>
            
-              <label for="lastname">Sukunimi: </label>
+              <label for="lastname">Sukunimi </label>
             
               <input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($lastname);?>" required>
           
-              <label for="email">Sähköposti:</label>
+              <label for="email">Sähköposti</label>
             
               <!-- E-mailin oikea muoto -->
               <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email);?>" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
