@@ -4,3 +4,6 @@
     style.css:
         -Peruuta -painikkeen tyylit lisätty, yhdessä input[type=submit].
         -input[type=submit]:hover lisätty.
+11.2.24:
+    -register.php:
+        -Lisätty lomakkeeseen ohjeistus salasanan muodostamisesta ja ohjeistus pakollisista inputeista.

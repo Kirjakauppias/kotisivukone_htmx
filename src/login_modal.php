@@ -14,10 +14,10 @@ session_start();
             hx-swap="innerHTML"
             autocomplete="off"
         >
-            <label for="username">Käyttäjätunnus:</label>
+            <label for="username">Käyttäjätunnus</label>
             <input type="text" id="username" name="username" autocomplete="username" required>
 
-            <label for="password">Salasana:</label>
+            <label for="password">Salasana</label>
             <input type="password" id="password" name="password" autocomplete="current-password" required>
 
             <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
