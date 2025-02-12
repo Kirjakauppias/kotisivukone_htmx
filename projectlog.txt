@@ -8,3 +8,5 @@
     -user_edit_modal.php, login_modal.php, password_modal.php, register.php:
         -Lisätty lomakkeeseen ohjeistus salasanan muodostamisesta ja ohjeistus pakollisista inputeista.
         -Label -otsikointi boldattu.
+12.2.24:
+    -Luotu tietoturvaseloste.html.
