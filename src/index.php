@@ -35,7 +35,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token']; ?>">
-    <title>Kirjautuminen</title>
+    <title>Kotisivukone</title>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="htmx.js" defer></script>
@@ -80,6 +80,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <?php endif; ?>
         </div>
     </div> <!-- /Banneri-->
+    
     <!-- Responsiivinen navigointipalkki -->
     <div class="topnav" id="myTopnav">
         <a href="#home" class="active">Etusivu</a>

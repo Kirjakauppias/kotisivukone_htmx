@@ -1,3 +1,4 @@
+/* KAIKILLE SIVUILLE TULEVAT TYYLIMÄÄRITTELYT */
 /* Nollaa oletustyylit kaikille elementeille */
 * {
     margin: 0; /* Poistaa oletusmarginaalit */
@@ -5,14 +6,14 @@
     box-sizing: border-box; /* Sisällyttää marginaalit ja reunukset elementin kokoon */
 }
 
-h1 {
-    letter-spacing: 5px;
-}
-
 /* Kehon (body) perusfontti */
 body {
     font-family:monospace; /* Asettaa monospace-fontin */
     /*min-height: 100vh; /* Määrittää kehon vähimmäiskorkeuden näytön korkeudeksi */
+}
+
+h1 {
+    letter-spacing: 5px;
 }
 
 main {
@@ -59,8 +60,6 @@ footer img {
 }
 
 /* NAVBAR */
-
-
 #myTopnav {
     overflow: hidden;
     background-color: #333;
@@ -292,6 +291,7 @@ img.avatar {
     padding: 3px;
 }
   
+/* PIENEMMÄN RUUDUN TYYLIT */
   @media screen and (max-width: 1514px) {
     .column {
         width: 25%;
@@ -308,6 +308,7 @@ img.avatar {
         width: 100%;
     }
   }
+  
   /* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 855px) {
     .column {
