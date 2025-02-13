@@ -69,3 +69,21 @@ function updateUserPassword($conn, $user_id, $hashedPassword){
         return "<div id='result'>Virhe tietojen päivittämisessä</div>";
     }
 }
+
+// Funktio joka asettaa käyttäjän tilin poistetuksi ("pehmeä poisto")
+function deleteUser($conn, $user_id) {
+    $sql = "UPDATE USER SET deleted_at = NOW() WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    
+    // Suoritetaan statement ja palautetaan tulos
+    if($stmt->execute()) {
+        $stmt->close();
+        return "<div id='result'>Tiedot päivitetty onnistuneesti! Muutokset näkyvät kun kirjaudut palveluun uudestaan.</div>";
+    } else {
+        $stmt->close();
+        return "<div id='result'>Virhe tietojen päivittämisessä</div>";
+    }
+
+}
+

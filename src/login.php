@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Haetaan käyttäjä tietokannasta
     $user = getUserByUsername($conn, $username);
-    if (!$user || !password_verify($password, $user['password'])) {
+    if (!$user || !password_verify($password, $user['password']) || $user['deleted_at'] != NULL) {
         $errors[] = "Virheellinen käyttäjätunnus tai salasana";
     }
 

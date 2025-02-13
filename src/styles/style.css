@@ -105,7 +105,7 @@ input[type=text], input[type=password], input[type=email] {
     box-sizing: border-box; /* Sisällyttää reunukset ja täytteet elementin kokoon */
 }
 
-input[type=submit], .btn-cancel {
+input[type=submit], .btn-cancel, .btn-delete {
     background-color: #212422; /* Asettaa painikkeen taustaväriksi oranssin */
     color: white; /* Asettaa tekstin väriksi valkoisen */
     padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
@@ -137,6 +137,11 @@ button:hover, input[type=submit]:hover {
 
 .password-guide {
     margin-bottom: 4px;
+}
+
+.btn-delete {
+    margin-top: 3rem !important;
+    background-color: red;
 }
 
 /* Kirjautumislomakkeen avatar */

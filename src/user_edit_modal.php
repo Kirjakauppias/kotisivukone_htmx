@@ -55,6 +55,16 @@ include_once './database/db_enquiry.php';
               >
                 Peruuta
               </button>
+            
+              <!-- 13.2. Lisätty poista tili -painike joka poistaa tilin (pehmeä poisto) -->
+              <button type="submit" class="btn-delete"  
+              hx-post="verifications/delete-user-vf.php" 
+              hx-target="#response"
+              hx-swap="innerHTML"
+              hx-confirm="Oletko varma että haluat poistaa tilisi? Tili poistetaan ja siirryt etusivulle."
+              >
+                Poista tili
+              </button>
          
           </form>
         

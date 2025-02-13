@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($email === FALSE) {
         $errors[] = "Sähköposti ei ole oikea.";
     }
-    if ($usernameCheck == TRUE || $userEmailCheck == TRUE) {
+    if ($usernameCheck == TRUE || $userEmailCheck == TRUE ) {
         $errors[] = "Rekisteröinti epäonnistui. Yritä toista käyttäjätunnusta tai sähköpostia.";
     }
 

@@ -13,3 +13,7 @@
 13.2.24:
     -Lomakkeiden inputtien reunat pyöristetty.
     -Mobiilipuolen tyyli-muokkauksia.
+    -user_edit_modal.php:
+        -listätty btb-delete painike jonka avulla käyttäjä voi poistaa tilinsä.
+    -delete-user-vf.php luotu.
+        -
