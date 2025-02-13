@@ -346,7 +346,7 @@ img.avatar {
     }
   }
 
-  @media screen and (max-width: 440px){
+  @media screen and (max-width: 500px){
     .presentation {
         margin: 0 5 5 5px;
         padding-top: 2rem;
