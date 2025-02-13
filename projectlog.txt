@@ -12,3 +12,4 @@
     -Luotu tietoturvaseloste.html.
 13.2.24:
     -Lomakkeiden inputtien reunat pyöristetty.
+    -Mobiilipuolen tyyli-muokkauksia.
