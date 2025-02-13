@@ -101,6 +101,7 @@ input[type=text], input[type=password], input[type=email] {
     padding: 12px 20px; /* Lisää sisäistä marginaalia */
     margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
     border: 1px solid #ccc; /* Luo harmaan kehyksen */
+    border-radius: 5px;
     box-sizing: border-box; /* Sisällyttää reunukset ja täytteet elementin kokoon */
 }
 
@@ -110,7 +111,7 @@ input[type=submit], .btn-cancel {
     padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
     margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
     border: none; /* Poistaa reunuksen */
-    border-radius: 0; /* Poistaa reunapyöristyksen .btn-cancelista */
+    border-radius: 5px; /* Poistaa reunapyöristyksen .btn-cancelista */
     cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
     font-size: 16px; /* Asettaa fonttikoon */
     font-weight: bold; /* Asettaa lihavoidun fontin */
@@ -308,7 +309,7 @@ img.avatar {
         width: 100%;
     }
   }
-  
+
   /* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 855px) {
     .column {
@@ -347,9 +348,15 @@ img.avatar {
 
   @media screen and (max-width: 420px){
     .presentation {
-        margin: 5px;
+        margin: 0 5 5 5px;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
     .presentation h1, .orange {
         font-size: 14px;
+    }
+
+    .img-stars {
+        display: none;
     }
   }

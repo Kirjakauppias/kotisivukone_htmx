@@ -10,3 +10,5 @@
         -Label -otsikointi boldattu.
 12.2.24:
     -Luotu tietoturvaseloste.html.
+13.2.24:
+    -Lomakkeiden inputtien reunat pyöristetty.
