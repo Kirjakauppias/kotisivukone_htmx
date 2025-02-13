@@ -228,7 +228,7 @@ img.avatar {
 .presentation p {
     text-transform: uppercase;
     letter-spacing: 3px;
-    font-size: 16px;
+    font-size: 2vw;
 }
 .orange {
     color: #f3c670;
@@ -311,6 +311,10 @@ img.avatar {
     }
   }
 
+  @media screen and (max-width: 930px) {
+    
+  }
+
   /* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 855px) {
     .column {
@@ -326,10 +330,6 @@ img.avatar {
     .topnav a.icon {
       float: right;
       display: block;
-    }
-
-    .presentation h1, .orange {
-        font-size: 16px;
     }
   }
   
@@ -353,8 +353,11 @@ img.avatar {
         padding-top: 2rem;
         padding-bottom: 2rem;
     }
-    .presentation h1, .orange {
-        font-size: 14px;
+    
+    .presentation p, .orange {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 16px;
     }
 
     .img-stars {
