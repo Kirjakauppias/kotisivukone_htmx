@@ -228,6 +228,7 @@ img.avatar {
 .presentation p {
     text-transform: uppercase;
     letter-spacing: 3px;
+    font-size: 16px;
 }
 .orange {
     color: #f3c670;
