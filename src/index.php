@@ -80,7 +80,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <?php endif; ?>
         </div>
     </div> <!-- /Banneri-->
-    
+
     <!-- Responsiivinen navigointipalkki -->
     <div class="topnav" id="myTopnav">
         <a href="#home" class="active">Etusivu</a>
@@ -117,9 +117,9 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <img src="images/stars_small.png" alt="5 stars" class="img-stars">
         <!-- Esittelyotsikko -->
         <div class="presentation">
-            <h1>Luo omat kotisivut itsellesi tai yrityksellesi</h1>
-            <h1>Kotisivukoneella rakennat</h1>
-            <h1 class="orange">sivut itse helposti</h1>
+            <p>Luo omat kotisivut itsellesi tai yrityksellesi</p>
+            <p>Kotisivukoneella rakennat</p>
+            <p class="orange">sivut itse helposti</p>
         </div>
         <!-- Esittelylaatikot -->
         <div class="row">
