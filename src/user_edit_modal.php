@@ -61,7 +61,7 @@ include_once './database/db_enquiry.php';
               hx-post="verifications/delete-user-vf.php" 
               hx-target="#response"
               hx-swap="innerHTML"
-              hx-confirm="Oletko varma että haluat poistaa tilisi? Tili poistetaan ja siirryt etusivulle."
+              hx-confirm="Tilin tiedot poistetaan lopullisesti viikko poiston jälkeen. Tilin voi uudelleen aktivoida ottamalla yhteyttä järjestelmänvalvojaan."
               >
                 Poista tili
               </button>

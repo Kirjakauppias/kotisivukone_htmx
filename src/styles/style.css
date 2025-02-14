@@ -232,7 +232,7 @@ img.avatar {
 }
 .presentation p {
     text-transform: uppercase;
-    letter-spacing: 1px;
+    /*letter-spacing: 1px;*/
     font-size: 2vw;
 }
 .orange {

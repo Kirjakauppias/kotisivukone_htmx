@@ -44,6 +44,18 @@ function checkUserEmailExists($conn, $email) {
     return fetchStmt($stmt);
 }
 
+// Funktio joka tarkistaa että käyttäjän antama email ei ole kenelläkään muulla kuin itse käyttäjällä
+function checkEmailUnique($conn, $email, $user_id) {
+    $sql = "SELECT COUNT(*) as count FROM USER WHERE email = ? AND user_id != ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $email, $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    
+    return $row['count'] == 0; // Palauttaa true, jos email on uniikki
+}
+
 // Funktio joka hakee käyttäjän tiedot usernamella
 function getUserByUsername($conn, $username) {
     $stmt = $conn->prepare("SELECT user_id, username, firstname, password, status, deleted_at FROM USER WHERE username = ?");

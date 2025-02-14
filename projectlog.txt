@@ -15,5 +15,8 @@
     -Mobiilipuolen tyyli-muokkauksia.
     -user_edit_modal.php:
         -listätty btb-delete painike jonka avulla käyttäjä voi poistaa tilinsä.
-    -delete-user-vf.php luotu.
-        -
+    -soft delete luotu.
+14.2.24:
+    -user_edit.php, db_enquiry.php checkEmailUnique($conn, $email, $user_id)
+        -Tarkistaa että tietoja päivittäessä email ei ole käytössä kenelläkään muulla.
+    -Tietoturvaselosteeseen lisätty maininta tilin poistosta ja uudelleen aktivoinnista.

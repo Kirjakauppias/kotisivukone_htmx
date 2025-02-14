@@ -1,5 +1,6 @@
 <?php
 session_start();
+//user_edit.php
 // Määritellään muuttuja
 $user_id = $_SESSION['user_id'] ?? null;
 
@@ -7,7 +8,9 @@ if (!isset($user_id) || !is_numeric($user_id)) {
     header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
     exit();
 }
-
+//checkEmailUnique
+include_once "./database/db_enquiry.php";
+//updateUserData()
 include_once "./database/db_add_data.php";
 
 // Tarkistetaan, että pyyntö on lähetetty POST -metodilla
@@ -16,6 +19,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $firstname = trim($_POST['firstname'] ?? '');
     $lastname = trim($_POST['lastname'] ?? '');
     $email = trim($_POST['email'] ?? '');
+    $emailUnique = checkEmailUnique($conn, $email, $user_id);
 
     // Virheiden tarkistus ja tulostus
     $errors = [];
@@ -26,7 +30,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if (empty($lastname)) {
         $errors[] = "Sukunimi ei voi olla tyhjä.";
     }
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //14.2.25 Lisätty tarkistus että email on vain käyttäjällä itsellään.
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$emailUnique) {
         $errors[] = "Virheellinen sähköposti.";
     }
 
