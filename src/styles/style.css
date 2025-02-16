@@ -285,7 +285,26 @@ img.avatar {
     letter-spacing: 3px;
     color: #fdfdfc;
 }
+.dashboard img {
+    display: block;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    height: 60px;
+    width: 60px;
+}
 
+.user-interface {
+    margin-top: 2rem;
+}
+
+.user-interface section {
+    display: flex;
+    align-items: center;
+}   
+
+.user-interface-icons {
+    max-width: fit-content;
+}
 /* FOOTER CONTENT */
 .footer-container {
     margin-left: 3px;

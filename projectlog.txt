@@ -20,3 +20,9 @@
     -user_edit.php, db_enquiry.php checkEmailUnique($conn, $email, $user_id)
         -Tarkistaa että tietoja päivittäessä email ei ole käytössä kenelläkään muulla.
     -Tietoturvaselosteeseen lisätty maininta tilin poistosta ja uudelleen aktivoinnista.
+15.2.24:
+    -dashboard.php
+        -Luodaan käyttäjäliittymä.
+16.2.24:
+    -dashboard.php
+        -Luotu user interface dashboardiin. Muotoilu kesken.
