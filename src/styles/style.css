@@ -285,12 +285,36 @@ img.avatar {
     letter-spacing: 3px;
     color: #fdfdfc;
 }
+
+.dashboard h2 {
+    color: #f3c670;
+}
+
+.dashboard h3 {
+    margin-right: 2px;
+}
+
+.dashboard a:link {
+    text-decoration: none;
+}
 .dashboard img {
     display: block;
     margin-bottom: 5px;
-    margin-right: 10px;
+    margin-right: 5px;
     height: 60px;
     width: 60px;
+}
+
+.dashboard section {
+    border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
+    padding: 3px;
+    margin-bottom: 8px;
+}
+
+.dashboard section:hover {
+    background-color: #333;
+    opacity: 0.8; /* Himmentää painikkeen taustaväriä hover-tilassa */
 }
 
 .user-interface {
