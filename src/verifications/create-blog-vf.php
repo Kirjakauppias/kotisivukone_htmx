@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("isss", $_SESSION['user_id'], $blog_name, $slug, $blog_description);
 
     if ($stmt->execute()) {
-        echo "Blogi luotu onnistuneesti! Voit sulkea ikkunan painamalla ruksia tai peruuta.";
+        echo "Blogi luotu onnistuneesti! <a href='index.php'>Palaa omalle sivulle</a>.";
     } else {
         echo "Virhe blogin luonnissa: " . $stmt->error;
     }

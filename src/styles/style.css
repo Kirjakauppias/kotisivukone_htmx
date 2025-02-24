@@ -35,6 +35,10 @@ footer img {
     border-radius: 12px;
 }
 
+#response a {
+    color: black;
+}
+
 /*BANNER*/
 .banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office.jpg");

@@ -37,7 +37,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param('isss', $blog_id, $title, $content, $status);
 
 if ($stmt->execute()) {
-    echo "Artikkeli luotu onnistuneesti.";
+    echo "Artikkeli luotu onnistuneesti. <a href='index.php'>Palaa omalle sivulle</a>";
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Artikkelin luonti epäonnistui.']);
 }
