@@ -1,22 +1,21 @@
 <?php
 require_once 'db_connect.php'; // Otetaan tietokantayhteys käyttöön
 
-// SQL-kysely taulun luomiseen
 $sql = "
 CREATE TABLE IF NOT EXISTS `BLOG` (
-  `blog_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL UNIQUE,
-  `description` text,
+  `blog_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `slug` VARCHAR(255) NOT NULL UNIQUE,
+  `description` TEXT,
   `published` TINYINT(1) NOT NULL DEFAULT 0, -- 0 = luonnos, 1 = julkaistu
   `visibility` ENUM('PUBLIC', 'PRIVATE') NOT NULL DEFAULT 'PUBLIC',
   `views` INT NOT NULL DEFAULT 0, -- Blogisivun katselukerrat
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_at` datetime DEFAULT NULL,
-  `layout_id` int DEFAULT NULL,
-  `style_id` int DEFAULT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME DEFAULT NULL,
+  `layout_id` INT DEFAULT NULL,
+  `style_id` INT DEFAULT NULL,
   PRIMARY KEY (`blog_id`),
   FOREIGN KEY (`user_id`) REFERENCES `USER`(`user_id`) ON DELETE CASCADE,
   FOREIGN KEY (`layout_id`) REFERENCES `LAYOUTS`(`layout_id`) ON DELETE SET NULL,
@@ -24,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `BLOG` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ";
 
-// Suoritetaan SQL-kysely
 try {
     $conn->query($sql);
     echo "✅ BLOG-taulu luotu Railway.comissa!";
