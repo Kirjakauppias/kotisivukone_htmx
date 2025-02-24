@@ -343,7 +343,7 @@ img.avatar {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
     padding: 5px;
 }
-.article h1 {
+.article h2 {
     color: #72fbfb;
 }
 
