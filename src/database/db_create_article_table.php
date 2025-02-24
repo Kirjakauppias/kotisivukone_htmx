@@ -1,5 +1,5 @@
 <?php
-require_once '../db_connect.php'; // Muokkaa polkua tarpeen mukaan
+require_once 'db_connect.php'; // Muokkaa polkua tarpeen mukaan
 
 $sql = "CREATE TABLE IF NOT EXISTS `ARTICLE` (
     `article_id` INT NOT NULL AUTO_INCREMENT,
