@@ -1,22 +1,19 @@
 <?php
-// Päivittää USER-taulun deleted_at-sarakkeen oletusarvoksi NULL ja asettaa NULL kaikille olemassa oleville riveille
+require_once 'db_connect.php'; // Otetaan tietokantayhteys käyttöön
 
-declare(strict_types=1);
-include_once 'db_connect.php'; // Tietokantayhteys
+$updates = [
+    "ALTER TABLE `LAYOUTS` MODIFY `layout_id` INT NOT NULL AUTO_INCREMENT;",
+    "ALTER TABLE `STYLES` MODIFY `style_id` INT NOT NULL AUTO_INCREMENT;"
+];
 
 try {
-    // Muutetaan deleted_at oletuksena NULL:ksi
-    $alterQuery = "ALTER TABLE `USER` MODIFY `deleted_at` TIMESTAMP NULL DEFAULT NULL";
-    $conn->query($alterQuery);
-    
-    // Asetetaan deleted_at NULL kaikille olemassa oleville riveille
-    $updateQuery = "UPDATE `USER` SET `deleted_at` = NULL WHERE `deleted_at` IS NOT NULL";
-    $conn->query($updateQuery);
-    
-    echo "Taulun USER päivittäminen onnistui!";
-} catch (mysqli_sql_exception $e) {
-    error_log("SQL-virhe: " . $e->getMessage());
-    die("Tietokantapäivitys epäonnistui: " . $e->getMessage());
+    foreach ($updates as $sql) {
+        $conn->query($sql);
+    }
+    echo "✅ LAYOUTS ja STYLES -taulut päivitetty onnistuneesti!";
+} catch (Exception $e) {
+    error_log("❌ Virhe taulujen päivityksessä: " . $e->getMessage());
+    die("❌ Virhe taulujen päivityksessä: " . $e->getMessage());
 }
 
 $conn->close();
