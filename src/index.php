@@ -70,7 +70,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                     hx-trigger="click"
                     class="btn-login"
                 >
-                    Kirjaudu
+                    Oma Blogi
                 </button>
             <?php else: ?>
                 <!-- Näytetään jos käyttäjä on kirjautunut sisään -->
