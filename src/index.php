@@ -112,6 +112,9 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             >
                 Uusi artikkeli
             </a>
+            <?php
+            $slug = getSlug($conn, $_SESSION['user_id']);
+            echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
             <?php endif; ?>
             <?php endif; ?>
 

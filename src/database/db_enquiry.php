@@ -87,10 +87,23 @@ function getUserByUsername($conn, $username) {
 // Funktio joka hakee käyttäjän tiedot user_id:llä
 function getUserByUserId($conn, $userId) {
     $stmt = $conn->prepare("SELECT user_id, firstname, lastname, username, email, password FROM USER WHERE user_id = ?");
-    $stmt->bind_param("s", $userId);
+    $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc();
+}
+
+// Funktio joka hakee slugin user_id:llä
+function getSlug($conn, $user_id) {
+    $stmt = $conn->prepare("SELECT slug FROM BLOG WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $slug = null;
+    $stmt->bind_result($slug);
+    $stmt->fetch();
+    $stmt->close();
+
+    return $slug;
 }
 
 // Funktio, jonka avulla tarkistetaan, onko käyttäjä admin
@@ -100,6 +113,8 @@ function checkIfAdmin($conn, $user_id) {
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
+
+        $role = null; // Alustetaan muuttuja oletusarvolla
         $stmt->bind_result($role);
         $stmt->fetch();
         $stmt->close();
