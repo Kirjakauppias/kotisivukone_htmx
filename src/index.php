@@ -18,6 +18,7 @@ ini_set('session.cookie_samesite', 'Strict'); // Ei lähetä keksejä kolmannen 
 // Käynnistetään sessio
 session_start(); 
 require 'funcs.php';
+require_once './database/db_enquiry.php';
 
 // Alustetaan muuttuja.
 $loggedIn = isset($_SESSION['user_id']); 
@@ -89,6 +90,31 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <?php endif; ?>
         <!-- 23.1.25: Jos käyttäjä on kirjautunut sisään, näytetään hallinta-navigaatio -->
         <?php if($loggedIn): ?>
+
+            <!-- 23.2. Tarkistetaan että onko käyttäjällä jo blogi. Jos blogi löytyy, piilotetaan "Luo blogi!" -->
+            <?php $isAdmin = checkIfAdmin($conn, $_SESSION['user_id']); ?>
+            <?php if($isAdmin) :?>
+            <?php $blogExists = checkBlogExists($conn, $_SESSION['user_id']); ?>
+            <?php if(!$blogExists) :?>
+            <a href="" alt="omat tiedot"
+                hx-get="modals/create-blog-modal.php" 
+                hx-target="#modal-container" 
+                hx-trigger="click"
+            >
+                Luo blogi!
+            </a>
+            <?php endif; ?>
+            <?php if($blogExists) :?>
+            <a href="" alt="omat tiedot"
+                hx-get="modals/create-article-modal.php" 
+                hx-target="#modal-container" 
+                hx-trigger="click"
+            >
+                Uusi artikkeli
+            </a>
+            <?php endif; ?>
+            <?php endif; ?>
+
             <a href="" alt="omat tiedot"
                 hx-get="user_edit_modal.php" 
                 hx-target="#modal-container" 

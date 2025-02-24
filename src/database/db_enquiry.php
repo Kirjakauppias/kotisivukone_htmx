@@ -44,6 +44,25 @@ function checkUserEmailExists($conn, $email) {
     return fetchStmt($stmt);
 }
 
+// Funktio joka tarkistaa, onko käyttäjällä jo blogi
+function checkBlogExists($conn, $user_id) {
+    
+    $sql = "SELECT blog_id FROM BLOG WHERE user_id = ? AND deleted_at IS NULL";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $user_id); // Sidotaan käyttäjän ID
+        $stmt->execute(); // Suoritetaan kysely
+        $stmt->store_result(); // Tallennetaan tulokset
+        
+        $hasBlog = $stmt->num_rows > 0; // Jos rivejä löytyy, käyttäjällä on blogi
+        
+        $stmt->close(); // Suljetaan kysely
+        return $hasBlog;
+    } else {
+        return false; // Jos kysely epäonnistuu, palauta false
+    }
+}
+
 // Funktio joka tarkistaa että käyttäjän antama email ei ole kenelläkään muulla kuin itse käyttäjällä
 function checkEmailUnique($conn, $email, $user_id) {
     $sql = "SELECT COUNT(*) as count FROM USER WHERE email = ? AND user_id != ?";
@@ -72,5 +91,22 @@ function getUserByUserId($conn, $userId) {
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc();
+}
+
+// Funktio, jonka avulla tarkistetaan, onko käyttäjä admin
+function checkIfAdmin($conn, $user_id) {
+    $sql = "SELECT role FROM USER WHERE user_id = ? LIMIT 1";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->bind_result($role);
+        $stmt->fetch();
+        $stmt->close();
+        
+        return $role === 'ADMIN';
+    }
+
+    return false; // Jos kysely epäonnistuu, palauta false
 }
 ?>

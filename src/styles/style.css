@@ -95,7 +95,7 @@ footer img {
 label {
     font-weight: bold;
 }
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], textarea {
     display: inline-block; /* Asettaa elementin viivalohkoksi */
     width: 100%; /* Elementti venyy koko rivin leveydelle */
     padding: 12px 20px; /* Lisää sisäistä marginaalia */
@@ -328,6 +328,36 @@ img.avatar {
 
 .user-interface-icons {
     max-width: fit-content;
+}
+
+/* BLOGISIVUN TYYLIT */
+
+.article-container {
+    margin-left: 4px;
+    margin-right: 4px;
+    color:white;
+    font-size: 16px;
+}
+.article {
+    border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
+    padding: 5px;
+}
+.article h1 {
+    color: #72fbfb;
+}
+
+.article-content {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-image: linear-gradient(rgba(61, 70, 58, 0.5), rgba(0, 0, 0, 0.5));
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.published {
+    color:#aaa;
+    background-image: none;
+    padding: 2px;
 }
 /* FOOTER CONTENT */
 .footer-container {

@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /blogit/
+# Ohjaa kaikki /blogit/slug -> /blogit/get_blog.php?slug=slug
+RewriteRule ^([^/]+)$ get_blog.php?slug=$1 [L,QSA]
