@@ -143,9 +143,9 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <img src="images/stars_small.png" alt="5 stars" class="img-stars">
         <!-- Esittelyotsikko -->
         <div class="presentation">
-            <p>Luo omat kotisivut itsellesi tai yrityksellesi</p>
-            <p>Kotisivukoneella rakennat</p>
-            <p class="orange">sivut itse helposti</p>
+            <p>Luo oma blogi itsellesi!</p>
+            <p>Täällä voit rakentaa</p>
+            <p class="orange">blogin itse helposti</p>
         </div>
         <!-- Esittelylaatikot -->
         <div class="row">
