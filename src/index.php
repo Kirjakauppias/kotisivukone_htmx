@@ -178,7 +178,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 <footer id="contact">
     <div class="footer-container">
         <div class="footer-details">
-            <h2>Opinnäytetyön muokattu versio</h2> 
+            <h2>Tietoa</h2> 
             <a href="tietoturvaseloste.html" alt="Tietoturvaseloste">Tietoturvaseloste</a>
             <p>2025 Mikko Lepistö</p>
             <p>metarktis@gmail.com</p>
