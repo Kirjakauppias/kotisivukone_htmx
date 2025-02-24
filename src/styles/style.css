@@ -340,8 +340,8 @@ img.avatar {
     font-size: 16px;
 }
 .article {
-    border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
+    
+    
     padding: 5px;
 }
 .article h2 {
