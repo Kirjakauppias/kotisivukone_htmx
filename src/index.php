@@ -163,7 +163,6 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 <main>
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
     <?php if(!$loggedIn): ?>
-        <img src="images/stars_small.png" alt="5 stars" class="img-stars">
         <!-- Esittelyotsikko -->
         <div class="presentation">
             <p>Luo ilmainen blogi!</p>

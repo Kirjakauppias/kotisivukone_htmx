@@ -231,14 +231,16 @@ img.avatar {
 
 /* MAIN -OSIO */
 .presentation {
+    padding-top: 4rem;
     margin-left: 25px;
     color:#fff;
-    margin-bottom: 100px;
+    margin-bottom: 10rem;
 }
 .presentation p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
     /*letter-spacing: 1px;*/
-    font-size: 2vw;
+    font-size: 40px;
 }
 .orange {
     color: #f3c670;
@@ -377,9 +379,18 @@ img.avatar {
 }
   
 /* PIENEMMÄN RUUDUN TYYLIT */
+  @media screen and (max-width: 1600px){
+    .presentation {
+        margin-bottom: 6rem;
+    }
+  }
   @media screen and (max-width: 1514px) {
     .column {
         width: 25%;
+    }
+    .presentation {
+        padding-top: 3rem;
+        margin-bottom: 6rem;
     }
   }
 
@@ -391,6 +402,13 @@ img.avatar {
     .column {
         margin: 0;
         width: 100%;
+    }
+    .presentation {
+        padding-top: 2rem;
+        margin-left: 2px;
+    }
+    .presentation p {
+        padding: 2px;
     }
   }
 
