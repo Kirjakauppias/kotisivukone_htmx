@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword);
         // Annetaan ilmoitus että käyttäjänimi on tallennettu tietokantaan onnistuneesti.
         echo "<div id='response'><p class='success'>Sinut on lisätty onnistuneesti!</p></div>";
-        echo "<a href='index.php'>Palaa takaisin</a>";
+        echo "<a href='index.php'>Sulje ikkuna</a>";
         exit();
     }
 
