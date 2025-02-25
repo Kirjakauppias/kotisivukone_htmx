@@ -1,6 +1,8 @@
 <?php
+session_start();
 // user-register-vf.php
 // Suoritetaan tilin luonnin tarkistus
+
 // Tarkistetaan, että pyyntö on lähetetty POST -metodilla
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // checkUsernameExists()
@@ -9,7 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once "../funcs.php";
     // addUser()
     require_once "../database/db_add_data.php";
-
+    
+    // 25.2.25 CSRF -tarkistus
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("CSRF-tarkistus epäonnistui.");
+    }
     // Alustetaan muuttujat ja suodatetaan syöte.
     // Tarkistetaan onko POSTissa avaimet, jos ei ole, käytetään tyhjää '',
     // tämä estää virheet, jotka johtuvat olemattomien POST-arvojen käyttämisestä.
@@ -58,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Sähköposti ei ole oikea.";
     }
     if ($usernameCheck == TRUE || $userEmailCheck == TRUE ) {
-        $errors[] = "Rekisteröinti epäonnistui. Yritä toista käyttäjätunnusta tai sähköpostia.";
+        $errors[] = "Rekisteröinti epäonnistui. Tarkista tietosi ja yritä uudelleen.";
     }
 
     // Tulostetaan virheviestit.
@@ -73,6 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword);
         // Annetaan ilmoitus että käyttäjänimi on tallennettu tietokantaan onnistuneesti.
         echo "<div id='response'><p class='success'>Sinut on lisätty onnistuneesti!</p></div>";
+        // Lisää skripti modalin automaattiseen sulkemiseen
+        echo "<script>
+        setTimeout(() => {
+            document.getElementById('modal-container').innerHTML = '';
+        }, 3000); // Sulkee modalin 3 sekunnin kuluttua
+        </script>";
+
         echo "<a href='index.php'>Sulje ikkuna</a>";
         exit();
     }
