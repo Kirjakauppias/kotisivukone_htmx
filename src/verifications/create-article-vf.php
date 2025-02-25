@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// create-article-vf.php
 require_once "../database/db_connect.php";
 
 if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {

@@ -19,7 +19,7 @@
 
 <div id="loginModal" style="display: block;">
   <div class="modal-content">
-    <span class="close" hx-get="close_modal.php" hx-target="#modal-container">&times;</span>
+    <span class="close" hx-get="modals/close-modal.php" hx-target="#modal-container">&times;</span>
     <div class="imgcontainer">
       <img src="images/blog_avatar.jpg" alt="Avatar" class="avatar">
     </div>
@@ -43,7 +43,7 @@
       
       <!-- Peruuta -painike joka sulkee lomakkeen -->
       <button type="button" class="btn-cancel" 
-        hx-get="close_modal.php" 
+        hx-get="modals/close-modal.php" 
         hx-target="#modal-container"
       >
         Peruuta

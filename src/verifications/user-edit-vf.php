@@ -1,6 +1,6 @@
 <?php
 session_start();
-//user_edit.php
+// user-edit-vf.php
 // Määritellään muuttuja
 $user_id = $_SESSION['user_id'] ?? null;
 
@@ -9,9 +9,9 @@ if (!isset($user_id) || !is_numeric($user_id)) {
     exit();
 }
 //checkEmailUnique
-include_once "./database/db_enquiry.php";
+include_once "../database/db_enquiry.php";
 //updateUserData()
-include_once "./database/db_add_data.php";
+include_once "../database/db_add_data.php";
 
 // Tarkistetaan, että pyyntö on lähetetty POST -metodilla
 if($_SERVER['REQUEST_METHOD'] === 'POST'){

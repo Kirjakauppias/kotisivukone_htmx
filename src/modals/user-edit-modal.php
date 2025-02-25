@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || !is_numeric($user_id)) {
   exit();
 }
 // getUserByUderId()
-include_once './database/db_enquiry.php';
+include_once '../database/db_enquiry.php';
 
 
   // Määritellään muuttujat
@@ -19,17 +19,17 @@ include_once './database/db_enquiry.php';
   $lastname = $userData['lastname'];
   $email = $userData['email'];
 ?>
-<!-- user_edit_modal.php -->
+<!-- user-edit-modal.php -->
 <!-- Sivu jossa käyttäjä voi päivittää omia tietojaan -->
 
 <div id="loginModal" style="display: block;">
   <div class="modal-content">
-  <span class="close" hx-get="close_modal.php" hx-target="#modal-container">&times;</span>
+  <span class="close" hx-get="modals/close-modal.php" hx-target="#modal-container">&times;</span>
   <div class="imgcontainer">
     <img src="images/register_avatar.png" alt="Avatar" class="avatar">
   </div>
         <form 
-          hx-post="user_edit.php" 
+          hx-post="./verifications/user-edit-vf.php" 
           hx-target="#response"
           hx-swap="innerHTML"
         >  
@@ -50,7 +50,7 @@ include_once './database/db_enquiry.php';
 
               <!-- 9.2. Lisätty peruuta -painike joka sulkee lomakkeen -->
               <button type="submit" class="btn-cancel" 
-              hx-get="close_modal.php" 
+              hx-get="modals/close-modal.php" 
               hx-target="#modal-container"
               >
                 Peruuta

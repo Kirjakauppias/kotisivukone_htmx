@@ -1,14 +1,14 @@
 <?php
-// register_check.php
+// user-register-vf.php
 // Suoritetaan tilin luonnin tarkistus
 // Tarkistetaan, että pyyntö on lähetetty POST -metodilla
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // checkUsernameExists()
-    require_once "./database/db_enquiry.php";
+    require_once "../database/db_enquiry.php";
     // display_errors($errors);
-    require_once "funcs.php";
+    require_once "../funcs.php";
     // addUser()
-    require_once "./database/db_add_data.php";
+    require_once "../database/db_add_data.php";
 
     // Alustetaan muuttujat ja suodatetaan syöte.
     // Tarkistetaan onko POSTissa avaimet, jos ei ole, käytetään tyhjää '',

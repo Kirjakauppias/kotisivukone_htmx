@@ -1,5 +1,6 @@
 <?php
-declare(strict_types=1);
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+
 // Lisätään virheiden raportointi kehitysympäristössä
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -8,26 +9,25 @@ error_reporting(E_ALL);
 // Asetetaan HTTP-otsikot tietoturvan parantamiseksi
 // Lisätään X-Frame-Options header estämään clickjacking
 header('X-Frame-Options: DENY');
-//header("Content-Security-Policy: default-src 'self'; style-src 'self';");
+//header("Content-Security-Policy: default-src 'self'; style-src 'self';"); // CSP:n käyttöönotto voi parantaa tietoturvaa
 
 // Konfiguroidaan istunnon tietoturva-asetukset
-ini_set('session.cookie_secure', '1'); // Vain HTTPS-yhteyksillä
-ini_set('session.cookie_httponly', '1'); // Estää JavaScriptin pääsyn kekseihin
+ini_set('session.cookie_secure', '1'); // Evästeitä lähetetään vain HTTPS-yhteyksillä
+ini_set('session.cookie_httponly', '1'); // Estää JavaScriptin pääsyn istuntoevästeisiin
 ini_set('session.cookie_samesite', 'Strict'); // Ei lähetä keksejä kolmannen osapuolen pyynnöissä
 
-// Käynnistetään sessio
-session_start(); 
-require 'funcs.php';
-require_once './database/db_enquiry.php';
+session_start(); // Käynnistetään istunto 
+require 'funcs.php'; // Apufunktioiden lataaminen
+require_once './database/db_enquiry.php'; // Tietokantakyselyt
 
-// Alustetaan muuttuja.
+// Tarkistetaan, onko käyttäjä kirjautunut sisään
 $loggedIn = isset($_SESSION['user_id']); 
 
 // Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
 // Luodaan tokenille aikaraja.
 if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    $_SESSION['csrf_token_time'] = time();
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Luodaan satunnainen token
+    $_SESSION['csrf_token_time'] = time(); // Aikaleima tokenin vanhentumisen seurantaan
 }
 ?>
 
@@ -41,6 +41,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="htmx.js" defer></script>
     <script>
+        // Lisätään CSFR-token kaikkiin HTMX:n tekemisiin pyyntöihin
         document.addEventListener('htmx:configRequest', (event) => {
             event.detail.headers['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         });
@@ -53,19 +54,20 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <h1 style="font-size:50px">TARINAN PAIKKA</h1>
             <p>Showcase Demo - Beta 24.2.25</p>
             <!-- Näytetään rekisteri -painike jos käyttäjä ei ole kirjautunu sisään. -->
+            <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
             <?php if(!$loggedIn): ?>
+                <!-- Nappula, joka avaa modalin ja hakee register.php -tiedoston sisällön #modal-containeriin -->
                 <button 
-                hx-get="register.php"
-                hx-target="#modal-container"
-                hx-trigger="click"
-                class="btn-register"
+                    hx-get="modals/user-register-modal.php"
+                    hx-target="#modal-container"
+                    hx-trigger="click"
+                    class="btn-register"
                 >
-                Aloita tästä!
+                    Aloita tästä!
                 </button>
-                <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
-                <!-- Nappula, joka avaa modalin -->
+                <!-- Nappula, joka avaa modalin ja hakee login_modal.php -tiedoston sisällön #modal-containeriin -->
                 <button 
-                    hx-get="login_modal.php" 
+                    hx-get="modals/login-modal.php" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
                     class="btn-login"
@@ -75,7 +77,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <?php else: ?>
                 <!-- Näytetään jos käyttäjä on kirjautunut sisään -->
                 <div class="logged-in">
-                    <!-- Uloskirjautumis -painike -->
+                    <!-- Uloskirjautumis -painike josta ohjataan logout.php -tiedostoon ja sitä kautta takaisin index.php -tiedostoon -->
                     <button class="btn-logout"><a href="logout.php">Kirjaudu ulos</a></button>
                 </div>
             <?php endif; ?>
@@ -85,6 +87,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <!-- Responsiivinen navigointipalkki -->
     <div class="topnav" id="myTopnav">
         <a href="#home" class="active">Etusivu</a>
+        <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivun navigaatio -->
         <?php if(!$loggedIn): ?>
             <a href="#contact">Yhteystiedot</a>
         <?php endif; ?>
@@ -92,32 +95,41 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <?php if($loggedIn): ?>
 
             <!-- 23.2. Tarkistetaan että onko käyttäjällä jo blogi. Jos blogi löytyy, piilotetaan "Luo blogi!" -->
+            <!-- 23.2. Haetaan muuttuja true / false arvo jolla määritellään, onko käyttäjällä ADMIN -arvo -->
             <?php $isAdmin = checkIfAdmin($conn, $_SESSION['user_id']); ?>
+            <!-- 23.2. Jos käyttäjä on ADMIN, pääsee hän luomaan blogin (poistetaan myöhemmin) -->
             <?php if($isAdmin) :?>
-            <?php $blogExists = checkBlogExists($conn, $_SESSION['user_id']); ?>
-            <?php if(!$blogExists) :?>
-            <a href="" alt="omat tiedot"
-                hx-get="modals/create-blog-modal.php" 
-                hx-target="#modal-container" 
-                hx-trigger="click"
-            >
-                Luo blogi!
-            </a>
+                <!-- 23.3. Tarkistetaan, onko käyttäjällä jo blogi -->
+                <?php $blogExists = checkBlogExists($conn, $_SESSION['user_id']); ?>
+                <!-- 23.2. Jos käyttäjällä ei ole vielä blogia (FALSE) näytetään blogin luonti -linkki -->
+                <?php if(!$blogExists) :?>
+                    <!-- 23.2. linkki joka avaa modalin jonne tulostetaan modals/create-blog-modal.php -tiedoston sisältö -->
+                    <a href="" alt="omat tiedot"
+                        hx-get="modals/create-blog-modal.php" 
+                        hx-target="#modal-container" 
+                        hx-trigger="click"
+                    >
+                        Luo blogi!
+                    </a>
+                <?php endif; ?>
+                <!-- 23.2. Jos käyttäjällä on jo blogi (TRUE), näytetään linkit jossa voi luoda uuden postauksen ja linkki omalle blogi-sivulle -->
+                <?php if($blogExists) :?>
+                    <!-- 23.2. Linkki joka avaa modalin jonne tulostetaan modals/create-article-modal.php -tiedoston sisältö -->
+                    <a href="" alt="omat tiedot"
+                        hx-get="modals/create-article-modal.php" 
+                        hx-target="#modal-container" 
+                        hx-trigger="click"
+                    >
+                        Uusi artikkeli
+                    </a>
+                    <?php
+                    // 23.2 Haetaan käyttäjän blogin nimestä luotu slug ja määritellään muuttuja
+                    $slug = getSlug($conn, $_SESSION['user_id']);
+                    // 23.2. Tulostetaan linkki jossa on osoitteena käyttäjän blogin slug
+                    echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
+                <?php endif; ?>
             <?php endif; ?>
-            <?php if($blogExists) :?>
-            <a href="" alt="omat tiedot"
-                hx-get="modals/create-article-modal.php" 
-                hx-target="#modal-container" 
-                hx-trigger="click"
-            >
-                Uusi artikkeli
-            </a>
-            <?php
-            $slug = getSlug($conn, $_SESSION['user_id']);
-            echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
-            <?php endif; ?>
-            <?php endif; ?>
-
+            <!-- Linkki, joka avaa modalin ja hakee user_edit_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="omat tiedot"
                 hx-get="user_edit_modal.php" 
                 hx-target="#modal-container" 
@@ -125,6 +137,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             >
                 Omat tiedot
             </a>
+            <!-- Linkki, joka avaa modalin ja hakee modals/password_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="omat tiedot"
                 hx-get="modals/password_modal.php" 
                 hx-target="#modal-container" 
@@ -133,12 +146,19 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                 Salasanan vaihto
             </a>
         <?php endif; ?>
+        <!-- 
+            Tämä on responsiivisen navigaatiopalkin painike, 
+            joka näkyy mobiililaitteilla. Kun käyttäjä klikkaa 
+            painiketta, kutsutaan JavaScript-funktiota `myFunction()`, 
+            joka vaihtaa navigaatiopalkin näkyvyyttä.
+        -->
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
+            <i class="fa fa-bars"></i> <!-- Font Awesome -ikonina hampurilaisvalikko -->
         </a>
     </div>
+
     <div id="modal-container">
-        <!-- Modalin kontti -->
+        <!-- Modalin kontti, tänne tulostuu kaikki ikkunat joita käyttäjä käyttää -->
     </div>
 <main>
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
@@ -173,7 +193,8 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <p>Kotisivukone-palvelulla tehdyt kotisivut ovat kustannustehokas tapa luoda näkyvyyttä ja lisätä yrityksen myyntiä.</p>
           </div>
         </div><!-- /row-->
-    <?php else: 
+    <?php else:
+        // Jos käyttäjä on kirjautunut sisään, näytetään hänen oma henkilökohtainen toimintosivu 
         include_once "./dashboard.php";
         endif;
     ?>
@@ -195,12 +216,17 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 <script>
     // Funktio navigoinnin responsiivisuuteen
     function myFunction() {
-      var x = document.getElementById("myTopnav");
-      if (x.className === "topnav") {
-        x.className += " responsive";
-      } else {
-        x.className = "topnav";
-      }
+        // Haetaan navigaatiopalkki sen ID:n perusteella
+        var x = document.getElementById("myTopnav");
+
+        // Tarkistetaan, onko navigaatiopalkin nykyinen luokka "topnav"
+        if (x.className === "topnav") {
+            // Jos on, lisätään "responsive"-luokka, joka näyttää valikon
+            x.className += " responsive";
+        } else {
+            // Jos "responsive" -luokka on jo lisätty, poistetaan se
+            x.className = "topnav";
+        }
     }
 </script>
 </body>

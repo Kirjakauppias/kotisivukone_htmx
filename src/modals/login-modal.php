@@ -1,15 +1,16 @@
 <?php
 session_start();
+// login-modal.php
 // Palauttaa modaalin HTML-sisällön
 ?>
 <div id="loginModal" style="display: block;">
     <div class="modal-content">
-        <span class="close" hx-get="close_modal.php" hx-target="#modal-container">&times;</span>
+        <span class="close" hx-get="modals/close-modal.php" hx-target="#modal-container">&times;</span>
         <div class="imgcontainer">
             <img src="images/login.png" alt="Avatar" class="avatar">
         </div>
         <form 
-            hx-post="login.php" 
+            hx-post="./verifications/login-vf.php" 
             hx-target="#errors" 
             hx-swap="innerHTML"
             autocomplete="off"
@@ -27,7 +28,7 @@ session_start();
 
             <!-- 9.2. Lisätty peruuta -painike joka sulkee lomakkeen -->
             <button type="submit" class="btn-cancel" 
-              hx-get="close_modal.php" 
+              hx-get="modals/close-modal.php" 
               hx-target="#modal-container"
             >
                 Peruuta

@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 session_start();
+// login-vf.php
 // getUserByUsername($conn, $username)
-require_once "database/db_enquiry.php";
+require_once "../database/db_enquiry.php";
 // userLastLogin($conn, $user)
-require_once "database/db_add_data.php";
+require_once "../database/db_add_data.php";
 // display_errors($errors)
-require_once "funcs.php";
+require_once "../funcs.php";
 
 // Tarkistetaan, onko lomake lähetetty index.php:sta.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
