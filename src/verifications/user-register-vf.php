@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }, 3000); // Sulkee modalin 3 sekunnin kuluttua
         </script>";
 
-        echo "<a href='index.php'>Sulje ikkuna</a>";
+        echo "Odota että ikkuna sulkeutuu tai <a href='index.php'>sulje ikkuna</a>";
         exit();
     }
 

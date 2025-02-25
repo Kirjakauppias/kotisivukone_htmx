@@ -47,6 +47,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     echo updateUserData($conn, $user_id, $firstname, $lastname, $email);
 
+    // Lisää skripti modalin automaattiseen sulkemiseen
+    echo "<script>
+    setTimeout(() => {
+        document.getElementById('modal-container').innerHTML = '';
+    }, 3000); // Sulkee modalin 3 sekunnin kuluttua
+    </script>";
+
     $conn->close();
 } else {
     header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle

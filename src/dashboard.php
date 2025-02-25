@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
     <div class="user-interface">
         <div class="user-interface-icons">
             <a href="" alt="omat tiedot"
-            hx-get="user_edit_modal.php" 
+            hx-get="modals/user-edit-modal.php" 
             hx-target="#modal-container" 
             hx-trigger="click"
             >

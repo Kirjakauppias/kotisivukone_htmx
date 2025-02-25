@@ -131,7 +131,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <?php endif; ?>
             <!-- Linkki, joka avaa modalin ja hakee user_edit_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="omat tiedot"
-                hx-get="user_edit_modal.php" 
+                hx-get="modals/user-edit-modal.php" 
                 hx-target="#modal-container" 
                 hx-trigger="click"
             >
