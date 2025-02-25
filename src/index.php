@@ -166,16 +166,16 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <img src="images/stars_small.png" alt="5 stars" class="img-stars">
         <!-- Esittelyotsikko -->
         <div class="presentation">
-            <p>Luo oma blogi itsellesi!</p>
-            <p>Täällä voit rakentaa</p>
-            <p class="orange">blogin itse helposti</p>
+            <p>Luo ilmainen blogi!</p>
+            <p>Täällä voit kertoa tarinasi </p>
+            <p class="orange">tai ideasi helposti.</p>
         </div>
         <!-- Esittelylaatikot -->
         <div class="row">
           <div class="column">
             <img src="images/webicon_small.png">
             <h1>Helppokäyttöinen</h1>
-            <p>Luo ammattimaiset kotisivut helposti ilman koodaamista.</p>
+            <p>Rekisteröidy, luo blogi ja ala kirjoittamaan. Kaikki ilman koodaamista.</p>
           </div>
           <div class="column">
             <img src="images/responsiveicon_small.png">
@@ -189,8 +189,8 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
           </div>
           <div class="column">
             <img src="images/effecticon_small.png">
-            <h1>Kustannustehokas</h1>
-            <p>Kotisivukone-palvelulla tehdyt kotisivut ovat kustannustehokas tapa luoda näkyvyyttä ja lisätä yrityksen myyntiä.</p>
+            <h1>Oman näköinen blogi</h1>
+            <p>Voit muokata blogin ulkoasua mieleiseksi (tulossa myöhemmin).</p>
           </div>
         </div><!-- /row-->
     <?php else:
