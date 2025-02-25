@@ -58,6 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Annetaan ilmoitus että käyttäjänimi on tallennettu tietokantaan onnistuneesti.
         echo "<div id='response'><p class='success'>Salasana on vaihdettu onnistuneesti!</p></div>";
         echo "<div id='response'><p class='success'>Voit sulkea ikkunan.</p></div>";
+        // Lisää skripti modalin automaattiseen sulkemiseen
+        echo "<script>
+        setTimeout(() => {
+            document.getElementById('modal-container').innerHTML = '';
+        }, 3000); // Sulkee modalin 3 sekunnin kuluttua
+        </script>";
         exit();
     }
 
