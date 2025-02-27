@@ -483,7 +483,13 @@ img.avatar {
         letter-spacing: 3px;
         font-size: 16px;
     }
-
+    .column h1 {
+        font-size: 20px;
+        color: #f3c670;
+    }
+    .column p {
+        font-size: 16px;
+    }
 
     .img-stars {
         display: none;
