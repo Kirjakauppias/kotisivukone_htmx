@@ -41,7 +41,7 @@ include_once "./database/db_enquiry.php";
                     // 27.2. Tulostetaan linkki jossa on osoitteena käyttäjän blogin slug
                     echo "<a href='blogit/$slug' target='_blank'>
                         <section class='section-link-blog'>
-                            <img src='images/dashboard/Blog.svg' alt='user-image'>
+                            <img src='images/dashboard/blog.svg' alt='user-image'>
                             <h3>Blogi-sivusi!</h3>
                         </section>
                         </a>"; ?>

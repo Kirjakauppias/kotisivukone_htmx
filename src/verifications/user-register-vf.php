@@ -12,10 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // addUser()
     require_once "../database/db_add_data.php";
     
-    // 25.2.25 CSRF -tarkistus
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("CSRF-tarkistus epäonnistui.");
-    }
     // Alustetaan muuttujat ja suodatetaan syöte.
     // Tarkistetaan onko POSTissa avaimet, jos ei ole, käytetään tyhjää '',
     // tämä estää virheet, jotka johtuvat olemattomien POST-arvojen käyttämisestä.
