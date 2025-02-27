@@ -35,8 +35,6 @@
       <label for="article_content">Sisältö</label>
       <textarea id="article_content" name="article_content"></textarea>
     
-      <!-- Lisätään CSRF-token joka tarkistetaan palvelinpuolella -->
-      <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
       <p>* pakolliset kentät</p>
     
       <input type="submit" value="Luo artikkeli">

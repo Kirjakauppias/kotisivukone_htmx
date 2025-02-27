@@ -149,6 +149,10 @@ button:hover, input[type=submit]:hover {
     background-color: red;
 }
 
+#article_content, #blog_description {
+    min-height: 300px;
+}
+
 /* Kirjautumislomakkeen avatar */
 .imgcontainer {
     text-align: center; /* Keskitetään sisältö (kuva) */
@@ -266,7 +270,7 @@ img.avatar {
 .column h1 {
     margin-top: 3px;
     margin-bottom: 7px;
-    color:#f9ff00;
+    color: #f3c670;
     letter-spacing: normal;
 }
 .column p {
@@ -426,6 +430,9 @@ img.avatar {
   @media screen and (max-width: 855px) {
     .column {
       width: 100%;
+      background-image: none;
+        border-style: none;
+        height: 175px;
     }
 
     .presentation p, .orange {
@@ -465,9 +472,9 @@ img.avatar {
       text-align: left;
     }
     .column {
-        background-image: none;
+        /*background-image: none;
         border-style: none;
-        height: 175px;
+        height: 175px;*/
     }
   }
 
@@ -485,7 +492,6 @@ img.avatar {
     }
     .column h1 {
         font-size: 20px;
-        color: #f3c670;
     }
     .column p {
         font-size: 16px;

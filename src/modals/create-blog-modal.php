@@ -28,8 +28,6 @@
       <label for="blog_description">Kuvaus</label>
       <textarea id="blog_description" name="blog_description"></textarea>
     
-      <!-- Lisätään CSRF-token joka tarkistetaan palvelinpuolella -->
-      <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
       <p>* pakolliset kentät</p>
     
       <input type="submit" value="Luo blogi">
