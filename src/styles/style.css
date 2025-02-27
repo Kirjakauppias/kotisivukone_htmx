@@ -480,8 +480,8 @@ img.avatar {
     
     .presentation p, .orange {
         text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 16px;
+        /*letter-spacing: 3px;*/
+        font-size: 17px;
     }
     .column h1 {
         font-size: 20px;
