@@ -336,6 +336,12 @@ img.avatar {
 .user-interface-icons {
     max-width: fit-content;
 }
+.section-link-blog {
+    background-color: #9bd9db;
+}
+.section-link-blog h3 {
+    color: #277746;
+}
 
 /* BLOGISIVUN TYYLIT */
 
