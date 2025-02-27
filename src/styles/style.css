@@ -464,6 +464,11 @@ img.avatar {
       display: block;
       text-align: left;
     }
+    .column {
+        background-image: none;
+        border-style: none;
+        height: 175px;
+    }
   }
 
   @media screen and (max-width: 500px){
@@ -478,6 +483,7 @@ img.avatar {
         letter-spacing: 3px;
         font-size: 16px;
     }
+
 
     .img-stars {
         display: none;
