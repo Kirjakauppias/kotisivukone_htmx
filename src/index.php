@@ -52,7 +52,6 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
     <div class="banner" id="home">
         <div class="banner-text">
             <h1 style="font-size:50px">TARINAN PAIKKA</h1>
-            <p>Showcase Demo - Beta 24.2.25</p>
             <!-- Näytetään rekisteri -painike jos käyttäjä ei ole kirjautunu sisään. -->
             <!-- Näytä kirjautumislomake vain, jos käyttäjä ei ole kirjautunut -->
             <?php if(!$loggedIn): ?>
