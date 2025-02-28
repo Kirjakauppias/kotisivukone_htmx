@@ -270,7 +270,7 @@ img.avatar {
 .column h1 {
     margin-top: 3px;
     margin-bottom: 7px;
-    color: #f3c670;
+    color: yellow;
     letter-spacing: normal;
 }
 .column p {
@@ -434,7 +434,9 @@ img.avatar {
         border-style: none;
         height: 175px;
     }
-
+    .column h1{
+        color: #f3c670;
+    }
     .presentation p, .orange {
         text-transform: uppercase;
         letter-spacing: 3px;
@@ -470,11 +472,6 @@ img.avatar {
       float: none;
       display: block;
       text-align: left;
-    }
-    .column {
-        /*background-image: none;
-        border-style: none;
-        height: 175px;*/
     }
   }
 

@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{blog_title}</title> <!-- Dynaaminen blogin otsikko -->
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/blogstyle.css">
 </head>
 <body>
     <!-- Banneri -->
@@ -23,7 +23,7 @@
     <footer id="contact">
         <div class="footer-container">
             <div class="footer-details">
-                <h2>Tietoa</h2> 
+                <h3>Tietoa</h3> 
                 <a href="https://kotisivukonehtmx-production.up.railway.app/"  target="_blank" alt="Tarinan paikka">Tarinan paikka</a>
                 <p>2025 Mikko Lepistö</p>
                 <p>metarktis@gmail.com</p>

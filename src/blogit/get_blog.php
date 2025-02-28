@@ -37,8 +37,8 @@ if (isset($_GET['slug'])) {
                 while ($article = $article_result->fetch_assoc()) {
                     $articles_html .= "<div class='article'>";
                         $articles_html .= "<h2>" . htmlspecialchars($article['title']) . "</h2>";
-                        $articles_html .= "<p class='article-content'>" . nl2br(htmlspecialchars($article['content'])) . "</p>";
                         $articles_html .= "<p class='published'><small>Julkaistu: " . date("d.m.Y H:i", strtotime($article['published_at'])) . "</small></p>";
+                        $articles_html .= "<p class='article-content'>" . nl2br(htmlspecialchars($article['content'])) . "</p>";
                     $articles_html .= "</div>";
                 }
                 $article_stmt->close();
