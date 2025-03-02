@@ -31,7 +31,7 @@
 
     <!-- Artikkelin valinta -->
     <select id="article_select" onchange="fillForm()">
-      <option value="">--Valitse artikkeli--</option>
+      <option value="">--Valitse julkaisu--</option>
       <?php foreach ($articles as $article): ?>
         <option value="<?= htmlspecialchars(json_encode($article), ENT_QUOTES, 'UTF-8') ?>">
             <?= htmlspecialchars($article['title']) ?>
@@ -47,7 +47,7 @@
     >  
       <input type="hidden" id="article_id" name="article_id">
       
-      <label for="article_title">Artikkelin otsikko*</label>
+      <label for="article_title">Julkaisun otsikko*</label>
       <input type="text" id="article_title" name="article_title" required>    
       <label for="article_content">Sisältö</label>
       <textarea id="article_content" name="article_content"></textarea>

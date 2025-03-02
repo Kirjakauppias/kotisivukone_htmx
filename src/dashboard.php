@@ -56,6 +56,17 @@ include_once "./database/db_enquiry.php";
                             <h3>Uusi julkaisu</h3>
                         </section>
                     </a>
+                    <!-- 2.3. Linkki joka avaa modalin jonne tulostetaan modals/edit-article-modal.php -tiedoston sisältö -->
+                    <a href="" alt="omat tiedot"
+                        hx-get="modals/edit-article-modal.php" 
+                        hx-target="#modal-container" 
+                        hx-trigger="click"
+                    >
+                        <section>
+                            <img src="images/dashboard/addBlog.svg" alt="user-image">
+                            <h3>Muokkaa julkaisuja</h3>
+                        </section>
+                    </a>
                 <?php endif; ?>
             <?php endif; ?>
             <a href="" alt="omat tiedot"
