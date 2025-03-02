@@ -119,7 +119,15 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                         hx-target="#modal-container" 
                         hx-trigger="click"
                     >
-                        Uusi artikkeli
+                        Uusi julkaisu
+                    </a>
+                    <!-- 2.3.25 Linkki joka avaa modalin jonne tulostetaan modals/edit-article-modal.php -tiedoston sisältö -->
+                    <a href="" alt="omat tiedot"
+                        hx-get="modals/edit-article-modal.php" 
+                        hx-target="#modal-container" 
+                        hx-trigger="click"
+                    >
+                        Muokkaa julkaisuja
                     </a>
                     <?php
                     // 23.2 Haetaan käyttäjän blogin nimestä luotu slug ja määritellään muuttuja
@@ -134,7 +142,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                 hx-target="#modal-container" 
                 hx-trigger="click"
             >
-                Omat tiedot
+                Käyttäjätiedot
             </a>
             <!-- Linkki, joka avaa modalin ja hakee modals/password_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="omat tiedot"

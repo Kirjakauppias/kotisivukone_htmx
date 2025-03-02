@@ -53,7 +53,7 @@ include_once "./database/db_enquiry.php";
                     >
                         <section>
                             <img src="images/dashboard/addBlog.svg" alt="user-image">
-                            <h3>Luo artikkeli</h3>
+                            <h3>Uusi julkaisu</h3>
                         </section>
                     </a>
                 <?php endif; ?>
@@ -65,7 +65,7 @@ include_once "./database/db_enquiry.php";
             >
                 <section>
                     <img src="images/dashboard/user.svg" alt="user-image">
-                    <h3>Muokkaa tietoja</h3>
+                    <h3>Käyttäjätiedot</h3>
                 </section>
             </a>
             <a href="" alt="omat tiedot"

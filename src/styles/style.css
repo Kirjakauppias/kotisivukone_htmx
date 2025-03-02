@@ -100,7 +100,7 @@ footer img {
 label {
     font-weight: bold;
 }
-input[type=text], input[type=password], input[type=email], textarea {
+input[type=text], input[type=password], input[type=email], textarea, #article_select {
     display: inline-block; /* Asettaa elementin viivalohkoksi */
     width: 100%; /* Elementti venyy koko rivin leveydelle */
     padding: 12px 20px; /* Lisää sisäistä marginaalia */

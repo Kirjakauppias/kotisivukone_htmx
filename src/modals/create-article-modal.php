@@ -29,7 +29,7 @@
       hx-swap="innerHTML"
     >  
       
-      <label for="article_title">Artikkelin otsikko*</label>
+      <label for="article_title">Julkaisun otsikko*</label>
       <input type="text" id="article_title" name="article_title" required>
     
       <label for="article_content">Sisältö</label>
@@ -37,7 +37,7 @@
     
       <p>* pakolliset kentät</p>
     
-      <input type="submit" value="Luo artikkeli">
+      <input type="submit" value="Luo julkaisu">
       
       <!-- Peruuta -painike joka sulkee lomakkeen -->
       <button type="button" class="btn-cancel" 
