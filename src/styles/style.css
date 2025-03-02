@@ -207,7 +207,16 @@ img.avatar {
     border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
 }
-
+.article-modal-content {
+    position: relative; /* Sijainti suhteessa modaalin sisään */
+    margin: 5% auto; /* Keskittää modaalin sisältö vaakasuunnassa ja asettaa 5% marginaalin yläreunasta */
+    padding: 20px; /* Lisää täytettä sisällön ympärille */
+    width: 80%; /* Asettaa sisällön leveydeksi 80% ikkunan leveydestä */
+    max-width: 600px; /* Maksimileveys on 600 pikseliä */
+    background: #fff; /* Asettaa sisällön taustaväriksi valkoisen */
+    border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
+}
 /* Modaalin sulkemiskuvakkeen tyylit */
 .close {
     color: #aaa; /* Asettaa sulkemiskuvakkeen väriksi vaaleanharmaan */
@@ -235,7 +244,7 @@ img.avatar {
 
 /* MAIN -OSIO */
 .presentation {
-    padding-top: 4rem;
+    padding-top: 3rem;
     margin-left: 25px;
     color:#fff;
     margin-bottom: 10rem;
@@ -244,12 +253,18 @@ img.avatar {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
     /*letter-spacing: 1px;*/
-    font-size: 40px;
+    font-size: 35px;
+    line-height: 1.2;
 }
 .orange {
     color: #f3c670;
 }
-
+ .presentation a {
+    letter-spacing: 1px;
+    line-height: 1.5;
+    font-size: 16px;
+    padding: 3px;
+ }
 /* ESITTELY -GRID */
 .row {
     display: flex;
@@ -272,6 +287,7 @@ img.avatar {
     margin-bottom: 7px;
     color: yellow;
     letter-spacing: normal;
+    text-decoration: underline;
 }
 .column p {
     font-family:monospace; /* Asettaa monospace-fontin */
@@ -472,6 +488,9 @@ img.avatar {
       float: none;
       display: block;
       text-align: left;
+    }
+    .article-modal-content {
+        width: 95%;
     }
   }
 

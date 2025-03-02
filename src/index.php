@@ -167,6 +167,8 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <p>Luo ilmainen blogi!</p>
             <p>Täällä voit kertoa tarinasi </p>
             <p class="orange">tai ideasi helposti.</p>
+            <br>
+            <a href="https://kotisivukonehtmx-production.up.railway.app/blogit/mikon-blogi" target="_blank">Lue täältä uusimmat muutokset</a>
         </div>
         <!-- Esittelylaatikot -->
         <div class="row">
