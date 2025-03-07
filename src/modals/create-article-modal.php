@@ -23,10 +23,12 @@
     <div class="imgcontainer">
       <img src="images/blog_avatar.jpg" alt="Avatar" class="avatar">
     </div>
+    <!-- 6.3.25 Lisätään tiedostojen lähetys: enctype -->
     <form 
       hx-post="./verifications/create-article-vf.php" 
       hx-target="#response"
       hx-swap="innerHTML"
+      enctype="multipart/form-data" 
     >  
       
       <label for="article_title">Julkaisun otsikko*</label>
@@ -34,6 +36,10 @@
     
       <label for="article_content">Sisältö</label>
       <textarea id="article_content" name="article_content"></textarea>
+
+      <!-- 6.3. Kuvan lataus -->
+      <label for="article_image">Lisää kuva</label>
+      <input type="file" id ="article_image" name="article_image" accept="image/*">
     
       <p>* pakolliset kentät</p>
     

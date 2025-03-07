@@ -100,7 +100,7 @@ footer img {
 label {
     font-weight: bold;
 }
-input[type=text], input[type=password], input[type=email], textarea, #article_select {
+input[type=text], input[type=password], input[type=email], input[type=file], textarea, #article_select {
     display: inline-block; /* Asettaa elementin viivalohkoksi */
     width: 100%; /* Elementti venyy koko rivin leveydelle */
     padding: 12px 20px; /* Lisää sisäistä marginaalia */
@@ -110,7 +110,7 @@ input[type=text], input[type=password], input[type=email], textarea, #article_se
     box-sizing: border-box; /* Sisällyttää reunukset ja täytteet elementin kokoon */
 }
 
-input[type=submit], .btn-cancel, .btn-delete {
+input[type=submit], .btn-cancel, .btn-delete, #delete-image-btn {
     background-color: #212422; /* Asettaa painikkeen taustaväriksi oranssin */
     color: white; /* Asettaa tekstin väriksi valkoisen */
     padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
@@ -134,6 +134,10 @@ button {
     cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
     font-size: 16px; /* Asettaa fonttikoon */
     font-weight: bold; /* Asettaa lihavoidun fontin */
+}
+
+#delete-image-btn {
+    width: 200px;
 }
 
 button:hover, input[type=submit]:hover {

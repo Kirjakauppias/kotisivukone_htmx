@@ -68,6 +68,15 @@ main {
     border-bottom-color: #aaa;
 }
 
+/* 6.3. Artikkelin kuvan muotoilu */
+.article-image {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+    display: block;
+    border-radius: 8px;
+}
+
 .article-content {
     padding: 5px;
 }

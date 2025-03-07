@@ -23,8 +23,9 @@ if (isset($_GET['slug'])) {
             $layout_html = $row['html_php_code'];  // Layoutin HTML/PHP-koodi
 
             // Haetaan blogin artikkelit
+            // 6.3. Lisätty image_path
             $articles_html = "";
-            $article_sql = "SELECT title, content, published_at FROM ARTICLE 
+            $article_sql = "SELECT title, content, published_at, image_path FROM ARTICLE 
                             WHERE blog_id = (SELECT blog_id FROM BLOG WHERE slug = ? LIMIT 1) 
                             AND status = 'PUBLISHED' 
                             ORDER BY published_at DESC";
@@ -38,6 +39,13 @@ if (isset($_GET['slug'])) {
                     $articles_html .= "<div class='article'>";
                         $articles_html .= "<h2>" . htmlspecialchars($article['title']) . "</h2>";
                         $articles_html .= "<p class='published'><small>Julkaistu: " . date("d.m.Y H:i", strtotime($article['published_at'])) . "</small></p>";
+
+                        // 6.3. LISÄTTY: Kuva näkyviin, jos artikkelilla on sellainen
+                        if (!empty($article['image_path'])) {
+                            $articles_html .= "<img src='/" . htmlspecialchars($article['image_path']) . "' alt='Artikkelin kuva' class='article-image'>";
+
+                        }
+
                         $articles_html .= "<p class='article-content'>" . nl2br(htmlspecialchars($article['content'])) . "</p>";
                     $articles_html .= "</div>";
                 }

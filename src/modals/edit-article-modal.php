@@ -14,7 +14,7 @@
   }
   
   // Haetaan käyttäjän blogi-päivitykset
-  $stmt = $conn->prepare("SELECT a.article_id, a.title, a.content FROM ARTICLE a JOIN BLOG b ON a.blog_id = b.blog_id WHERE b.user_id = ?");
+  $stmt = $conn->prepare("SELECT a.article_id, a.title, a.content, a.image_path FROM ARTICLE a JOIN BLOG b ON a.blog_id = b.blog_id WHERE b.user_id = ?");
   $stmt->bind_param("i", $user_id);
   $stmt->execute();
   $result = $stmt->get_result();
@@ -44,15 +44,41 @@
       hx-post="./verifications/edit-article-vf.php" 
       hx-target="#response"
       hx-swap="innerHTML"
+      enctype="multipart/form-data"
     >  
       <input type="hidden" id="article_id" name="article_id">
       
-      <label for="article_title">Julkaisun otsikko*</label>
-      <input type="text" id="article_title" name="article_title" required>    
+      <label for="article_title">Julkaisun otsikko</label>
+      <input type="text" id="article_title" name="article_title" required>
+
       <label for="article_content">Sisältö</label>
       <textarea id="article_content" name="article_content"></textarea>
-    
-      <p>* pakolliset kentät</p>
+
+      <!-- 6.3. Kuvan esittäminen ja poistaminen -->
+      <label for="article_image">Lisää, poista tai vaihda kuva. Päivitä julkaisu.</label>
+      <input type="file" id="article_image" name="article_image">
+
+      <div id="image-container">
+        <label>Nykyinen kuva:</label>
+        <div id="current-image-wrapper">
+          <img id="current-image" src="" alt="Artikkelin kuva" style="max-width: 200px; display: none;">
+          <button type="button" id="delete-image-btn"
+            hx-post="./verifications/delete-image-vf.php"
+            hx-target="#response"
+            hx-confirm="Haluatko varmasti poistaa kuvan?"
+            hx-vals='{}'
+            style="display: none;"
+          >
+            Poista kuva
+          </button>
+        </div>
+      </div>
+
+      
+      <!--<div class="image-preview">
+          <img id="article-image-preview" src="" alt="Ei kuvaa" style="max-width: 100%; display: none;">
+          
+      </div>-->
     
       <input type="submit" value="Päivitä julkaisu">
       
@@ -79,10 +105,23 @@
             document.getElementById('article_id').value = article.article_id;
             document.getElementById('article_title').value = article.title;
             document.getElementById('article_content').value = article.content;
+
+            // 6.3. Näytetään kuva jos sellainen on
+            if (article.image_path) {
+              document.getElementById('current-image').src = "/" + article.image_path;
+              document.getElementById('current-image').style.display = "block";
+              document.getElementById('delete-image-btn').setAttribute("hx-vals", JSON.stringify({"article_id": article.article_id}));
+              document.getElementById('delete-image-btn').style.display = "inline-block";
+            } else {
+              document.getElementById('current-image').style.display = "none";
+              document.getElementById('delete-image-btn').style.display = "none";
+            }
         } else {
-        document.getElementById('article_id').value = '';
-        document.getElementById('article_title').value = '';
-        document.getElementById('article_content').value = '';
+          document.getElementById('article_id').value = '';
+          document.getElementById('article_title').value = '';
+          document.getElementById('article_content').value = '';
+          document.getElementById('current-image').style.display = "none";
+          document.getElementById('delete-image-btn').style.display = "none";
         }
     }
 </script>
