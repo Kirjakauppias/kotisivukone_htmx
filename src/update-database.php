@@ -1,5 +1,5 @@
 <?php
-require_once "../database/db_connect.php"; // Yhdistetään tietokantaan
+require_once "./database/db_connect.php"; // Yhdistetään tietokantaan
 
 try {
     // SQL-kysely: Lisätään image_path-sarake, jos sitä ei ole
