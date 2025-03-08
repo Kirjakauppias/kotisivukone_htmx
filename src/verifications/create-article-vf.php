@@ -1,8 +1,29 @@
 <?php
 session_start();
-
 // create-article-vf.php
+require __DIR__ . "./../vendor/autoload.php";
 require_once "../database/db_connect.php";
+
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Api\Upload\UploadApi;
+use Dotenv\Dotenv;
+
+// Ladataan .env -tiedosto
+$dotenv = Dotenv::createImmutable(dirname(__DIR__, 1));
+$dotenv->load();
+
+// Cloudinary-konfiguraatio
+Configuration::instance([
+    'cloud' => [
+        'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
+        'api_key' => $_ENV['CLOUDINARY_API_KEY'],
+        'api_secret' => $_ENV['CLOUDINARY_API_SECRET']
+    ],
+    'url' => [
+        'secure' => true
+    ]
+]);
+
 
 /*if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     die("Virhe: Käyttäjätunnus puuttuu. Kirjaudu sisään uudelleen.");
@@ -20,25 +41,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Otsikko ja sisältö ovat pakollisia kenttiä.");
     }
 
-    // 6.3. Käsitellään kuvan lataus
-    if(!empty($_FILES['article_image']['name'])) {
-        $upload_dir = "../uploads/";
-        $filename = time() . "_" . basename($_FILES["article_image"]["name"]);
-        $target_file = $upload_dir . $filename;
-
-        // 6.3. Tarkistetaan tiedostomuoto
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-        if(!in_array($_FILES['article_image']['type'], $allowed_types)) {
-            echo "<p class='error'>Vain JPG, PNG ja GIF tiedostot sallittu.</p>";
-            exit();
-        }
-
-        // 6.3. Tallennetaan kuva palvelimelle
-        if (move_uploaded_file($_FILES["article_image"]["tmp_name"], $target_file)) {
-            $image_path = "uploads/" . $filename; // Tallennetaan suhteellinen polku
-        } else {
-            echo "<p class='error'>Virhe kuvan lataamisessa.</p>";
-            exit();
+    // 6.3. Käsitellään kuvan lataus Cloudinaryyn
+    if(!empty($_FILES['article_image']['tmp_name'])) {
+        try{
+            $upload = (new UploadApi())->upload($_FILES['article_image']['tmp_name'], [
+                "folder" => "blog_images",
+                "use_filename" => true,
+                "unique_filename" => true
+            ]);
+            $image_url = $upload['secure_url'];
+            $image_path = $image_url;
+        } catch (Exception $e) {
+            die("Kuvan lataaminen epäonnistui: " . $e->getMessage());
         }
     }
 

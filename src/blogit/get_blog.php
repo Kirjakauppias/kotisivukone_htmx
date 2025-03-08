@@ -42,7 +42,7 @@ if (isset($_GET['slug'])) {
 
                         // 6.3. LISÄTTY: Kuva näkyviin, jos artikkelilla on sellainen
                         if (!empty($article['image_path'])) {
-                            $articles_html .= "<img src='/" . htmlspecialchars($article['image_path']) . "' alt='Artikkelin kuva' class='article-image'>";
+                            $articles_html .= "<img src='" . htmlspecialchars($article['image_path']) . "' alt='Artikkelin kuva' class='article-image'>";
 
                         }
 

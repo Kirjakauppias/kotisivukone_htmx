@@ -108,7 +108,7 @@
 
             // 6.3. Näytetään kuva jos sellainen on
             if (article.image_path) {
-              document.getElementById('current-image').src = "/" + article.image_path;
+              document.getElementById('current-image').src = article.image_path;
               document.getElementById('current-image').style.display = "block";
               document.getElementById('delete-image-btn').setAttribute("hx-vals", JSON.stringify({"article_id": article.article_id}));
               document.getElementById('delete-image-btn').style.display = "inline-block";

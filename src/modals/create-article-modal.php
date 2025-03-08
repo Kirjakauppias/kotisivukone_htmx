@@ -1,5 +1,6 @@
 <?php
   session_start();
+  // create-article-modal.php
   require_once "../database/db_connect.php";
   $user_id = $_SESSION['user_id'] ?? null;
   // Tarkistetaan, onko käyttäjä kirjautunut sisään

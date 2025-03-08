@@ -2,8 +2,27 @@
 session_start();
 // edit-article-vf.php
 // tiedosto jossa tallennetaan tietokantaan käyttäjän päivittämät julkaisut
-
+require __DIR__ . "./../vendor/autoload.php";
 require_once "../database/db_connect.php";
+
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Api\Admin\AdminApi;
+use Dotenv\Dotenv;
+
+// Ladataan .env-tiedosto
+$dotenv = Dotenv::createImmutable(dirname(__DIR__, 1));
+$dotenv->load();
+
+// Cloudinary-konfiguraatio
+Configuration::instance([
+    'cloud' => [
+        'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
+        'api_key' => $_ENV['CLOUDINARY_API_KEY'],
+        'api_secret' => $_ENV['CLOUDINARY_API_SECRET']
+    ],
+    'url' => ['secure' => true]
+]);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $article_id = $_POST['article_id'] ?? null;
@@ -15,36 +34,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // 6.3. Tarkistetaan, onko uusi kuva ladattu
-    if(!empty($_FILES['article_image']['name'])) {
-        $upload_dir = "../uploads/";
-        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
-        $file_ext = strtolower(pathinfo($_FILES['article_image']['name'], PATHINFO_EXTENSION));
-        $new_filename = uniqid("img_") . "." . $file_ext;
+    // 6.3. Haetaan vanha kuva
+    $stmt = $conn->prepare("SELECT image_path FROM ARTICLE WHERE article_id = ?");
+    $stmt->bind_param("i", $article_id);
+    $stmt->execute();
+    $stmt->bind_result($old_image);
+    $stmt->fetch();
+    $stmt->close();
 
-        if (!in_array($file_ext, $allowed_types)) {
-            echo "<p class='error'>Väärä tiedostotyyppi! Vain JPG, JPEG, PNG ja GIF sallittu.</p>";
-            exit();
-        }
+    // 8.3. Tarkistetaan, onko uusi kuva ladattu
+    if(!empty($_FILES['article_image']['tmp_name'])) {
+        // 8.3. Ladataan uusi kuva Cloudinaryyn
+        try{
+            $upload = (new UploadApi())->upload($_FILES['article_image']['tmp_name'], [
+                "folder" => "blog_images",
+                "use_filename" => true,
+                "unique_filename" => true
+            ]);
+            $image_url = $upload['secure_url'];
+            $image_path = $image_url;
 
-        // 6.3. Haetaan vanha kuva
-        $stmt = $conn->prepare("SELECT image_path FROM ARTICLE WHERE article_id = ?");
-        $stmt->bind_param("i", $article_id);
-        $stmt->execute();
-        $stmt->bind_result($old_image);
-        $stmt->fetch();
-        $stmt->close();
-
-        // 6.3 Poistetaan vanha kuva, jos se on olemassa
-        if ($old_image && file_exists("../" . $old_image)) {
-            unlink("../" . $old_image);
-        }
-
-        // 6.3 Tallennetaan uusi kuva
-        if (move_uploaded_file($_FILES['article_image']['tmp_name'], $upload_dir . $new_filename)) {
-            $image_path = "uploads/" . $new_filename;
-        } else {
-            echo "<p class='error'>Kuvan lataaminen epäonnistui!</p>";
+            // 8.3. Poistetaan vanha kuva Cloudinarysta, jos se on olemassa
+            if ($old_image) {
+                preg_match("/\/v\d+\/([^\/]+)\.\w+$/", $old_image, $matches);
+                if(!empty($matches[1])) {
+                    (new AdminApi())->deleteAssets(["blog_images/" . $matches[1]]);
+                }
+            }
+        } catch (Exception $e) {
+            die("<p class='error'>Kuvan lataaminen epäonnistui: " . $e->getMessage() . "</p>");
             exit();
         }
     }
@@ -77,4 +95,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Vain POST-pyynnöt sallittu.";
     exit();
 }
+
 ?>
