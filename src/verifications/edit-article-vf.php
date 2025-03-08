@@ -10,9 +10,11 @@ use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Api\Admin\AdminApi;
 use Dotenv\Dotenv;
 
-// Ladataan .env-tiedosto
-$dotenv = Dotenv::createImmutable(dirname(__DIR__, 1));
-$dotenv->load();
+// Ladataan .env-tiedosto vain lokaalisti (jos se on olemassa)
+if (file_exists(dirname(__DIR__, 1) . '/.env')) {
+    $dotenv = Dotenv::createImmutable(dirname(__DIR__, 1));
+    $dotenv->load();
+}
 
 // Cloudinary-konfiguraatio
 Configuration::instance([
