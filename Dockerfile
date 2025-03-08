@@ -14,6 +14,7 @@ CMD ["apache2ctl", "-D", "FOREGROUND"]
 
 # **TÄRKEÄ: Kopioi sivuston tiedostot konttiin!**
 COPY ./src/ /var/www/html/
+COPY composer.json /var/www/html/
 RUN composer install --no-dev --optimize-autoloader
 RUN ls -lah /var/www/html
 # **TÄRKEÄ: Aseta Apache käyttämään index.php tai index.html**
