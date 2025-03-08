@@ -1,3 +1,4 @@
 # Ympäristömuuttujatiedot
 .env
 .sql
+/vendor
