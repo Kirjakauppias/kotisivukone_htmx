@@ -13,7 +13,7 @@ CMD ["apache2ctl", "-D", "FOREGROUND"]
 
 # **TÄRKEÄ: Kopioi sivuston tiedostot konttiin!**
 COPY ./src/ /var/www/html/
-COPY --chown=www-data:www-data ./vendor /var/www/html/vendor
+RUN composer install --no-dev --optimize-autoloader
 RUN ls -lah /var/www/html
 # **TÄRKEÄ: Aseta Apache käyttämään index.php tai index.html**
 RUN echo "DirectoryIndex index.php index.html" > /etc/apache2/conf-available/custom-index.conf && \
