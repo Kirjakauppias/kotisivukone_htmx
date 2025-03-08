@@ -1,6 +1,7 @@
-FROM php:8.0-apache
+FROM php:8.2-apache
 WORKDIR /var/www/html
-RUN apt-get update && apt-get install -y libmariadb-dev
+RUN apt-get update && apt-get install -y curl unzip \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # Ota käyttöön Apache mod_rewrite
 RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli
