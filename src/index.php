@@ -49,6 +49,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 </head>
 <body>
     <!-- Banneri -->
+    <!--TESTI-->
     <div class="banner" id="home">
         <div class="banner-text">
             <h1 style="font-size:50px">TARINAN PAIKKA</h1>
