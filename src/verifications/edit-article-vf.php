@@ -1,10 +1,10 @@
 <?php
-session_start();
+//session_start();
 // edit-article-vf.php
 // tiedosto jossa tallennetaan tietokantaan käyttäjän päivittämät julkaisut
 require __DIR__ . "./../vendor/autoload.php";
 require_once "../database/db_connect.php";
-
+require_once "../funcs.php";
 use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Api\Admin\AdminApi;
@@ -49,19 +49,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $file_type = mime_content_type($_FILES['article_image']['tmp_name']);
 
+        $compressedImage = compressImage($_FILES['article_image']['tmp_name'], tempnam(sys_get_temp_dir(), 'compressed_'));
+
+        if (!$compressedImage) {
+            die("Virhe: Kuvan käsittely epäonnistui.");
+        }
+        
+
         // 8.3. Ladataan uusi kuva Cloudinaryyn
         try{
-            $upload = (new UploadApi())->upload($_FILES['article_image']['tmp_name'], [
+            $upload = (new UploadApi())->upload($compressedImage, [
                 "folder" => "blog_images",
                 "use_filename" => true,
                 "unique_filename" => true,
-                "resource_type" => "image",
-                "transformation" => [
-                    ["quality" => "auto:low", "fetch_format" => "jpg", "width" => 1000, "height" => 1000, "crop" => "limit", "dpr" => 0.8] // Rajoitetaan kuvan maksimikoko
-                ]
+                "resource_type" => "image"
             ]);
             $image_url = $upload['secure_url'];
             $image_path = $image_url;
+
+            // Poistetaan pakattu väliaikaistiedosto
+            unlink($compressedImage);
 
             // 8.3. Poistetaan vanha kuva Cloudinarysta, jos se on olemassa
             if ($old_image) {
