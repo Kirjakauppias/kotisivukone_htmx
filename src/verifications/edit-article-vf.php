@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "unique_filename" => true,
                 "resource_type" => "image",
                 "transformation" => [
-                    ["quality" => "auto", "width" => 1200, "height" => 1200, "crop" => "limit"] // Rajoitetaan kuvan maksimikoko
+                    ["quality" => "auto:low", "fetch_format" => "jpg", "width" => 1000, "height" => 1000, "crop" => "limit", "dpr" => 0.8] // Rajoitetaan kuvan maksimikoko
                 ]
             ]);
             $image_url = $upload['secure_url'];

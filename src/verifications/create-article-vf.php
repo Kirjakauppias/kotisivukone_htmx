@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "unique_filename" => true,
                 "resource_type" => "image",
                 "transformation" => [
-                    ["quality" => "auto:eco", "fetch_format" => "jpg", "width" => 1200, "height" => 1200, "crop" => "limit"]
+                    ["quality" => "auto:low", "fetch_format" => "jpg", "width" => 1000, "height" => 1000, "crop" => "limit", "dpr" => 0.8]
                     ]
             ]);
             $image_url = $upload['secure_url'];
