@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "unique_filename" => true,
                 "resource_type" => "image",
                 "transformation" => [
-                ["quality" => "auto:low", "fetch_format" => "jpg"] // Pakkaa kuvan ja muuntaa sen JPG-muotoon
-            ]
+                    ["quality" => "auto:eco", "fetch_format" => "jpg", "width" => 1200, "height" => 1200, "crop" => "limit"]
+                    ]
             ]);
             $image_url = $upload['secure_url'];
             $image_path = $image_url;
