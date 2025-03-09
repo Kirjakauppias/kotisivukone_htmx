@@ -45,6 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 6.3. Käsitellään kuvan lataus Cloudinaryyn
     if(!empty($_FILES['article_image']['tmp_name'])) {
+        $mime_type = mime_content_type($_FILES['article_image']['tmp_name']);
+        echo "Tiedoston MIME-tyyppi: " . $mime_type;
+
         try{
             function compressImage($source, $destination, $quality = 75, $maxWidth = 1200) {
                 $info = getimagesize($source);
@@ -130,12 +133,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         echo "Artikkeli luotu onnistuneesti. <a href='index.php'>Palaa omalle sivulle</a>";
-        // Lisää skripti modalin automaattiseen sulkemiseen
+        /* Lisää skripti modalin automaattiseen sulkemiseen
         echo "<script>
         setTimeout(() => {
             document.getElementById('modal-container').innerHTML = '';
         }, 3000); // Sulkee modalin 3 sekunnin kuluttua
-        </script>";
+        </script>";*/
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Artikkelin luonti epäonnistui.']);
     }
