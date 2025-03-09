@@ -35,6 +35,24 @@ function compressImage($source, $destination, $quality = 75, $maxWidth = 1200) {
             return false; // Ei tuettu formaatti
     }
 
+    // 🔄 Tarkistetaan ja korjataan orientaatio (vain JPEG-kuville)
+    if ($mime === 'image/jpeg' && function_exists('exif_read_data')) {
+        $exif = @exif_read_data($source);
+        if (!empty($exif['Orientation'])) {
+            switch ($exif['Orientation']) {
+                case 3:
+                    $image = imagerotate($image, 180, 0); // Käännä 180 astetta
+                    break;
+                case 6:
+                    $image = imagerotate($image, -90, 0); // Käännä 90 astetta vastapäivään
+                    break;
+                case 8:
+                    $image = imagerotate($image, 90, 0); // Käännä 90 astetta myötäpäivään
+                    break;
+            }
+        }
+    }
+
     // Skaalataan kuva max 1200px leveyteen säilyttäen mittasuhteet
     $width = imagesx($image);
     $height = imagesy($image);
