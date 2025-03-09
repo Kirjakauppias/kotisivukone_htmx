@@ -58,10 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // 8.3. Poistetaan vanha kuva Cloudinarysta, jos se on olemassa
             if ($old_image) {
-                preg_match("/\/v\d+\/([^\/]+)\.\w+$/", $old_image, $matches);
-                if(!empty($matches[1])) {
-                    (new AdminApi())->deleteAssets(["blog_images/" . $matches[1]]);
-                }
+              // 9.3. Haetaan vanhan kuvan public_id Cloudinarysta
+              $public_id = pathinfo(parse_url($old_image, PHP_URL_PATH), PATHINFO_FILENAME);
+
+              try {
+                (new UploadApi())->destroy("blog_images/" . $public_id);
+              } catch (Exception $e) {
+                error_log("Cloudinary-kuvan poisto epäonnistui: " . $e->getMessage());
+              }
             }
         } catch (Exception $e) {
             die("<p class='error'>Kuvan lataaminen epäonnistui: " . $e->getMessage() . "</p>");
