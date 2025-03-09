@@ -49,12 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $file_type = mime_content_type($_FILES['article_image']['tmp_name']);
 
-if (!in_array($file_type, ['image/jpeg', 'image/png', 'image/webp'])) {
-    die("<p class='error'>Kuvan lataaminen epäonnistui: </p>" );
-    exit();
-}
-
-
         // 8.3. Ladataan uusi kuva Cloudinaryyn
         try{
             $upload = (new UploadApi())->upload($_FILES['article_image']['tmp_name'], [
