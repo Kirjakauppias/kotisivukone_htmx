@@ -3,7 +3,6 @@ session_start();
 // create-article-vf.php
 require __DIR__ . "./../vendor/autoload.php";
 require_once "../database/db_connect.php";
-phpinfo();
 
 use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
