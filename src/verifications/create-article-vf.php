@@ -3,6 +3,7 @@ session_start();
 // create-article-vf.php
 require __DIR__ . "./../vendor/autoload.php";
 require_once "../database/db_connect.php";
+phpinfo();
 
 use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
@@ -46,15 +47,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 6.3. Käsitellään kuvan lataus Cloudinaryyn
     if(!empty($_FILES['article_image']['tmp_name'])) {
         try{
-            $upload = (new UploadApi())->upload($_FILES['article_image']['tmp_name'], [
+            function compressImage($source, $destination, $quality = 75, $maxWidth = 1200) {
+                $info = getimagesize($source);
+                if ($info === false) {
+                    return false; // Ei kelvollinen kuva
+                }
+
+                // Haetaan kuvan tyyppi
+                $mime = $info['mime'];
+
+                // Luodaan kuva oikeasta tiedostotyypistä
+                switch ($mime) {
+                    case 'image/jpeg':
+                        $image = imagecreatefromjpeg($source);
+                        break;
+                    case 'image/png':
+                        $image = imagecreatefrompng($source);
+                        break;
+                    case 'image/webp':
+                        $image = imagecreatefromwebp($source);
+                        break;
+                    default:
+                        return false; // Ei tuettu formaatti
+                }
+
+                // Skaalataan kuva max 1200px leveyteen säilyttäen mittasuhteet
+                $width = imagesx($image);
+                $height = imagesy($image);
+                if($width > $maxWidth) {
+                    $newWidth = $maxWidth;
+                    $newHeight = ($maxWidth / $width) * $height;
+                    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+                    imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                    imagedestroy($image);
+                    $image = $resizedImage;
+                }
+
+                // Tallennetaan pakattu kuva tilapäiseen tiedostoon
+                $compressedPath = tempnam(sys_get_temp_dir(), 'compressed_') . 'jpg';
+                imagejpeg($image, $compressedPath, $quality);
+                imagedestroy($image);
+
+                return $compressedPath;
+            }
+
+            $compressedImage = compressImage($_FILES['article_image']['tmp_name'], tempnam(sys_get_temp_dir(), 'compressed_'));
+
+            if (!$compressedImage) {
+                die("Virhe: Kuvan käsittely epäonnistui.");
+            }
+            $upload = (new UploadApi())->upload($compressedImage, [
                 "folder" => "blog_images",
                 "use_filename" => true,
-                "unique_filename" => true,
-                "resource_type" => "image",
-                "transformation" => [
-                    ["quality" => "auto:low", "fetch_format" => "jpg", "width" => 1000, "height" => 1000, "crop" => "limit", "dpr" => 0.8]
-                    ]
+                "unique_filename" => true
             ]);
+
             $image_url = $upload['secure_url'];
             $image_path = $image_url;
         } catch (Exception $e) {
