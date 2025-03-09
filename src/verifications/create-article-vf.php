@@ -49,7 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $upload = (new UploadApi())->upload($_FILES['article_image']['tmp_name'], [
                 "folder" => "blog_images",
                 "use_filename" => true,
-                "unique_filename" => true
+                "unique_filename" => true,
+                "resource_type" => "image",
+                "transformation" => [
+                    ["quality" => "auto", "width" => 1200, "height" => 1200, "crop" => "limit"] // Rajoitetaan kuvan maksimikoko
+                ]
             ]);
             $image_url = $upload['secure_url'];
             $image_path = $image_url;
