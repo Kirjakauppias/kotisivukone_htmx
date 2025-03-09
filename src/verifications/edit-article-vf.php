@@ -46,6 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 8.3. Tarkistetaan, onko uusi kuva ladattu
     if(!empty($_FILES['article_image']['tmp_name'])) {
+
+        $file_type = mime_content_type($_FILES['article_image']['tmp_name']);
+
+if (!in_array($file_type, ['image/jpeg', 'image/png', 'image/webp'])) {
+    die("Virhe: Vain JPEG-, PNG- ja WebP-kuvat ovat sallittuja.");
+}
+
+
         // 8.3. Ladataan uusi kuva Cloudinaryyn
         try{
             $upload = (new UploadApi())->upload($_FILES['article_image']['tmp_name'], [
