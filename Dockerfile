@@ -18,6 +18,8 @@ CMD ["apache2ctl", "-D", "FOREGROUND"]
 # **TÄRKEÄ: Kopioi sivuston tiedostot konttiin!**
 COPY ./src/ /var/www/html/
 COPY composer.json /var/www/html/
+# Kopioidaan oma php.ini asetustiedosto konttiin
+COPY config/php.ini /usr/local/etc/php/conf.d/custom.ini
 RUN composer install --no-dev --optimize-autoloader
 RUN ls -lah /var/www/html
 # **TÄRKEÄ: Aseta Apache käyttämään index.php tai index.html**
