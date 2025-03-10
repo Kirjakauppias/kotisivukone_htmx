@@ -56,7 +56,7 @@ main {
     padding: 4px;
     color:white;
     font-size: 16px;
-    width: 70%;
+    width: 50%;
 }
 
 .article {
@@ -70,7 +70,8 @@ main {
 
 /* 6.3. Artikkelin kuvan muotoilu */
 .article-image {
-    max-width: 100%;
+    width: 100%;
+    max-width: 500px;
     height: auto;
     margin: 10px 0;
     display: block;
@@ -109,7 +110,7 @@ footer {
         width: 80%;
     }
 }
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 645px) {
     .article-container {
         width: 100%;
     }
