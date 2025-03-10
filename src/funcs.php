@@ -57,8 +57,8 @@ function compressImage($source, $destination, $quality = 75, $maxWidth = 1200) {
     $width = imagesx($image);
     $height = imagesy($image);
     if($width > $maxWidth) {
-        $newWidth = $maxWidth;
-        $newHeight = ($maxWidth / $width) * $height;
+        $newWidth = (int) $maxWidth;
+        $newHeight = (int) (($maxWidth / $width) * $height);
         $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         imagedestroy($image);

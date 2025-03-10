@@ -93,8 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $width = imagesx($image);
                 $height = imagesy($image);
                 if($width > $maxWidth) {
-                    $newWidth = $maxWidth;
-                    $newHeight = ($maxWidth / $width) * $height;
+                    $newWidth = (int) $maxWidth;
+                    $newHeight = (int) (($maxWidth / $width) * $height);
                     $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
                     imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
                     imagedestroy($image);
