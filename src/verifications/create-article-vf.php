@@ -149,12 +149,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         echo "Artikkeli luotu onnistuneesti. <a href='index.php'>Palaa omalle sivulle</a>";
-        // Lisää skripti modalin automaattiseen sulkemiseen
+        /* Lisää skripti modalin automaattiseen sulkemiseen
         echo "<script>
         setTimeout(() => {
             document.getElementById('modal-container').innerHTML = '';
         }, 3000); // Sulkee modalin 3 sekunnin kuluttua
-        </script>";
+        </script>";*/
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Artikkelin luonti epäonnistui.']);
     }
