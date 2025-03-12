@@ -24,10 +24,13 @@ if (isset($_GET['slug'])) {
 
             // Haetaan blogin artikkelit
             // 6.3. Lisätty image_path
+            // 12.3. Lisätty deleted_at
             $articles_html = "";
-            $article_sql = "SELECT title, content, published_at, image_path FROM ARTICLE 
+            $article_sql = "SELECT title, content, published_at, image_path, deleted_at 
+                            FROM ARTICLE 
                             WHERE blog_id = (SELECT blog_id FROM BLOG WHERE slug = ? LIMIT 1) 
-                            AND status = 'PUBLISHED' 
+                            AND status = 'PUBLISHED'
+                            AND deleted_at IS NULL 
                             ORDER BY published_at DESC";
 
             if ($article_stmt = $conn->prepare($article_sql)) {

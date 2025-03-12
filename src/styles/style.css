@@ -110,7 +110,7 @@ input[type=text], input[type=password], input[type=email], input[type=file], tex
     box-sizing: border-box; /* Sisällyttää reunukset ja täytteet elementin kokoon */
 }
 
-input[type=submit], .btn-cancel, .btn-delete, #delete-image-btn {
+input[type=submit], .btn-cancel, .btn-delete, #delete-image-btn, #delete-article-button {
     background-color: #212422; /* Asettaa painikkeen taustaväriksi oranssin */
     color: white; /* Asettaa tekstin väriksi valkoisen */
     padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
@@ -120,7 +120,7 @@ input[type=submit], .btn-cancel, .btn-delete, #delete-image-btn {
     cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
     font-size: 16px; /* Asettaa fonttikoon */
     font-weight: bold; /* Asettaa lihavoidun fontin */
-    width: 100%; /* Venyy koko rivin leveydelle */
+    width: 100% !important; /* Venyy koko rivin leveydelle */
 }
 
 button {

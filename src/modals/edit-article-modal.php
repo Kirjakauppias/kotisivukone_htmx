@@ -14,7 +14,12 @@
   }
   
   // Haetaan käyttäjän blogi-päivitykset
-  $stmt = $conn->prepare("SELECT a.article_id, a.title, a.content, a.image_path FROM ARTICLE a JOIN BLOG b ON a.blog_id = b.blog_id WHERE b.user_id = ?");
+  $stmt = $conn->prepare("SELECT a.article_id, a.title, a.content, a.image_path, a.deleted_at 
+                          FROM ARTICLE a 
+                          JOIN BLOG b 
+                          ON a.blog_id = b.blog_id 
+                          WHERE b.user_id = ? AND a.deleted_at IS NULL"
+                        );
   $stmt->bind_param("i", $user_id);
   $stmt->execute();
   $result = $stmt->get_result();
@@ -81,14 +86,25 @@
       </div>-->
     
       <input type="submit" value="Päivitä julkaisu">
+
       
       <!-- Peruuta -painike joka sulkee lomakkeen -->
       <button type="button" class="btn-cancel" 
-        hx-get="modals/close-modal.php" 
-        hx-target="#modal-container"
+      hx-get="modals/close-modal.php" 
+      hx-target="#modal-container"
       >
-        Peruuta
-      </button>
+      Peruuta
+    </button>
+    <!-- 11.3.25: Poista julkaisu -painike -->
+    <button type="button" id="delete-article-btn"
+      hx-post="./verifications/delete-article-vf.php"
+      hx-target="#response"
+      hx-confirm="Haluatko varmasti poistaa tämän julkaisun? Julkaisun kuva poistetaan pysyvästi."
+      hx-vals='{}'
+      style="display: none; background-color: red; color: white; width: 100%; margin-top: 3rem;"
+    >
+      Poista julkaisu
+    </button>
     </form>
     <div id="response" aria-live="polite" role="alert">
       <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut artikkelin luonti -->
@@ -97,31 +113,42 @@
 </div><!--/container-->
 <script>
     function fillForm() {
-        let select = document.getElementById('article_select');
-        let selectedValue = select.value;
+    let select = document.getElementById('article_select');
+    let selectedValue = select.value;
+    let deleteArticleBtn = document.getElementById('delete-article-btn');
 
-        if (selectedValue) {
-            let article = JSON.parse(selectedValue);
-            document.getElementById('article_id').value = article.article_id;
-            document.getElementById('article_title').value = article.title;
-            document.getElementById('article_content').value = article.content;
+    if (selectedValue) {
+        let article = JSON.parse(selectedValue);
+        document.getElementById('article_id').value = article.article_id;
+        document.getElementById('article_title').value = article.title;
+        document.getElementById('article_content').value = article.content;
 
-            // 6.3. Näytetään kuva jos sellainen on
-            if (article.image_path) {
-              document.getElementById('current-image').src = article.image_path;
-              document.getElementById('current-image').style.display = "block";
-              document.getElementById('delete-image-btn').setAttribute("hx-vals", JSON.stringify({"article_id": article.article_id}));
-              document.getElementById('delete-image-btn').style.display = "inline-block";
-            } else {
-              document.getElementById('current-image').style.display = "none";
-              document.getElementById('delete-image-btn').style.display = "none";
-            }
+        // 6.3. Näytetään kuva, jos sellainen on
+        if (article.image_path) {
+            document.getElementById('current-image').src = article.image_path;
+            document.getElementById('current-image').style.display = "block";
+            document.getElementById('delete-image-btn').setAttribute("hx-vals", JSON.stringify({"article_id": article.article_id}));
+            document.getElementById('delete-image-btn').style.display = "inline-block";
         } else {
-          document.getElementById('article_id').value = '';
-          document.getElementById('article_title').value = '';
-          document.getElementById('article_content').value = '';
-          document.getElementById('current-image').style.display = "none";
-          document.getElementById('delete-image-btn').style.display = "none";
+            document.getElementById('current-image').style.display = "none";
+            document.getElementById('delete-image-btn').style.display = "none";
         }
+
+        // 11.3. Näytetään "Poista julkaisu" -painike vain, jos artikkelilla ei ole deleted_at-arvoa
+        if (!article.deleted_at) { 
+            deleteArticleBtn.setAttribute("hx-vals", JSON.stringify({"article_id": article.article_id}));
+            deleteArticleBtn.style.display = "inline-block";
+        } else {
+            deleteArticleBtn.style.display = "none";
+        }
+
+    } else {
+        document.getElementById('article_id').value = '';
+        document.getElementById('article_title').value = '';
+        document.getElementById('article_content').value = '';
+        document.getElementById('current-image').style.display = "none";
+        document.getElementById('delete-image-btn').style.display = "none";
+        deleteArticleBtn.style.display = "none"; // Piilotetaan "Poista julkaisu" -nappi
     }
+}
 </script>
