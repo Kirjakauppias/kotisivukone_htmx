@@ -3,7 +3,7 @@ require_once "./database/db_connect.php"; // Yhdistetään tietokantaan
 
 try {
     // SQL-kysely: Lisätään image_path-sarake, jos sitä ei ole
-    $sql = "ALTER TABLE ARTICLE ADD COLUMN deleted_at IS NULL";
+    $sql = "ALTER TABLE ARTICLE ADD COLUMN deleted_at DATETIME NULL";
     if ($conn->query($sql) === TRUE) {
         echo "Tietokannan päivitys onnistui: 'deleted_at' lisätty.";
     } else {
