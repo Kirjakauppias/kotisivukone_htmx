@@ -3,9 +3,9 @@ require_once "./database/db_connect.php"; // Yhdistetään tietokantaan
 
 try {
     // SQL-kysely: Lisätään image_path-sarake, jos sitä ei ole
-    $sql = "ALTER TABLE ARTICLE ADD COLUMN image_path VARCHAR(255) NULL";
+    $sql = "ALTER TABLE ARTICLE ADD COLUMN deleted_at NULL";
     if ($conn->query($sql) === TRUE) {
-        echo "Tietokannan päivitys onnistui: 'image_path' lisätty.";
+        echo "Tietokannan päivitys onnistui: 'deleted_at' lisätty.";
     } else {
         echo "Virhe päivitettäessä tietokantaa: " . $conn->error;
     }
