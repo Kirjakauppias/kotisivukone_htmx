@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($info === false) {
                     return false; // Ei kelvollinen kuva
                 }
-
-                // Haetaan kuvan MIME-tyyppi
+            
+                // Haetaan MIME-tyyppi
                 $mime = $info['mime'];
-
+            
                 // Luodaan kuva oikeasta tiedostotyypistä
                 switch ($mime) {
                     case 'image/jpeg':
@@ -75,32 +75,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     case 'image/webp':
                         $image = imagecreatefromwebp($source);
                         break;
+                    case 'image/heic':
+                    case 'image/heif':
+                        return false; // HEIC/HEIF ei tueta suoraan PHP:ssä, vaatii erillisen muunnoksen
                     default:
                         return false; // Ei tuettu formaatti
                 }
-
-                // Jos kuva on JPEG, tarkistetaan ja korjataan mahdollinen väärä orientaatio
+            
+                // 🔄 **Korjataan orientaatio (vain JPEG-kuville)**
                 if ($mime === 'image/jpeg' && function_exists('exif_read_data')) {
                     $exif = @exif_read_data($source);
                     if (!empty($exif['Orientation'])) {
                         switch ($exif['Orientation']) {
                             case 3:
-                                $image = imagerotate($image, 180, 0); // Käännä 180 astetta
+                                $image = imagerotate($image, 180, 0);
                                 break;
                             case 6:
-                                $image = imagerotate($image, -90, 0); // Käännä 90 astetta vastapäivään
+                                $image = imagerotate($image, -90, 0);
                                 break;
                             case 8:
-                                $image = imagerotate($image, 90, 0); // Käännä 90 astetta myötäpäivään
+                                $image = imagerotate($image, 90, 0);
                                 break;
                         }
                     }
                 }
-
-                // Skaalataan kuva max 1200px leveyteen säilyttäen mittasuhteet
+            
+                // 📏 **Skaalataan kuva max 1200px leveyteen säilyttäen mittasuhteet**
                 $width = imagesx($image);
                 $height = imagesy($image);
-                if($width > $maxWidth) {
+                if ($width > $maxWidth) {
                     $newWidth = (int) $maxWidth;
                     $newHeight = (int) (($maxWidth / $width) * $height);
                     $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
@@ -108,12 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     imagedestroy($image);
                     $image = $resizedImage;
                 }
-
-                // Tallennetaan pakattu kuva tilapäiseen tiedostoon
-                $compressedPath = tempnam(sys_get_temp_dir(), 'compressed_') . 'jpg';
+            
+                // 💾 **Tallennetaan pakattu kuva JPEG-muodossa**
+                $compressedPath = tempnam(sys_get_temp_dir(), 'compressed_') . '.jpg';
                 imagejpeg($image, $compressedPath, $quality);
                 imagedestroy($image);
-
+            
                 return $compressedPath;
             }
 
@@ -126,7 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "folder" => "blog_images",
                 "use_filename" => true,
                 "unique_filename" => true,
-                "format" => "jpg" // Muuntaa HEIC-kuvat automaattisesti JPEG-muotoon
+                "quality" => "auto", // Automaattinen optimointi
+                "fetch_format" => "jpg" // Muuntaa HEIC-kuvat automaattisesti JPEG-muotoon
             ]);
 
             // Tallennetaan Cloudinaryn palauttama kuvaosoite
