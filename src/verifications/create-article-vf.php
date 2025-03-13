@@ -125,7 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $upload = (new UploadApi())->upload($compressedImage, [
                 "folder" => "blog_images",
                 "use_filename" => true,
-                "unique_filename" => true
+                "unique_filename" => true,
+                "format" => "jpg" // Muuntaa HEIC-kuvat automaattisesti JPEG-muotoon
             ]);
 
             // Tallennetaan Cloudinaryn palauttama kuvaosoite
