@@ -138,10 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "keep_iptc" => true
             ]);
 
+            /* Kuvan tietojen debuggausta varten
             $exif = @exif_read_data($_FILES['article_image']['tmp_name']);
             echo "<div id='result'>";
             print_r($exif);
-            echo "</div>";
+            echo "</div>";*/
 
             // Tallennetaan Cloudinaryn palauttama kuvaosoite
             $image_url = $upload['secure_url'];
