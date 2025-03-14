@@ -99,7 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                     }
                 }
-            
+
+                
                 // 📏 **Skaalataan kuva max 1200px leveyteen säilyttäen mittasuhteet**
                 $width = imagesx($image);
                 $height = imagesy($image);
@@ -111,17 +112,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     imagedestroy($image);
                     $image = $resizedImage;
                 }
-            
+                
                 // 💾 **Tallennetaan pakattu kuva JPEG-muodossa**
                 $compressedPath = tempnam(sys_get_temp_dir(), 'compressed_') . '.jpg';
                 imagejpeg($image, $compressedPath, $quality);
                 imagedestroy($image);
-            
+                
                 return $compressedPath;
             }
-
+            
             $compressedImage = compressImage($_FILES['article_image']['tmp_name'], tempnam(sys_get_temp_dir(), 'compressed_'));
-
+            
+            
             if (!$compressedImage) {
                 die("Virhe: Kuvan käsittely epäonnistui.");
             }
@@ -130,8 +132,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "use_filename" => true,
                 "unique_filename" => true,
                 "quality" => "auto", // Automaattinen optimointi
-                "fetch_format" => "jpg" // Muuntaa HEIC-kuvat automaattisesti JPEG-muotoon
+                "format" => "jpg", // Muuntaa HEIC-kuvat automaattisesti JPEG-muotoon
+                "overwrite" => true,
+                "keep_iptc" => true
             ]);
+
+            $exif = @exif_read_data($_FILES['article_image']['tmp_name']);
+            echo "<div id='result'>";
+            print_r($exif);
+            echo "</div>";
 
             // Tallennetaan Cloudinaryn palauttama kuvaosoite
             $image_url = $upload['secure_url'];
@@ -168,12 +177,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->execute()) {
         echo "Artikkeli luotu onnistuneesti. <a href='index.php'>Palaa omalle sivulle</a>";
         
-        // Lisää java-skripti joka sulkee modalin 3 sekunnin kuluttua
+        /* Lisää java-skripti joka sulkee modalin 3 sekunnin kuluttua
         echo "<script>
         setTimeout(() => {
             document.getElementById('modal-container').innerHTML = '';
         }, 3000); // Sulkee modalin 3 sekunnin kuluttua
-        </script>";
+        </script>";*/
     } else {
         // Jos tietokantaan lisääminen epäonnistui, palautetaan JSON-virheilmoitus
         echo json_encode(['status' => 'error', 'message' => 'Artikkelin luonti epäonnistui.']);

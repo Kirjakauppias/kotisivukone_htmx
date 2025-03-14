@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y curl unzip \
 RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libwebp-dev \
     && docker-php-ext-configure gd --with-jpeg --with-webp \
     && docker-php-ext-install gd
+RUN docker-php-ext-install exif && docker-php-ext-enable exif
 # Ota käyttöön Apache mod_rewrite
 RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli
