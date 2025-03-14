@@ -62,7 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "folder" => "blog_images",
                 "use_filename" => true,
                 "unique_filename" => true,
-                "resource_type" => "image"
+                "quality" => "auto", // Automaattinen optimointi
+                "format" => "jpg", // Muuntaa HEIC-kuvat automaattisesti JPEG-muotoon
+                "overwrite" => true,
+                "angle" => "exif",
+                "keep_iptc" => true
             ]);
             $image_url = $upload['secure_url'];
             $image_path = $image_url;
