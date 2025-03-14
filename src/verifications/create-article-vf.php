@@ -134,6 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "quality" => "auto", // Automaattinen optimointi
                 "format" => "jpg", // Muuntaa HEIC-kuvat automaattisesti JPEG-muotoon
                 "overwrite" => true,
+                "angle" => "exif",
                 "keep_iptc" => true
             ]);
 
