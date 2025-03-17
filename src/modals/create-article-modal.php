@@ -10,7 +10,7 @@
   }
   
   // Haetaan käyttäjän blogit
-  $stmt = $conn->prepare("SELECT blog_id, name FROM BLOG WHERE user_id = ?");
+  $stmt = $conn->prepare("SELECT blog_id, name FROM BLOG WHERE user_id = ? AND deleted_at IS NULL");
   $stmt->bind_param("i", $user_id);
   $stmt->execute();
   $result = $stmt->get_result();

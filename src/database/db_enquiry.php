@@ -86,7 +86,7 @@ function getUserByUserId($conn, $userId) {
 // Funktio joka hakee slugin user_id:llä
 function getSlug($conn, $user_id) {
     // Valmistellaan kysely
-    $stmt = $conn->prepare("SELECT slug FROM BLOG WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT slug FROM BLOG WHERE user_id = ? AND deleted_at IS NULL");
     $stmt->bind_param("i", $user_id); // Sidotaan käyttäjän id parametriin
     $stmt->execute(); // Suoritetaan kysely
     $slug = null; // Alustetaan muuttuja 
@@ -114,5 +114,24 @@ function checkIfAdmin($conn, $user_id) {
     }
 
     return false; // Jos kysely epäonnistuu, palauta false
+}
+
+// 15.3. Funktio joka hakee käyttäjän blogin ja palauttaa sen
+// jos blogia ei ole poistettu
+function getBlogByUserId($conn, $user_id) {
+    $sql = "SELECT blog_id, name, slug, description, published, visibility, views, created_at, updated_at, layout_id, style_id 
+              FROM BLOG 
+              WHERE user_id = ? AND deleted_at IS NULL 
+              LIMIT 1";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $blog = $result->fetch_assoc();
+        $stmt->close();
+        return $blog; // Palauttaa assosiatiivisen taulukon tai NULL, jos blogia ei löydy
+    } else {
+        return null; // Palautetaan null, jos kysely epäonnistuu
+    }
 }
 ?>

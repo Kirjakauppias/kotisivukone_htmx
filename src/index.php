@@ -122,6 +122,14 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                     >
                         Uusi julkaisu
                     </a>
+                    <!-- 14.3. Linkki joka avaa modalin jonne tulostetaan modals/edit-blog-modal.php -tiedoston sisältö -->
+                    <a href="" alt="omat tiedot"
+                        hx-get="modals/edit-blog-modal.php" 
+                        hx-target="#modal-container" 
+                        hx-trigger="click"
+                    >
+                        Muokkaa blogia
+                    </a>
                     <!-- 2.3.25 Linkki joka avaa modalin jonne tulostetaan modals/edit-article-modal.php -tiedoston sisältö -->
                     <a href="" alt="omat tiedot"
                         hx-get="modals/edit-article-modal.php" 

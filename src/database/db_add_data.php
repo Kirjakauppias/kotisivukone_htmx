@@ -3,6 +3,7 @@
 // Otetaan yhteys tietokantaan:
 require_once "db_connect.php";
 
+
 // Funktio, jolla lisätään uusi käyttäjä tietokantaan
 function addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword) {
     // SQL-lause uuden käyttäjän lisäämiseksi.
@@ -72,6 +73,7 @@ function updateUserPassword($conn, $user_id, $hashedPassword){
 
 // Funktio joka asettaa käyttäjän tilin poistetuksi ("pehmeä poisto")
 function deleteUser($conn, $user_id) {
+    deleteUserBlogsAndArticles($conn, $user_id);
     $sql = "UPDATE USER SET deleted_at = NOW() WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
@@ -86,4 +88,42 @@ function deleteUser($conn, $user_id) {
     }
 
 }
+
+// Funktio joka päivittää käyttäjän blogin
+function updateBlog($conn, $user_id, $blog_name, $blog_description) {
+    $query = "UPDATE BLOG SET name = ?, description = ?, updated_at = NOW() 
+              WHERE user_id = ? AND deleted_at IS NULL";
+
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param("ssi", $blog_name, $blog_description, $user_id);
+        if ($stmt->execute()) {
+            $stmt->close();
+            return "Blogin tiedot päivitetty onnistuneesti!";
+        } else {
+            $stmt->close();
+            return "Virhe päivityksessä: " . $conn->error;
+        }
+    } else {
+        return "Virhe tietokantakyselyssä.";
+    }
+}
+
+// Funktio joka poistaa käyttäjän blogin
+function deleteBlog($conn, $user_id) {
+    $sql ="UPDATE BLOG SET deleted_at = NOW() WHERE user_id = ? AND deleted_at IS NULL";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $user_id);
+        if ($stmt->execute()) {
+            $stmt->close();
+            return "Blogi on merkitty poistetuksi. Se poistetaan lopullisesti viikon kuluttua.";
+        } else {
+            $stmt->close();
+            return "Virhe poistossa: " . $conn->error;
+        }
+    } else {
+        return "Virhe tietokantakyselyssä.";
+    }
+}
+
 

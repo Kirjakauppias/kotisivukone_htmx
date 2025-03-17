@@ -75,3 +75,10 @@ function compressImage($source, $destination, $quality = 75, $maxWidth = 1200) {
     
     return $compressedPath;
 }
+
+function isUserLoggedIn() {
+    $user_id = $_SESSION['user_id'] ?? null;
+        if (!$user_id) {
+            die("Virhe: Käyttäjä ei ole kirjautunut.");
+        }
+    }

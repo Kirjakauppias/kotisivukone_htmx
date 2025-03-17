@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Haetaan käyttäjän blogin ID
-    $sql = "SELECT blog_id FROM BLOG WHERE user_id = ? LIMIT 1";
+    $sql = "SELECT blog_id FROM BLOG WHERE user_id = ? AND deleted_at IS NULL LIMIT 1";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $user_id);
     $stmt->execute();
@@ -179,12 +179,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->execute()) {
         echo "Artikkeli luotu onnistuneesti. <a href='index.php'>Palaa omalle sivulle</a>";
         
-        /* Lisää java-skripti joka sulkee modalin 3 sekunnin kuluttua
+        // Lisää java-skripti joka sulkee modalin 2 sekunnin kuluttua
         echo "<script>
         setTimeout(() => {
             document.getElementById('modal-container').innerHTML = '';
-        }, 3000); // Sulkee modalin 3 sekunnin kuluttua
-        </script>";*/
+        }, 2000); // Sulkee modalin 2 sekunnin kuluttua
+        </script>";
     } else {
         // Jos tietokantaan lisääminen epäonnistui, palautetaan JSON-virheilmoitus
         echo json_encode(['status' => 'error', 'message' => 'Artikkelin luonti epäonnistui.']);

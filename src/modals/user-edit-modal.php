@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || !is_numeric($user_id)) {
   header('Location: index.php'); // Ohjataan takaisin etusivulle
   exit();
 }
-// getUserByUderId()
+// getUserByUserId()
 include_once '../database/db_enquiry.php';
 
 

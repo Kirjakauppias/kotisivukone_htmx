@@ -18,7 +18,7 @@
                           FROM ARTICLE a 
                           JOIN BLOG b 
                           ON a.blog_id = b.blog_id 
-                          WHERE b.user_id = ? AND a.deleted_at IS NULL"
+                          WHERE b.user_id = ? AND b.deleted_at IS NULL AND a.deleted_at IS NULL"
                         );
   $stmt->bind_param("i", $user_id);
   $stmt->execute();

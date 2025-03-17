@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>
         setTimeout(() => {
             document.getElementById('modal-container').innerHTML = '';
-        }, 3000); // Sulkee modalin 3 sekunnin kuluttua
+        }, 2000); // Sulkee modalin 2 sekunnin kuluttua
         </script>";
     } else {
         echo "<p class='error'>Virhe artikkelin päivittämisessä.</p>";
