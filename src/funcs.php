@@ -82,3 +82,12 @@ function isUserLoggedIn() {
             die("Virhe: Käyttäjä ei ole kirjautunut.");
         }
     }
+
+// Funktio jonka avulla modal-ikkuna sulkeutuu automaattisesti.
+function autoCloseModal() {
+    echo "<script>
+        setTimeout(() => {
+            document.getElementById('modal-container').innerHTML = '';
+        }, 2000); // Sulkee modalin 2 sekunnin kuluttua
+        </script>";
+}

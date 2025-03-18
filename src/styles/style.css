@@ -211,7 +211,7 @@ img.avatar {
     border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
 }
-.article-modal-content {
+.article-modal-content, .user-guide-modal-content {
     position: relative; /* Sijainti suhteessa modaalin sisään */
     margin: 5% auto; /* Keskittää modaalin sisältö vaakasuunnassa ja asettaa 5% marginaalin yläreunasta */
     padding: 20px; /* Lisää täytettä sisällön ympärille */
@@ -235,6 +235,11 @@ img.avatar {
     color: black; /* Muuttaa värin mustaksi, kun kohdistin on kuvakkeen päällä tai se on valittu */
     text-decoration: none; /* Poistaa alleviivauksen */
     cursor: pointer; /* Muuttaa osoittimen kädeksi */
+}
+
+ul p {
+    letter-spacing: 1px;
+    line-height: 1.5;
 }
 
 /* Sisäänkirjautuneen ilmoitus */

@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // checkUsernameExists()
     require_once "../database/db_enquiry.php";
     // display_errors($errors);
+    // autoCloseModal();
     require_once "../funcs.php";
     // addUser()
     require_once "../database/db_add_data.php";
@@ -74,19 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Lisätään käyttäjä tietokantaan.
         addUser($conn, $firstname, $lastname, $username, $email, $hashedPassword);
         // Annetaan ilmoitus että käyttäjänimi on tallennettu tietokantaan onnistuneesti.
-        echo "<div id='response'><p class='success'>Sinut on lisätty onnistuneesti!</p></div>";
-        // Lisää skripti modalin automaattiseen sulkemiseen
-        echo "<script>
-        setTimeout(() => {
-            document.getElementById('modal-container').innerHTML = '';
-        }, 3000); // Sulkee modalin 3 sekunnin kuluttua
-        </script>";
-
-        echo "Odota että ikkuna sulkeutuu tai <a href='index.php'>sulje ikkuna</a>";
+        echo "<div id='response'><p class='success'>Sinut on lisätty onnistuneesti!</p>";
+        autoCloseModal();
+        echo "<p>Jos ikkuna ei sulkeudu automaattisesti <a href='index.php'>sulje ikkuna tästä</a>.</p></div>";
         exit();
     }
 
 } else {
+    // Jos ei ole POST:
     header('HTTP/1.1 405 Method Not Allowed');
     echo "Vain POST -pyyntö sallittu";
     exit();

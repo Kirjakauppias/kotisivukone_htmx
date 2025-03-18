@@ -66,9 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 } else {
-    // Jos ei ole POST-pyyntöä, palautetaan virheilmoitus.
+    // Jos ei ole POST:
     header('HTTP/1.1 405 Method Not Allowed');
-    echo "<div id='response'><p class='error'>Vain POST-pyynnöt sallittu.</div>";
+    echo "Vain POST -pyyntö sallittu";
     exit();
 }
 ?>

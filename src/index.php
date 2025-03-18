@@ -95,10 +95,8 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <?php if($loggedIn): ?>
 
             <!-- 23.2. Tarkistetaan että onko käyttäjällä jo blogi. Jos blogi löytyy, piilotetaan "Luo blogi!" -->
-            <!-- 23.2. Haetaan muuttuja true / false arvo jolla määritellään, onko käyttäjällä ADMIN -arvo -->
-            <?php $isAdmin = checkIfAdmin($conn, $_SESSION['user_id']); ?>
-            <!-- 23.2. Jos käyttäjä on ADMIN, pääsee hän luomaan blogin (poistetaan myöhemmin) -->
-            <?php if($isAdmin) :?>
+            
+            
                 <!-- 23.3. Tarkistetaan, onko käyttäjällä jo blogi -->
                 <?php $blogExists = checkBlogExists($conn, $_SESSION['user_id']); ?>
                 <!-- 23.2. Jos käyttäjällä ei ole vielä blogia (FALSE) näytetään blogin luonti -linkki -->
@@ -144,7 +142,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                     // 23.2. Tulostetaan linkki jossa on osoitteena käyttäjän blogin slug
                     echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
                 <?php endif; ?>
-            <?php endif; ?>
+            
             <!-- Linkki, joka avaa modalin ja hakee user_edit_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="omat tiedot"
                 hx-get="modals/user-edit-modal.php" 
@@ -193,6 +191,13 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <img src="images/webicon_small.png">
             <h1>Helppokäyttöinen</h1>
             <p>Rekisteröidy, luo blogi ja ala kirjoittamaan. Kaikki ilman koodaamista.</p>
+            <a href="" alt="omat tiedot"
+                hx-get="modals/user-guide-modal.php" 
+                hx-target="#modal-container" 
+                hx-trigger="click"
+            >
+                Lue ohjeet täältä!
+            </a>
           </div>
           <div class="column">
             <img src="images/responsiveicon_small.png">

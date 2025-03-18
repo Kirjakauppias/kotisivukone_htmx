@@ -11,7 +11,7 @@ session_start();
         </div>
         <form 
             hx-post="./verifications/login-vf.php" 
-            hx-target="#errors" 
+            hx-target="#response" 
             hx-swap="innerHTML"
             autocomplete="off"
         >
@@ -34,6 +34,8 @@ session_start();
                 Peruuta
             </button>
         </form>
-        <div id="errors"></div>
+        <div id="response" aria-live="polite" role="alert">
+            <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut rekisteröinti -->
+        </div>
     </div>
 </div>
