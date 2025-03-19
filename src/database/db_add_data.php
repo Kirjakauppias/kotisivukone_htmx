@@ -90,15 +90,15 @@ function deleteUser($conn, $user_id) {
 }
 
 // Funktio joka päivittää käyttäjän blogin
-function updateBlog($conn, $user_id, $blog_name, $blog_description) {
-    $query = "UPDATE BLOG SET name = ?, description = ?, updated_at = NOW() 
+function updateBlog($conn, $user_id, $blog_name, $blog_description, $slug) {
+    $query = "UPDATE BLOG SET name = ?, description = ?, slug = ?, updated_at = NOW() 
               WHERE user_id = ? AND deleted_at IS NULL";
 
     if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("ssi", $blog_name, $blog_description, $user_id);
+        $stmt->bind_param("sssi", $blog_name, $blog_description, $slug, $user_id);
         if ($stmt->execute()) {
             $stmt->close();
-            return "Blogin tiedot päivitetty onnistuneesti!";
+            return "Blogin tiedot päivitetty onnistuneesti! Omaa blogia pääset katsomaan kun päivität sivun.";
         } else {
             $stmt->close();
             return "Virhe päivityksessä: " . $conn->error;
