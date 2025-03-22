@@ -221,6 +221,27 @@ img.avatar {
     border-radius: 8px; /* Pyöristää kulmat 8 pikselillä */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
 }
+
+/* Käyttöohjeistusikkuna*/
+
+.user-guide-modal-content {
+    max-width: 700px;
+    width: 100%;
+}
+.user-guide-modal-content ul {
+    background-color: #f9f3f3;
+    list-style-type:circle;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.user-guide-modal-content li {
+    font-size: 18px;
+    padding: 4px;
+}
+
+.user-guide-modal-content h2 {
+    text-decoration: underline;
+}
 /* Modaalin sulkemiskuvakkeen tyylit */
 .close {
     color: #aaa; /* Asettaa sulkemiskuvakkeen väriksi vaaleanharmaan */

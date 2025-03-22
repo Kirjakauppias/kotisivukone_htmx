@@ -20,7 +20,7 @@
         <li><p>Paina "Kirjaudu" -painiketta.</p></li>
         <li><p>Jos lomakkeen tiedot ovat oikein, käyttäjä ohjataan henkilökohtaiselle sivulle.</p></li>
     </ul>
-    <h2>Henkilökohtainen sivu, jossa voit tehdä seuraavia asioita:</h2>
+    <h2>Henkilökohtainen sivu:</h2>
     <ul>
         <li><p>Voit luoda oman blogin!</p></li>
         <li><p>Katsoa omaa blogia.</p></li>
