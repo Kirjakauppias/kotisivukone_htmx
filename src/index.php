@@ -93,55 +93,52 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
         <?php endif; ?>
         <!-- 23.1.25: Jos käyttäjä on kirjautunut sisään, näytetään hallinta-navigaatio -->
         <?php if($loggedIn): ?>
-
             <!-- 23.2. Tarkistetaan että onko käyttäjällä jo blogi. Jos blogi löytyy, piilotetaan "Luo blogi!" -->
-            
-            
-                <!-- 23.3. Tarkistetaan, onko käyttäjällä jo blogi -->
-                <?php $blogExists = checkBlogExists($conn, $_SESSION['user_id']); ?>
-                <!-- 23.2. Jos käyttäjällä ei ole vielä blogia (FALSE) näytetään blogin luonti -linkki -->
-                <?php if(!$blogExists) :?>
-                    <!-- 23.2. linkki joka avaa modalin jonne tulostetaan modals/create-blog-modal.php -tiedoston sisältö -->
-                    <a href="" alt="omat tiedot"
-                        hx-get="modals/create-blog-modal.php" 
-                        hx-target="#modal-container" 
-                        hx-trigger="click"
-                    >
-                        Luo blogi!
-                    </a>
-                <?php endif; ?>
-                <!-- 23.2. Jos käyttäjällä on jo blogi (TRUE), näytetään linkit jossa voi luoda uuden postauksen ja linkki omalle blogi-sivulle -->
-                <?php if($blogExists) :?>
-                    <!-- 23.2. Linkki joka avaa modalin jonne tulostetaan modals/create-article-modal.php -tiedoston sisältö -->
-                    <a href="" alt="omat tiedot"
-                        hx-get="modals/create-article-modal.php" 
-                        hx-target="#modal-container" 
-                        hx-trigger="click"
-                    >
-                        Uusi julkaisu
-                    </a>
-                    <!-- 14.3. Linkki joka avaa modalin jonne tulostetaan modals/edit-blog-modal.php -tiedoston sisältö -->
-                    <a href="" alt="omat tiedot"
-                        hx-get="modals/edit-blog-modal.php" 
-                        hx-target="#modal-container" 
-                        hx-trigger="click"
-                    >
-                        Muokkaa blogia
-                    </a>
-                    <!-- 2.3.25 Linkki joka avaa modalin jonne tulostetaan modals/edit-article-modal.php -tiedoston sisältö -->
-                    <a href="" alt="omat tiedot"
-                        hx-get="modals/edit-article-modal.php" 
-                        hx-target="#modal-container" 
-                        hx-trigger="click"
-                    >
-                        Muokkaa julkaisuja
-                    </a>
-                    <?php
-                    // 23.2 Haetaan käyttäjän blogin nimestä luotu slug ja määritellään muuttuja
-                    $slug = getSlug($conn, $_SESSION['user_id']);
-                    // 23.2. Tulostetaan linkki jossa on osoitteena käyttäjän blogin slug
-                    echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
-                <?php endif; ?>
+            <!-- 23.3. Tarkistetaan, onko käyttäjällä jo blogi -->
+            <?php $blogExists = checkBlogExists($conn, $_SESSION['user_id']); ?>
+            <!-- 23.2. Jos käyttäjällä ei ole vielä blogia (FALSE) näytetään blogin luonti -linkki -->
+            <?php if(!$blogExists) :?>
+                <!-- 23.2. linkki joka avaa modalin jonne tulostetaan modals/create-blog-modal.php -tiedoston sisältö -->
+                <a href="" alt="omat tiedot"
+                    hx-get="modals/create-blog-modal.php" 
+                    hx-target="#modal-container" 
+                    hx-trigger="click"
+                >
+                    Luo blogi!
+                </a>
+            <?php endif; ?>
+            <!-- 23.2. Jos käyttäjällä on jo blogi (TRUE), näytetään linkit jossa voi luoda uuden postauksen ja linkki omalle blogi-sivulle -->
+            <?php if($blogExists) :?>
+                <!-- 23.2. Linkki joka avaa modalin jonne tulostetaan modals/create-article-modal.php -tiedoston sisältö -->
+                <a href="" alt="omat tiedot"
+                    hx-get="modals/create-article-modal.php" 
+                    hx-target="#modal-container" 
+                    hx-trigger="click"
+                >
+                    Uusi julkaisu
+                </a>
+                <?php
+                // 23.2 Haetaan käyttäjän blogin nimestä luotu slug ja määritellään muuttuja
+                $slug = getSlug($conn, $_SESSION['user_id']);
+                // 23.2. Tulostetaan linkki jossa on osoitteena käyttäjän blogin slug
+                echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
+                <!-- 14.3. Linkki joka avaa modalin jonne tulostetaan modals/edit-blog-modal.php -tiedoston sisältö -->
+                <a href="" alt="omat tiedot"
+                    hx-get="modals/edit-blog-modal.php" 
+                    hx-target="#modal-container" 
+                    hx-trigger="click"
+                >
+                    Muokkaa blogia
+                </a>
+                <!-- 2.3.25 Linkki joka avaa modalin jonne tulostetaan modals/edit-article-modal.php -tiedoston sisältö -->
+                <a href="" alt="omat tiedot"
+                    hx-get="modals/edit-article-modal.php" 
+                    hx-target="#modal-container" 
+                    hx-trigger="click"
+                >
+                    Muokkaa julkaisuja
+                </a>
+            <?php endif; ?>
             
             <!-- Linkki, joka avaa modalin ja hakee user_edit_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="omat tiedot"
