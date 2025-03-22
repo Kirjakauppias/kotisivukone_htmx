@@ -226,7 +226,8 @@ img.avatar {
 
 .user-guide-modal-content {
     max-width: 700px;
-    width: 100%;
+    width: 95%;
+    background-color: #9eb394;
 }
 .user-guide-modal-content ul {
     background-color: #f9f3f3;
@@ -235,7 +236,7 @@ img.avatar {
     border-radius: 10px;
 }
 .user-guide-modal-content li {
-    font-size: 18px;
+    font-size: 16px;
     padding: 4px;
 }
 
