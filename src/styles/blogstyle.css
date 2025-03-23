@@ -53,10 +53,15 @@ main {
 }
 
 .article-container {
+    margin: 0 auto;
     padding: 4px;
     color:white;
     font-size: 16px;
-    width: 70%;
+    width: 60%;
+    border-style: solid;
+    border-top-style: none;
+    border-color:#00000045;
+
 }
 
 .article {
