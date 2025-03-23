@@ -17,11 +17,13 @@ ini_set('session.cookie_httponly', '1'); // Estää JavaScriptin pääsyn istunt
 ini_set('session.cookie_samesite', 'Strict'); // Ei lähetä keksejä kolmannen osapuolen pyynnöissä
 
 session_start(); // Käynnistetään istunto 
+
 require 'funcs.php'; // Apufunktioiden lataaminen
+require 'loginFuncs.php'; // Kirjautumisfunktioiden lataaminen
 require_once './database/db_enquiry.php'; // Tietokantakyselyt
 
-// Tarkistetaan, onko käyttäjä kirjautunut sisään
-$loggedIn = isset($_SESSION['user_id']); 
+// Laitetaan muuttujaan tieto siitä että onko käyttäjä kirjautunut sisään.
+$loggedIn = loggedIn($conn);
 
 // Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
 // Luodaan tokenille aikaraja.
@@ -250,3 +252,15 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 </script>
 </body>
 </html>
+<!--
+Index -sivun algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Lisätään virheiden raportointi kehitysympäristössä.
+    Asetetaan HTTP-otsikot tietoturvan parantamiseksi.
+    Lisätään X-Frame-Options header estämään clickjacking. (Ei vielä käytössä.)
+    Konfiguroidaan istunnon tietoturva-asetukset.
+    Aloitetaan sessio.
+    Ladataan tarvittavat tietokantayhteydet ja funktiot.
+    Tarkistetaan, onko käyttäjä kirjautunut sisään (TRUE / FALSE).
+-->

@@ -1,10 +1,8 @@
 <?php
-// Tarkistetaan, onko käyttäjä kirjautunut sisään
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
-    exit();
-}
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 include_once "./database/db_enquiry.php";
+require_once "loginFuncs.php";
+requireLogin($conn);
 
 ?>
 <div class="dashboard">
@@ -61,3 +59,9 @@ include_once "./database/db_enquiry.php";
 <div id="modal-container">
     <!-- Modalin kontti -->
 </div>
+<!--
+dashboard.php -tiedoston algoritmi:
+                
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+
+-->
