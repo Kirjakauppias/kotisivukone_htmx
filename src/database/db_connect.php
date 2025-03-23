@@ -1,6 +1,6 @@
 <?php
-// db_connect.php
-// Tiedosto jolla otetaan yhteys tietokantaan
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+
 // kaikki SQL -virheet raportoidaan:
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -27,4 +27,10 @@ if ($conn->connect_error) {
 
 // 25.2. Asetetaan merkistökoodaus, estää erikoismerkkiongelmat
 $conn->set_charset("utf8mb4");
+
+/*
+    db_connect.php algoritmi
+
+        Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+*/
 ?>

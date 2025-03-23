@@ -65,5 +65,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 /*
     edit-user-vf.php algoritmi:
+
+        Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+        Ladataan virheidenkäsittely (config.php)
 */
 ?>

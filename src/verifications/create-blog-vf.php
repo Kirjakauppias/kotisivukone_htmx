@@ -54,5 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 /*
     create-blog-vf.php algoritmi:
+
+        Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+        Ladataan virheidenkäsittely (config.php)
 */
 ?>

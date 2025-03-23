@@ -1,6 +1,6 @@
 <?php
-// db_enquiry.php
-// Otetaan yhteys tietokantaan:
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+
 require_once "db_connect.php";
 
 // Funktio joka tarkastaa, että onko haettu data jo tietokannassa
@@ -141,4 +141,10 @@ function closeConn($conn) {
         $conn->close();
     }
 }
+
+/*
+    db_enquiry.php algoritmi
+
+        Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+*/
 ?>

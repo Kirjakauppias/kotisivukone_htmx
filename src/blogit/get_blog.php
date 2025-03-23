@@ -86,5 +86,7 @@ echo $layout_html;
 
 /*
     get_blog.php algoritmi
+
+        Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
 */
 ?>
