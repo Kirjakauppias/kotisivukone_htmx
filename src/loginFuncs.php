@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 require_once "./database/db_connect.php";
 
 function loggedIn($conn) {
@@ -32,4 +32,11 @@ function requireLogin($conn) {
         exit();
     }
 }
+
+/*
+loginFuncs.php -tiedoston algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+
+*/
 ?>

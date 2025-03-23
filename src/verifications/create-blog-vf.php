@@ -1,5 +1,7 @@
 <?php
-declare(strict_types=1);
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 require_once "../database/db_connect.php";
 //verifications/create-blog-vf.php
@@ -49,4 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "Ei ole POST";
 }
+
+/*
+    create-blog-vf.php algoritmi:
+*/
 ?>

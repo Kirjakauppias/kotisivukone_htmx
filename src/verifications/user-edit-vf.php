@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 // user-edit-vf.php
 // Määritellään muuttuja
@@ -60,4 +63,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     exit();
 }
 
+/*
+    edit-user-vf.php algoritmi:
+*/
 ?>

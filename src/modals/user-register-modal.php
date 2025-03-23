@@ -1,5 +1,7 @@
 <?php
-  session_start();
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+session_start();
 ?>
 <!-- user-register-modal.php -->
 <!-- Sivu jossa käyttäjä voi luoda tunnuksen itselleen -->
@@ -66,3 +68,10 @@
           </div>
   </div>        
 </div><!--/container-->
+
+<!--
+  user-register-modal.php algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Ladataan virheidenkäsittely (config.php)
+-->

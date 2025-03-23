@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
 session_start();
 // create-article-vf.php
 // Yhdistetään tietokantaan
@@ -194,4 +196,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
+
+/*
+    create-article-vf.php algoritmi:
+*/
 ?>

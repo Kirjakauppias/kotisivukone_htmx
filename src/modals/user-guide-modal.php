@@ -107,3 +107,8 @@
         </ul>
   </div>        
 </div><!--/container-->
+
+<!--
+  user-guide-modal.php algoritmi:
+
+-->

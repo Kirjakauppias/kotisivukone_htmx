@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 // user-register-vf.php
 // Suoritetaan tilin luonnin tarkistus
@@ -88,4 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
+/*
+    user-register-vf.php algoritmi:
+*/
 ?>

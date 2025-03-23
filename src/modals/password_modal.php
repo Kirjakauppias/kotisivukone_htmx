@@ -1,5 +1,6 @@
 <?php
-declare(strict_types=1);
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
 session_start();
 // getUserByUderId()
 include_once '../database/db_enquiry.php';
@@ -55,3 +56,10 @@ $userData = getUserByUserId($conn, $user_id);
         </div>
   </div>        
 </div><!--/container-->
+
+<!--
+  password-modal.php algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Ladataan virheidenkäsittely (config.php)
+-->

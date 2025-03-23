@@ -1,5 +1,7 @@
 <?php
-declare(strict_types=1);
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 // password-vf.php
 // getUserByUderId()
@@ -71,4 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
     exit();
 }
+
+/*
+    password-vf.php algoritmi:
+*/
 ?>

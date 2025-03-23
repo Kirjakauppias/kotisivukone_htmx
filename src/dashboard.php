@@ -1,7 +1,11 @@
 <?php
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+
+// Ladataan tarvittavat tietokantayhteydet ja funktiot.
 include_once "./database/db_enquiry.php";
 require_once "loginFuncs.php";
+
+// Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan index.php.
 requireLogin($conn);
 
 ?>
@@ -63,5 +67,7 @@ requireLogin($conn);
 dashboard.php -tiedoston algoritmi:
                 
     Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Ladataan tarvittavat tietokantayhteydet ja funktiot.
+    Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan index.php.
 
 -->

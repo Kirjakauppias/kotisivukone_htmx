@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 //session_start();
 // edit-article-vf.php
 // tiedosto jossa tallennetaan tietokantaan käyttäjän päivittämät julkaisut
@@ -120,4 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
+/*
+    edit-article-vf.php algoritmi:
+*/
 ?>

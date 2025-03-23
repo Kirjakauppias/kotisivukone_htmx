@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 
 include_once "../database/db_add_data.php";
@@ -114,4 +117,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Vain POST -pyyntö sallittu";
     exit();
 }
+
+/*
+    delete-blog-vf.php algoritmi:
+*/
 ?>

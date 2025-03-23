@@ -1,5 +1,6 @@
 <?php
-declare(strict_types=1);
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
 session_start();
 // Määritellään muuttuja
 $user_id = $_SESSION['user_id'] ?? null;
@@ -74,3 +75,9 @@ include_once '../database/db_enquiry.php';
   </div>        
 </div><!--/container-->
 
+<!--
+  user-edit-modal.php algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Ladataan virheidenkäsittely (config.php)
+-->

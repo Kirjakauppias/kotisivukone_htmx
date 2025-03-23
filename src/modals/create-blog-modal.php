@@ -1,4 +1,6 @@
 <?php
+  declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+  require_once '../config.php'; // Virheiden käsittely
   session_start();
 
   $user_id = $_SESSION['user_id'] ?? null;
@@ -45,3 +47,10 @@
     </div>
   </div>        
 </div><!--/container-->
+
+<!--
+  create-blog-modal.php algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Ladataan virheidenkäsittely (config.php)
+-->

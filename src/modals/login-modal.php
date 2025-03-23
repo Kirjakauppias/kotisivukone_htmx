@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
 session_start();
 // login-modal.php
 // Palauttaa modaalin HTML-sisällön
@@ -39,3 +41,10 @@ session_start();
         </div>
     </div>
 </div>
+
+<!--
+  login-modal.php algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Ladataan virheidenkäsittely (config.php)
+-->

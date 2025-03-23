@@ -1,11 +1,6 @@
 <?php
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 
-// Lisätään virheiden raportointi kehitysympäristössä
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 // Asetetaan HTTP-otsikot tietoturvan parantamiseksi
 // Lisätään X-Frame-Options header estämään clickjacking
 header('X-Frame-Options: DENY');
@@ -15,6 +10,8 @@ header('X-Frame-Options: DENY');
 ini_set('session.cookie_secure', '1'); // Evästeitä lähetetään vain HTTPS-yhteyksillä
 ini_set('session.cookie_httponly', '1'); // Estää JavaScriptin pääsyn istuntoevästeisiin
 ini_set('session.cookie_samesite', 'Strict'); // Ei lähetä keksejä kolmannen osapuolen pyynnöissä
+
+require_once 'config.php'; // Virheiden käsittely
 
 session_start(); // Käynnistetään istunto 
 
@@ -256,11 +253,60 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
 Index -sivun algoritmi:
 
     Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
-    Lisätään virheiden raportointi kehitysympäristössä.
     Asetetaan HTTP-otsikot tietoturvan parantamiseksi.
     Lisätään X-Frame-Options header estämään clickjacking. (Ei vielä käytössä.)
     Konfiguroidaan istunnon tietoturva-asetukset.
+    Ladataan virheidenkäsittely (config.php)
     Aloitetaan sessio.
     Ladataan tarvittavat tietokantayhteydet ja funktiot.
-    Tarkistetaan, onko käyttäjä kirjautunut sisään (TRUE / FALSE).
+    Tarkistetaan, onko käyttäjä kirjautunut sisään ja että käyttäjän ID on tietokannassa.
+    Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
+    Luodaan tokenille aikaraja.
+    Aloitetaan HTML-tiedosto ja määritellään dokumentin kieli lang="en".
+    Määritellään merkistökoodauksen UTF-8:ksi.
+    Määritellään sivun skaalaus mobiililaitteille.
+    Sisällytään CSRF-tunniste metatietoina.
+    Asetetaan sivun otsikko.
+    Ladataan ulkoinen CSS-tiedosto.
+    Ladataan Font Awesome -ikonikirjasto.
+    Ladataan HTMX-kirjasto.
+    Lisätään CSFR-token kaikkiin HTMX:n tekemisiin pyyntöihin.
+    Näytetään banneri jossa on sivun otsikko.
+    Tarkistetaan, onko käyttäjä kirjautunut sisään $loggedIn-muuttujan kautta.
+    Jos käyttäjä ei ole kirjautunut: 
+        -Näytetään "Aloita tästä" -nappi.
+        -Näytetään "Oma Blogi" -nappi.
+    Jos käyttäjä on kirjautunut:
+        -Näytetään uloskirjautumisnappi.
+    Aloitetaan navigointivalikko.
+    Etusivu-linkki lisätään aina.
+    Jos käyttäjä ei ole kirjautunut, lisätään "Yhteystiedot" -linkki.
+    Jos käyttäjä on kirjautunut:
+        -Tarkistetaan, onko käyttäjällä blogi.
+    Jos ei ole blogia -> näytetään "Luo blogi" -linkki.
+    Jos on blogi:
+        -Näytetään "Uusi julkaisu" -nappi.
+        -Haetaan käyttäjän blogin slug tietokannasta.
+        -Luodaan linkki käyttäjän blogiin.
+        -Näytetään "Muokkaa blogia" -linkki.
+        -Näytetään "Muokkaa julkaisuja" -linkki.
+    Näytetään "Käyttäjätiedot" -linkki.
+    Näytetään "Salasanan vaihto" -linkki.
+    Lisätään mobiiliresponsiivinen navigointipainike.
+    Modaalikontti toimii dynaamisena alueena johon modaalit latautuvat käyttäjän klikkauksen perusteella.
+    Jos käyttäjä ei ole kirjautunut:
+        -Näytetään esittelysivu:
+        -Esittelyteksti.
+        -Linkki uusimpiin muutoksiin.
+        -Neljä esittelylaatikkoa jossa kerrotaan blogipalvelun eduista.
+    Jos käyttäjä on kirjautunut, näytetään dashboard.php, joka toimii käyttäjän hallintapaneelina.
+    Lisätään alatunnisteen osiot:
+        -Tietoa-sarja (Tietoturvaseloste, sähköpostiosoite, nimi).
+        -Sosiaalinen media (linkit GitHubiin ja LinkedInniin).
+    JavaScript: responsiivinen navigointi
+        -myFunction() -funktio vaihtaa navigaation näkyvyyttä.
+        -Haetaan navigaatiopalkki ID:n avulla (myTopnav).
+        -Tarkistetaan, onko luokka topnav:
+            Jos kyllä -> lisätään "responsive" -luokka.
+            Jos ei -> poistetaan "responsive" -luokka.
 -->

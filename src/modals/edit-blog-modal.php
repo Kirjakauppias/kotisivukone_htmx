@@ -1,6 +1,6 @@
 <?php
-// edit-blog-modal.php
-// Tiedosto jonka avulla käyttäjä voi muokata blogia tai poistaa blogin.
+//declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
 session_start();
 $user_id = $_SESSION['user_id'] ?? null;
 
@@ -26,9 +26,9 @@ $blog_id = ($blog['blog_id'] ?? '');
 
 <div id="loginModal" style="display: block;">
   <div class="modal-content">
-  <span class="close" hx-get="modals/close-modal.jpg" hx-target="#modal-container">&times;</span>
+  <span class="close" hx-get="modals/close-modal.php" hx-target="#modal-container">&times;</span>
   <div class="imgcontainer">
-    <img src="images/blog_avatar.png" alt="Avatar" class="avatar">
+    <img src="images/blog_avatar.jpg" alt="Avatar" class="avatar">
   </div>
         <form 
           hx-post="./verifications/edit-blog-vf.php" 
@@ -75,3 +75,10 @@ $blog_id = ($blog['blog_id'] ?? '');
 <?php
     $conn->close();
 ?>
+
+<!--
+  edit-blog-modal.php algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1); HUOM! EI TOIMI 23.3.25
+    Ladataan virheidenkäsittely (config.php)
+-->

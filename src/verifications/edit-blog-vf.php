@@ -1,6 +1,7 @@
 <?php
-// edit-blog-vf.php
-// Tiedosto joka tarkistaa ja tekee päivityksen käyttäjän blogiin
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 // updateBlog();
 include_once "../database/db_add_data.php";
@@ -58,4 +59,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 $conn->close();
+
+/*
+    edit-blog-vf.php algoritmi:
+*/
 ?>

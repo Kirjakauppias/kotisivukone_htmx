@@ -1,5 +1,7 @@
 <?php
-declare(strict_types=1);
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 // login-vf.php
 // getUserByUsername($conn, $username)
@@ -71,4 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo "Vain POST -pyyntö sallittu";
     exit();
 }
+
+/*
+    login-vf.php algoritmi:
+*/
 ?>

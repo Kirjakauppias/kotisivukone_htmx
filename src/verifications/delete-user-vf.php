@@ -1,5 +1,7 @@
 <?php
-declare(strict_types=1);
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 //delete-user-vf.php
 //Tiedosto jossa suoritetaan käyttäjän tilin poisto
@@ -122,5 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
+/*
+    delete-user-vf.php algoritmi:
+*/
 
 ?>

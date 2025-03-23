@@ -1,5 +1,5 @@
 <?php
-// Tiedosto jossa on kaikki käytetyt funktiot
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 
 // Funktio virheiden tulostamista varten
 function display_errors($errors) {
@@ -91,3 +91,10 @@ function autoCloseModal() {
         }, 2000); // Sulkee modalin 2 sekunnin kuluttua
         </script>";
 }
+
+/*
+funcs.php -tiedoston algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+
+*/

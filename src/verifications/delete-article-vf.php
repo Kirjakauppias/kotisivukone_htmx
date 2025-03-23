@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 require_once "../database/db_connect.php";
 require __DIR__ . "./../vendor/autoload.php";
@@ -71,4 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode(['status' => 'error', 'message' => 'Vain POST-pyynnöt sallittu.']);
     exit();
 }
+
+/*
+    delete-article-vf.php algoritmi:
+*/
 ?>

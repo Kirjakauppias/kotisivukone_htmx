@@ -1,4 +1,6 @@
 <?php
+  declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+  require_once '../config.php'; // Virheiden käsittely
   session_start();
   // 2.3.25 edit-article-modal.php
   // lomake-tiedosto jonka avulla käyttäjä voi muokata omia blogipostauksia
@@ -152,3 +154,10 @@
     }
 }
 </script>
+
+<!--
+  edit-article-modal.php algoritmi:
+
+    Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
+    Ladataan virheidenkäsittely (config.php)
+-->

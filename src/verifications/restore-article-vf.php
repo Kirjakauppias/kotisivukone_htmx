@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 session_start();
 require_once "../database/db_connect.php";
 
@@ -27,4 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Vain POST-pyynnöt sallittu.";
     exit();
 }
+
+/*
+    restore-article-vf.php algoritmi:
+*/
 ?>

@@ -134,4 +134,11 @@ function getBlogByUserId($conn, $user_id) {
         return null; // Palautetaan null, jos kysely epäonnistuu
     }
 }
+
+// Funtio joka tarkistaa onko tietokantayhteys päällä ja sulkee sen.
+function closeConn($conn) {
+    if (isset($conn)) {
+        $conn->close();
+    }
+}
 ?>
