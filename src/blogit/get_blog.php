@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
+require_once '../config.php'; // Virheiden käsittely
+
 include_once "../database/db_connect.php";  // Yhteys tietokantaan
 
 if (isset($_GET['slug'])) {
@@ -80,4 +83,8 @@ $conn->close();
 
 // Tulostetaan generoidun layoutin HTML
 echo $layout_html;
+
+/*
+    get_blog.php algoritmi
+*/
 ?>
