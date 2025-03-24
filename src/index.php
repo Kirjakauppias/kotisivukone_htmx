@@ -16,7 +16,6 @@ require_once 'config.php'; // Virheiden käsittely
 session_start(); // Käynnistetään istunto 
 
 require 'funcs.php'; // Apufunktioiden lataaminen
-require 'loginFuncs.php'; // Kirjautumisfunktioiden lataaminen
 require_once './database/db_enquiry.php'; // Tietokantakyselyt
 
 // Laitetaan muuttujaan tieto siitä että onko käyttäjä kirjautunut sisään.
@@ -27,6 +26,12 @@ $loggedIn = loggedIn($conn);
 if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Luodaan satunnainen token
     $_SESSION['csrf_token_time'] = time(); // Aikaleima tokenin vanhentumisen seurantaan
+}
+
+// Tarkistetaan, onko sessiossa jo validi "modal_key"
+if (empty($_SESSION['modal_key'])) {
+    // Jos ei ole, luodaan satunnainen avain ja tallennetaan se sessioon
+    $_SESSION['modal_key'] = bin2hex(random_bytes(32)); // Luodaan satunnainen 64-merkkinen avain
 }
 ?>
 
@@ -98,7 +103,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <!-- 23.2. Jos käyttäjällä ei ole vielä blogia (FALSE) näytetään blogin luonti -linkki -->
             <?php if(!$blogExists) :?>
                 <!-- 23.2. linkki joka avaa modalin jonne tulostetaan modals/create-blog-modal.php -tiedoston sisältö -->
-                <a href="" alt="omat tiedot"
+                <a href="" alt="Luo blogi"
                     hx-get="modals/create-blog-modal.php" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
@@ -109,8 +114,8 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <!-- 23.2. Jos käyttäjällä on jo blogi (TRUE), näytetään linkit jossa voi luoda uuden postauksen ja linkki omalle blogi-sivulle -->
             <?php if($blogExists) :?>
                 <!-- 23.2. Linkki joka avaa modalin jonne tulostetaan modals/create-article-modal.php -tiedoston sisältö -->
-                <a href="" alt="omat tiedot"
-                    hx-get="modals/create-article-modal.php" 
+                <a href="" alt="Uusi julkaisu"
+                    hx-get="modals/create-article-modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
                 >
@@ -122,7 +127,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                 // 23.2. Tulostetaan linkki jossa on osoitteena käyttäjän blogin slug
                 echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
                 <!-- 14.3. Linkki joka avaa modalin jonne tulostetaan modals/edit-blog-modal.php -tiedoston sisältö -->
-                <a href="" alt="omat tiedot"
+                <a href="" alt="muokkaa blogia"
                     hx-get="modals/edit-blog-modal.php" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
@@ -130,7 +135,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                     Muokkaa blogia
                 </a>
                 <!-- 2.3.25 Linkki joka avaa modalin jonne tulostetaan modals/edit-article-modal.php -tiedoston sisältö -->
-                <a href="" alt="omat tiedot"
+                <a href="" alt="muokkaa julkaisuja"
                     hx-get="modals/edit-article-modal.php" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
@@ -140,7 +145,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
             <?php endif; ?>
             
             <!-- Linkki, joka avaa modalin ja hakee user_edit_modal.php -tiedoston sisällön #modal-containeriin -->
-            <a href="" alt="omat tiedot"
+            <a href="" alt="Käyttäjätiedot"
                 hx-get="modals/user-edit-modal.php" 
                 hx-target="#modal-container" 
                 hx-trigger="click"
@@ -148,7 +153,7 @@ if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ??
                 Käyttäjätiedot
             </a>
             <!-- Linkki, joka avaa modalin ja hakee modals/password_modal.php -tiedoston sisällön #modal-containeriin -->
-            <a href="" alt="omat tiedot"
+            <a href="" alt="Vaihda salasana"
                 hx-get="modals/password_modal.php" 
                 hx-target="#modal-container" 
                 hx-trigger="click"

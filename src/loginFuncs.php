@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
-require_once "./database/db_connect.php";
+require_once './database/db_connect.php';
 
 function loggedIn($conn) {
     // Tarkistetaan, onko käyttäjä istunnossa

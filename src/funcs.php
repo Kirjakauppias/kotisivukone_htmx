@@ -92,6 +92,17 @@ function autoCloseModal() {
         </script>";
 }
 
+// Funktio joka estää modaalin avaamisen suoraan URL:stä
+function checkIfModalAllowed() {
+    // Tarkistetaan, onko modal_key URL:ssä ja onko se sama kuin sessiossa oleva
+    if (empty($_GET['modal_key']) || $_GET['modal_key'] !== $_SESSION['modal_key']) {
+         // Jos modal_key ei ole URL:ssä tai ei täsmää sessiossa olevaan avaimen kanssa, ohjataan pois
+        echo "Ei ole lupaa modalille";
+        exit;
+      }
+}
+
+
 /*
 funcs.php -tiedoston algoritmi:
 

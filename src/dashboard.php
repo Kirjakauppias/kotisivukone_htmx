@@ -3,7 +3,7 @@ declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyj
 
 // Ladataan tarvittavat tietokantayhteydet ja funktiot.
 include_once "./database/db_enquiry.php";
-require_once "loginFuncs.php";
+
 
 // Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan index.php.
 requireLogin($conn);
@@ -46,7 +46,7 @@ requireLogin($conn);
                     </a>"; ?>
                 <!-- 27.2. Linkki joka avaa modalin jonne tulostetaan modals/create-article-modal.php -tiedoston sisältö -->
                 <a href="" alt="omat tiedot"
-                    hx-get="modals/create-article-modal.php" 
+                    hx-get="modals/create-article-modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
                 >

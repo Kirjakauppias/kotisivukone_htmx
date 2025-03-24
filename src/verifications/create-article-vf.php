@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 require_once '../config.php'; // Virheiden käsittely
+
 session_start();
+require '../funcs.php';
 // create-article-vf.php
 // Yhdistetään tietokantaan
 require_once "../database/db_connect.php";
@@ -39,6 +41,8 @@ Configuration::instance([
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Haetaan käyttäjä ID istunnosta (tai null, jos ei ole asetettu)
     $user_id = $_SESSION['user_id'] ?? null;
+    // Tallennetaan muuttujaan lähetetty blog_id
+    $blog_id = isset($_POST['blog_id']) ? intval($_POST['blog_id']) : null;
     // Haetaan ja puhdistetaan käyttäjän antamat tiedot
     $title = htmlspecialchars(trim($_POST['article_title'] ?? ''));
     $content = htmlspecialchars(trim($_POST['article_content'] ?? ''));
@@ -155,22 +159,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-
-    // Haetaan käyttäjän blogin ID
-    $sql = "SELECT blog_id FROM BLOG WHERE user_id = ? AND deleted_at IS NULL LIMIT 1";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Jos käyttäjällä ei ole blogia, lopetetaan suoritus
-    if ($result->num_rows === 0) {
-        die("Käyttäjällä ei ole blogia");
-    }
-
-    // Haetaan blogin ID
-    $row = $result->fetch_assoc();
-    $blog_id = $row['blog_id'];
+    if (!$blog_id) {
+        echo json_encode(['status' => 'error', 'message' => 'Käyttäjällä ei ole blogia.']);
+        exit;
+    } 
 
     // Lisätään uusi artikkeli tietokantaan
     $sql = "INSERT INTO ARTICLE (blog_id, title, content, image_path, status, published_at) VALUES (?, ?, ?, ?, ?, NOW())";
@@ -195,6 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Suljetaan tietokantayhteys
     $stmt->close();
     $conn->close();
+    
 }
 
 /*

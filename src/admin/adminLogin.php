@@ -26,6 +26,6 @@ session_start(); // Käynnistetään sessio
             - Ohjataan hallintapaneeliin (adminPage.php)
         7. Jos kirjautuminen epäonnistuu:
             - Näytetään virheilmoitus käyttäjälle
-     8. Lopetus
+        8. Lopetus
 */
 ?>
