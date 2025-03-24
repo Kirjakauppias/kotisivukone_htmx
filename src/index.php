@@ -104,7 +104,7 @@ if (empty($_SESSION['modal_key'])) {
             <?php if(!$blogExists) :?>
                 <!-- 23.2. linkki joka avaa modalin jonne tulostetaan modals/create-blog-modal.php -tiedoston sisältö -->
                 <a href="" alt="Luo blogi"
-                    hx-get="modals/create-blog-modal.php" 
+                    hx-get="modals/create-blog-modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
                 >
@@ -128,7 +128,7 @@ if (empty($_SESSION['modal_key'])) {
                 echo "<a href='blogit/$slug' target='_blank'>Blogisivusi</a>"; ?>
                 <!-- 14.3. Linkki joka avaa modalin jonne tulostetaan modals/edit-blog-modal.php -tiedoston sisältö -->
                 <a href="" alt="muokkaa blogia"
-                    hx-get="modals/edit-blog-modal.php" 
+                    hx-get="modals/edit-blog-modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
                 >
@@ -136,7 +136,7 @@ if (empty($_SESSION['modal_key'])) {
                 </a>
                 <!-- 2.3.25 Linkki joka avaa modalin jonne tulostetaan modals/edit-article-modal.php -tiedoston sisältö -->
                 <a href="" alt="muokkaa julkaisuja"
-                    hx-get="modals/edit-article-modal.php" 
+                    hx-get="modals/edit-article-modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
                 >
@@ -146,7 +146,7 @@ if (empty($_SESSION['modal_key'])) {
             
             <!-- Linkki, joka avaa modalin ja hakee user_edit_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="Käyttäjätiedot"
-                hx-get="modals/user-edit-modal.php" 
+                hx-get="modals/user-edit-modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                 hx-target="#modal-container" 
                 hx-trigger="click"
             >
@@ -154,7 +154,7 @@ if (empty($_SESSION['modal_key'])) {
             </a>
             <!-- Linkki, joka avaa modalin ja hakee modals/password_modal.php -tiedoston sisällön #modal-containeriin -->
             <a href="" alt="Vaihda salasana"
-                hx-get="modals/password_modal.php" 
+                hx-get="modals/password_modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                 hx-target="#modal-container" 
                 hx-trigger="click"
             >
@@ -267,6 +267,8 @@ Index -sivun algoritmi:
     Tarkistetaan, onko käyttäjä kirjautunut sisään ja että käyttäjän ID on tietokannassa.
     Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
     Luodaan tokenille aikaraja.
+    Tarkistetaan, onko sessiossa jo validi "modal_key".
+        -Jos ei ole, luodaan satunnainen avain ja tallennetaan se sessioon.
     Aloitetaan HTML-tiedosto ja määritellään dokumentin kieli lang="en".
     Määritellään merkistökoodauksen UTF-8:ksi.
     Määritellään sivun skaalaus mobiililaitteille.

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 require_once '../config.php'; // Virheiden käsittely
-session_start();
+session_start(); // Aloitetaan sessio
 ?>
 <!-- user-register-modal.php -->
 <!-- Sivu jossa käyttäjä voi luoda tunnuksen itselleen -->
@@ -74,4 +74,5 @@ session_start();
 
     Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
     Ladataan virheidenkäsittely (config.php)
+    Aloitetaan sessio.
 -->

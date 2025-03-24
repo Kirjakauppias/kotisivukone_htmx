@@ -8,7 +8,6 @@
   require_once '../database/db_enquiry.php';
   require '../funcs.php';
 
-
   requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../index.php.
 
   checkIfModalAllowed(); // Tarkistetaan, onko URL:ssa parametrina modal_key 
@@ -16,9 +15,7 @@
   $user_id = $_SESSION['user_id'] ?? null; // Asetetaan muuttujaan käyttäjän ID.
   
   $blog = getBlogByUserId($conn, $user_id); // Haetaan käyttäjän blogin tiedot.
-
-  
-  ?>
+?>
 
 <div id="loginModal" style="display: block;">
   <div class="article-modal-content">
@@ -75,7 +72,7 @@
     Ladataan virheidenkäsittely (config.php).
     Aloitetaan sessio.
     Ladataan tarvittavat tietokantayhteydet ja funktiot.
-    Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan index.php.
+    Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan ../index.php.
     Jos käyttäjä yrittää avata modalia URL:n kautta, ohjataan ../index.php
     Asetetaan muuttujaan käyttäjän ID.
     Haetaan käyttäjän blogin tiedot.

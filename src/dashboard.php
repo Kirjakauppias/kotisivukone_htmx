@@ -22,7 +22,7 @@ requireLogin($conn);
             <?php if(!$blogExists) :?>
                 <!-- 27.2. linkki joka avaa modalin jonne tulostetaan modals/create-blog-modal.php -tiedoston sisältö -->
                 <a href="" alt="omat tiedot"
-                    hx-get="modals/create-blog-modal.php" 
+                    hx-get="modals/create-blog-modal.php?modal_key=<?php echo $_SESSION['modal_key']; ?>" 
                     hx-target="#modal-container" 
                     hx-trigger="click"
                 >

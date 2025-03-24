@@ -1,19 +1,18 @@
 <?php
   declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
   require_once '../config.php'; // Virheiden käsittely
-  session_start();
-  // 2.3.25 edit-article-modal.php
-  // lomake-tiedosto jonka avulla käyttäjä voi muokata omia blogipostauksia
-
+  session_start(); // Aloitetaan sessio
+  
+  // Ladataan tarvittavat tietokantayhteydet ja funktiot.
   require_once "../database/db_connect.php";
+  require_once '../database/db_enquiry.php';
+  require '../funcs.php';
+
+  requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../index.php.
+  checkIfModalAllowed(); // Tarkistetaan, onko URL:ssa parametrina modal_key 
+
   // Määritellään muuttuja
   $user_id = $_SESSION['user_id'] ?? null;
-  
-  // Tarkistetaan, onko käyttäjä kirjautunut sisään
-  if (!isset($_SESSION['user_id']) || !is_numeric($user_id)) {
-    header('Location: index.php'); // Ohjataan takaisin kirjautumissivulle
-    exit();
-  }
   
   // Haetaan käyttäjän blogi-päivitykset
   $stmt = $conn->prepare("SELECT a.article_id, a.title, a.content, a.image_path, a.deleted_at 
@@ -160,4 +159,8 @@
 
     Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
     Ladataan virheidenkäsittely (config.php)
+    Aloitetaan sessio.
+    Ladataan tarvittavat tietokantayhteydet ja funktiot.
+    Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan ../index.php.
+    Jos käyttäjä yrittää avata modalia URL:n kautta, ohjataan ../index.php
 -->

@@ -1,17 +1,19 @@
 <?php
 //declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 require_once '../config.php'; // Virheiden käsittely
-session_start();
-$user_id = $_SESSION['user_id'] ?? null;
+session_start(); // Aloitetaan sessio
 
-if(!$user_id) {
-    die("Sinun täytyy olla kirjautunut muokataksesti blogia.");
-}
+// Ladataan tarvittavat tietokantayhteydet ja funktiot.
+require_once "../database/db_connect.php";
+require_once '../database/db_enquiry.php';
+require '../funcs.php';
 
-// getBlogByUserId()
-include_once '../database/db_enquiry.php';
+requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../index.php.
+checkIfModalAllowed(); // Tarkistetaan, onko URL:ssa parametrina modal_key 
 
-$blog = getBlogByUserId($conn, $user_id); // Haetaan blogi tietokannasta
+$user_id = $_SESSION['user_id'] ?? null; // Määritellään user_id -muuttuja.
+
+$blog = getBlogByUserId($conn, $user_id); // Haetaan blogi tietokannasta.
 
 if(!$blog) {
     die("Blogin tietoja ei löytynyt");
@@ -81,4 +83,8 @@ $blog_id = ($blog['blog_id'] ?? '');
 
     Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1); HUOM! EI TOIMI 23.3.25
     Ladataan virheidenkäsittely (config.php)
+    Aloitetaan sessio.
+    Ladataan tarvittavat tietokantayhteydet ja funktiot.
+    Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan ../index.php.
+    Jos käyttäjä yrittää avata modalia URL:n kautta, ohjataan ../index.php
 -->
