@@ -63,5 +63,5 @@ $userData = getUserByUserId($conn, $user_id);
     Aloitetaan sessio.
     Ladataan tarvittavat tietokantayhteydet ja funktiot.
     Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan ../index.php.
-    Jos käyttäjä yrittää avata modalia URL:n kautta, ohjataan ../index.php
+    Jos käyttäjä yrittää avata modalia URL:n kautta, annetaan 403 -virheilmoitus.
 -->

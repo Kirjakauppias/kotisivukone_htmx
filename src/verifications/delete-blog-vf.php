@@ -2,11 +2,14 @@
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 require_once '../config.php'; // Virheiden käsittely
 
-session_start();
+session_start(); // Aloitetaan sessio
 
+// Ladataan tarvittavat tietokantayhteydet ja funktiot.
 include_once "../database/db_add_data.php";
 include_once "../database/db_enquiry.php";
 include "../funcs.php";
+
+requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../index.php.
 
 // Ladataan Compser autoloader, jotta voidaan käyttää riippuvuuksia
 require __DIR__ . "./../vendor/autoload.php";
@@ -123,5 +126,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
         Ladataan virheidenkäsittely (config.php)
+        Aloitetaan sessio.
+        Ladataan tarvittavat tietokantayhteydet ja funktiot.
+        Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan ../index.php.
 */
 ?>

@@ -3,8 +3,6 @@ declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyj
 require_once '../config.php'; // Virheiden käsittely
 session_start(); // Aloitetaan sessio
 ?>
-<!-- user-register-modal.php -->
-<!-- Sivu jossa käyttäjä voi luoda tunnuksen itselleen -->
 
 <div id="loginModal" style="display: block;">
   <div class="modal-content">

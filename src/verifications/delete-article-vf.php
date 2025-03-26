@@ -3,7 +3,14 @@ declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyj
 require_once '../config.php'; // Virheiden käsittely
 
 session_start();
+
+// Ladataan tarvittavat tietokantayhteydet ja funktiot.
 require_once "../database/db_connect.php";
+require_once '../database/db_enquiry.php';
+require '../funcs.php';
+
+requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../index.php.
+
 require __DIR__ . "./../vendor/autoload.php";
 
 use Cloudinary\Configuration\Configuration;
@@ -70,8 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 } else {
-    header('HTTP/1.1 405 Method Not Allowed');
-    echo json_encode(['status' => 'error', 'message' => 'Vain POST-pyynnöt sallittu.']);
+    // Jos ei ole POST -ohjataan takaisin etusivulle.
+    header("Location: ../index.php");
     exit();
 }
 
@@ -80,5 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
         Ladataan virheidenkäsittely (config.php)
+        Aloitetaan sessio.
+        Ladataan tarvittavat tietokantayhteydet ja funktiot.
+        Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan ../index.php.
 */
 ?>

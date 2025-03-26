@@ -2,12 +2,19 @@
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja
 require_once '../config.php'; // Virheiden käsittely
 
-session_start();
+session_start(); // Aloitetaan sessio
+
+// Ladataan tarvittavat tietokantayhteydet ja funktiot.
+include_once "../database/db_enquiry.php";
 require_once "../database/db_connect.php";
+include "../funcs.php";
+
+requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../index.php.
+
+
 require __DIR__ . "./../vendor/autoload.php";
 
-// delete-image.vf.php
-// Tiedosto jonka avulla poistetaan valittu kuva palvelimelta
+
 
 use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Admin\AdminApi;
@@ -84,5 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
         Ladataan virheidenkäsittely (config.php)
+        Aloitetaan sessio.
+        Ladataan tarvittavat tietokantayhteydet ja funktiot.
+        Tarkistetaan, onko käyttäjä kirjautunut sisään. Jos ei, ohjataan ../index.php.
 */
 ?>

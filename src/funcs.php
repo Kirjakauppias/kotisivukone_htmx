@@ -96,10 +96,11 @@ function autoCloseModal() {
 function checkIfModalAllowed() {
     // Tarkistetaan, onko modal_key URL:ssä ja onko se sama kuin sessiossa oleva
     if (empty($_GET['modal_key']) || $_GET['modal_key'] !== $_SESSION['modal_key']) {
-         // Jos modal_key ei ole URL:ssä tai ei täsmää sessiossa olevaan avaimen kanssa, ohjataan pois
-         header("Location: ../index.php");
-        exit;
-      }
+         // Jos modal_key ei ole URL:ssä tai ei täsmää sessiossa olevaan avaimen kanssa, annetaan 403 -viesti.
+        http_response_code(403);
+        echo "Pääsy estetty";
+        exit();
+    }
 }
 
 
