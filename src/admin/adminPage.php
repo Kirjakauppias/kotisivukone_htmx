@@ -33,12 +33,20 @@ if (empty($_SESSION['modal_key'])) {
    <!-- Uloskirjautumis -painike josta ohjataan logout.php -tiedostoon ja sitä kautta takaisin index.php -tiedostoon -->
    <button class="btn-logout"><a href="adminLogout.php">Kirjaudu ulos</a></button>
    <br>
+   
    <button
       hx-get="adminModals/showUserModal.php" 
       hx-target="#modal-container" 
       hx-trigger="click"
    >
       Näytä käyttäjät
+   </button>
+   <button 
+      hx-get="adminModals/changeUserPasswordModal.php" 
+      hx-target="#modal-container" 
+      hx-swap="outerHTML"
+   >
+      Vaihda salasana
    </button>
 
    <div id="modal-container">

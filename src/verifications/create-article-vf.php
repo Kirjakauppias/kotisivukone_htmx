@@ -7,7 +7,6 @@ session_start(); // Aloitetaan sessio
 // Ladataan tarvittavat tietokantayhteydet ja funktiot.
 require_once "../database/db_connect.php";
 require_once '../database/db_enquiry.php';
-require '../funcs.php';
 
 requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../index.php.
 
