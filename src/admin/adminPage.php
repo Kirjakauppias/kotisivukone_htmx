@@ -41,13 +41,7 @@ if (empty($_SESSION['modal_key'])) {
    >
       Näytä käyttäjät
    </button>
-   <button 
-      hx-get="adminModals/changeUserPasswordModal.php" 
-      hx-target="#modal-container" 
-      hx-swap="outerHTML"
-   >
-      Vaihda salasana
-   </button>
+  
 
    <div id="modal-container">
 

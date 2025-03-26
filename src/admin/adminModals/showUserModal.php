@@ -57,7 +57,14 @@ $result = $conn->query($sql);
                         <td><?= htmlspecialchars($row['user_id']) ?></td>
                         <td><?= htmlspecialchars($row['firstname']) ?></td>
                         <td><?= htmlspecialchars($row['lastname']) ?></td>
-                        <td><?= htmlspecialchars($row['username']) ?></td>
+                        <td>
+                            <!-- **7.1. Linkki josta avataan käyttäjän tiedot** -->
+                            <a href="#" hx-get="adminModals/editUserModal.php?user_id=<?= $row['user_id'] ?>" 
+                                hx-target="#modal-container" 
+                                hx-swap="innerHTML">
+                                <?= htmlspecialchars($row['username']) ?>
+                            </a>
+                        </td>
                         <td><?= htmlspecialchars($row['email']) ?></td>
                         <td><?= htmlspecialchars($row['role']) ?></td>
                         <td><?= $row['last_login'] ? htmlspecialchars($row['last_login']) : 'Ei kirjautumista.' ?></td>
@@ -93,6 +100,7 @@ $result = $conn->query($sql);
         Tulostetaan käyttäjätaulukko.
             -Järjestyspainikkeet (HTMX-pohjaiset linkit).
             -Käyttäjälistan tietojen tulostus.
+            -Linkki josta avataan käyttäjän tiedot.
         Jos käyttäjiä ei löydy, näytetään viesti.
         Suljetaan tietokantayhteys.
     -->
