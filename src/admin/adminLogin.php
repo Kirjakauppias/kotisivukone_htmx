@@ -21,7 +21,7 @@ isAdminLogged($conn); // Tarkistetaan, onko admin kirjautunut sisään ja että 
 </head>
 <body>
     <div class="admin-login-container">
-        <h1>Järjestelmävalvojan kirjautumissivu</h1>
+        <h1>Järjestelmävalvojan kirjautuminen</h1>
         <!-- Näytetään kirjautumislomake -->
         <form
             hx-post="./adminVerifications/adminLoginVf.php" 
