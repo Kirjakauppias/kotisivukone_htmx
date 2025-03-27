@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Luodaan slug blogin nimestä
     $slug = strtolower($blog_name);
-    $slug = preg_replace('/[^a-z0-9]+/', '-', $slug); // Poistaa erikoismerkit ja korvaa välilyönnit viivalla
+    $slug = preg_replace('/[^a-ö0-9]+/', '-', $slug); // Poistaa erikoismerkit ja korvaa välilyönnit viivalla
     $slug = trim($slug, '-');
 
     // Varmistetaan että slug on uniikki
