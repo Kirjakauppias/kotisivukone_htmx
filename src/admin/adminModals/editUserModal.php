@@ -27,27 +27,31 @@ if (!$user) {
     echo "<p>Käyttäjää ei löytynyt.</p>";
     exit();
 }
+$stmt->close();
+$conn->close();
 ?>
 
 <div id="edit-user-modal">
     <h2>Muokkaa käyttäjää: <?= htmlspecialchars($user['username']) ?></h2>
 
     <form id="edit-user-form" hx-post="adminVerifications/updateUserVf.php" hx-target="#update-user-response" hx-swap="innerHTML">
-    <label for="firstname">Etunimi:</label>
 
+        <input type="hidden" name="user_id" value="<?= ($user['user_id']) ?>">
+
+        <label for="firstname">Etunimi:</label>
+
+
+        <input type="text" id="firstname" name="firstname" value="<?= htmlspecialchars($user['firstname']) ?>" required>
+
+        <label for="lastname">Sukunimi:</label>
+        <input type="text" id="lastname" name="lastname" value="<?= htmlspecialchars($user['lastname']) ?>" required>
+
+        <label for="username">Käyttäjätunnus:</label>
+        <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['username']) ?>" required>
+
+        <label for="email">Sähköposti:</label>
+        <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
     
-    <input type="text" id="firstname" name="firstname" value="<?= htmlspecialchars($user['firstname']) ?>" required>
-    
-    <label for="lastname">Sukunimi:</label>
-    <input type="text" id="lastname" name="lastname" value="<?= htmlspecialchars($user['lastname']) ?>" required>
-    
-    <label for="username">Käyttäjätunnus:</label>
-    <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['username']) ?>" required>
-    
-    <label for="email">Sähköposti:</label>
-    <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
-    
-    <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
     
         <button type="submit">Päivitä tiedot</button>
     </form>

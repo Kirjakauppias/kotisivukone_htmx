@@ -41,6 +41,20 @@ if (empty($_SESSION['modal_key'])) {
    >
       Näytä käyttäjät
    </button>
+   <button
+      hx-get="adminModals/showBlogModal.php" 
+      hx-target="#modal-container" 
+      hx-trigger="click"
+   >
+      Näytä blogit
+   </button>
+   <button
+      hx-get="adminModals/showArticleModal.php" 
+      hx-target="#modal-container" 
+      hx-trigger="click"
+   >
+      Näytä julkaisut
+   </button>
   
 
    <div id="modal-container">
