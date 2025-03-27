@@ -70,11 +70,11 @@ $result = $conn->query($sql);
                         <td><?= ($row['published_at']) ? htmlspecialchars($row['published_at']) : 'Tallennustilassa.' ?></td>
                         <td><?= $row['created_at'] ? htmlspecialchars($row['created_at']) : 'Ei julkaisua.' ?></td>
                         <td><?= $row['updated_at'] ? htmlspecialchars($row['updated_at']) : 'Ei päivitystä.' ?></td>
-                        <td><?php if ($row['image_path'] != null) {
-                            ?><img src="<?= $row['image_path'] ?>" alt="julkaisun kuva">
-                        <?php } else {
-                            echo "Ei kuvaa";
-                        } ?></td>
+                        <td><?php 
+                            if ($row['deleted_at'] === null && !empty($row['image_path'])) { ?>
+                                <img src="<?= ($row['image_path']) ?>" alt="Julkaisun kuva" style="width:100px; height:100px; border-radius:50%;">
+                      <?php } ?>
+                        </td>
                         <td><?= $row['deleted_at'] ? htmlspecialchars($row['deleted_at']) : 'Artikkeli aktiivinen.' ?></td>
                     </tr>
                 <?php endwhile; ?>
