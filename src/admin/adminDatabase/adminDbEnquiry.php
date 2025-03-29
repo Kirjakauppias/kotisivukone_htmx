@@ -80,6 +80,93 @@ function requireLogin($conn) {
         exit();
     }
 }
+
+function getUser($conn, $user_id) {
+    // Haetaan käyttäjän tiedot
+    $sql = "SELECT user_id, firstname, lastname, username, email, role, deleted_at FROM USER WHERE user_id = ?";
+
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        echo "Virhe: " . $conn->error;
+        return null;
+    }
+    
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        echo "Virhe: Käyttäjää ei löytynyt.";
+        $stmt->close();
+        exit();
+    }
+
+    $user = $result->fetch_assoc();
+
+    $stmt->close();
+
+    return $user;
+}
+
+function getBlogJoinUser($conn, $blog_id) {
+    // Haetaan julkaisun tiedot
+    $sql = "SELECT b.blog_id, b.user_id, u.username, b.name, b.slug, b.description, b.deleted_at 
+        FROM BLOG b 
+        JOIN USER u ON b.user_id = u.user_id 
+        WHERE blog_id = ?";
+
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        echo "Virhe: " . $conn->error;
+        return null;
+    }
+    
+    $stmt->bind_param("i", $blog_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        echo "Virhe: Blogia ei löytynyt.";
+        $stmt->close();
+        exit();
+    }
+
+    $blog = $result->fetch_assoc();
+
+    $stmt->close();
+
+    return $blog;
+}
+
+function getArticleJoinBlog($conn, $article_id) {
+    // Haetaan julkaisun tiedot
+    $sql = "SELECT a.article_id, b.name, a.title, a.content, a.status, a.published_at, a.created_at, a.updated_at, a.image_path, a.deleted_at
+    FROM ARTICLE a
+    JOIN BLOG b ON a.blog_id = b.blog_id
+    WHERE article_id = ?";
+
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        echo "Virhe: " . $conn->error;
+        return null;
+    }
+    
+    $stmt->bind_param("i", $article_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        echo "Virhe: Julkaisua ei löytynyt.";
+        $stmt->close();
+        exit();
+    }
+
+    $article = $result->fetch_assoc();
+
+    $stmt->close();
+
+    return $article;
+}
 /*
     adminDbEnquiry.php algoritmi
 

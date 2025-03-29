@@ -31,17 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     // Tarkistetaan, onko käyttäjä jo aktiivinen (deleted_at on NULL)
-    if (is_null($user['deleted_at'])) {
-        echo "<p>Käyttäjä on jo aktiivinen.</p>";
+    if (!is_null($user['deleted_at'])) {
+        echo "<p>Käyttäjä on jo poistettu.</p>";
         exit();
     }
 
     // Päivitetään käyttäjän tila
-    $stmt = $conn->prepare("UPDATE USER SET deleted_at = NULL WHERE user_id=?");
+    $stmt = $conn->prepare("UPDATE USER SET deleted_at = NOW() WHERE user_id=?");
     $stmt->bind_param("i", $user_id);
 
     if ($stmt->execute()) {
-            echo "<p>Käyttäjä palautettu näkyviin!</p>";
+            echo "<p>Käyttäjä poistettu!</p>";
     } else {
         echo "<p>Virhe tilin tilan päivittämisessä.</p>";
     }

@@ -59,7 +59,7 @@ $result = $conn->query($sql);
                         <td><?= htmlspecialchars($row['name']) ?></td>
                         <td>
                             <!-- **7.1. Linkki josta avataan käyttäjän tiedot** -->
-                            <a href="#" hx-get="adminModals/editArticleModal.php?blog_id=<?= $row['article_id'] ?>" 
+                            <a href="#" hx-get="adminModals/editArticleModal.php?article_id=<?= $row['article_id'] ?>" 
                                 hx-target="#modal-container" 
                                 hx-swap="innerHTML">
                                 <?= htmlspecialchars($row['title']) ?>
@@ -72,7 +72,7 @@ $result = $conn->query($sql);
                         <td><?= $row['updated_at'] ? htmlspecialchars($row['updated_at']) : 'Ei päivitystä.' ?></td>
                         <td><?php 
                             if ($row['deleted_at'] === null && !empty($row['image_path'])) { ?>
-                                <img src="<?= ($row['image_path']) ?>" alt="Julkaisun kuva" style="width:100px; height:100px; border-radius:50%;">
+                                <img src="<?= ($row['image_path']) ?>" alt="Julkaisun kuva" style="width:100px; height:100px; border-radius:80%;">
                       <?php } ?>
                         </td>
                         <td><?= $row['deleted_at'] ? htmlspecialchars($row['deleted_at']) : 'Artikkeli aktiivinen.' ?></td>

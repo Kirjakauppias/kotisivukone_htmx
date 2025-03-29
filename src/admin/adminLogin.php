@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyjä arvoja.
 require_once 'adminConfig.php'; // Virheiden käsittely.
+
 session_start(); // Aloita sessio.
 
 // Ladataan tarvittavat tietokantayhteydet ja funktiot

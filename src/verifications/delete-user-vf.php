@@ -118,6 +118,7 @@ function deleteUserBlogsAndArticles($conn, $user_id) {
 
 // Tarkistetaan, että pyyntö on lähetetty POST -metodilla
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = $_POST['$user_id'];
     deleteUser($conn, $user_id);
     session_destroy();
     header('HX-Location: logout.php');

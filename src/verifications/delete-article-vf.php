@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Poistetaan julkaisu tietokannasta
-    $stmt = $conn->prepare("UPDATE ARTICLE SET deleted_at = NOW() WHERE article_id = ?");
+    $stmt = $conn->prepare("UPDATE ARTICLE SET deleted_at = NOW(),  image_path = NULL WHERE article_id = ?");
     $stmt->bind_param("i", $article_id);
 
     if ($stmt->execute()) {

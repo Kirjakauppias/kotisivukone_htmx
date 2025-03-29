@@ -38,6 +38,7 @@ $blog_id = ($blog['blog_id'] ?? '');
           hx-swap="innerHTML"
         >     
             <input type="hidden" name="blog_id" value="<?= htmlspecialchars($blog_id); ?>">
+            <input type="hidden" name="user_id" value="<?= htmlspecialchars($user_id); ?>">
 
             <label for="blogname" aria-label="blogname">Blogin nimi </label>
         

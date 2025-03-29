@@ -15,12 +15,16 @@ function debug(){
         echo print_r($_POST);
     
 }
-/* Funktio joka tarkistaa, onko admin kirjautunut sisään.
-function adminLoggedIn() {
-    if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-        header("Location: ../adminPage.php"); // Jos admin on kirjautunut sisään, ohjataan käyttöliittymä-sivulle.
+
+// Funktio joka tarkistaa annetun parametrin ja palauttaa sen.
+function ifGet($param) {
+
+    if (!isset($_GET[$param]) || empty($_GET[$param])) {
+        echo "Virhe: Parametri '$param' puuttuu tai on tyhjä.";
         exit();
     }
-}*/
+
+    return $_GET[$param];
+}
 
 ?>

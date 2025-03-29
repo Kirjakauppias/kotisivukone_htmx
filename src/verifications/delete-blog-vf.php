@@ -15,7 +15,7 @@ requireLoginModals($conn); // Jos käyttäjä ei ole kirjautunut, ohjataan ../in
 require __DIR__ . "./../vendor/autoload.php";
 
 $user_id = $_SESSION['user_id'] ?? null;
-$blog_id = $_POST['blog_id'] ?? null;
+//$blog_id = $_POST['blog_id'] ?? null;
 
 if (!$user_id) {
     die("Virhe: Käyttäjä ei ole kirjautunut.");
@@ -90,7 +90,7 @@ function deleteBlogArticlesByBlogId($conn, $blog_id) {
         }
     }
 
-    $sql = "UPDATE ARTICLE SET deleted_at = NOW() WHERE blog_id = ? AND deleted_at IS NULL";
+    $sql = "UPDATE ARTICLE SET deleted_at = NOW(), image_path = NULL WHERE blog_id = ? AND deleted_at IS NULL";
 
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("i", $blog_id);
@@ -111,7 +111,8 @@ function deleteBlogArticlesByBlogId($conn, $blog_id) {
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
- 
+    $blog_id = $_POST['blog_id'] ?? null;
+    $user_id = $_POST['user_id'] ?? null;
     echo deleteBlogArticlesByBlogId($conn, $blog_id);
     echo deleteBlog($conn, $user_id);
 

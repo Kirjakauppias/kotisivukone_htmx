@@ -2,13 +2,103 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+ 
 
+.admin-login-container {
+    background-color: #ebe5e5;
+    max-width: 500px;
+    margin: auto;
+    padding: 15rem 2rem 1rem 2rem;
+    
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+ form {
+    padding: 1rem 3rem 0 3rem;
+ }
 
+input[type=text], input[type=password], input[type=email], input[type=file], textarea {
+    display: inline-block; /* Asettaa elementin viivalohkoksi */
+    width: 100%; /* Elementti venyy koko rivin leveydelle */
+    padding: 12px 20px; /* Lisää sisäistä marginaalia */
+    margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
+    border: 1px solid #ccc; /* Luo harmaan kehyksen */
+    border-radius: 5px;
+    box-sizing: border-box; /* Sisällyttää reunukset ja täytteet elementin kokoon */
+}
+
+input[type=submit] {
+    background-color: #212422; /* Asettaa painikkeen taustaväriksi oranssin */
+    color: white; /* Asettaa tekstin väriksi valkoisen */
+    padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
+    margin: 8px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
+    border: none; /* Poistaa reunuksen */
+    border-radius: 5px; /* Poistaa reunapyöristyksen .btn-cancelista */
+    cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
+    font-size: 16px; /* Asettaa fonttikoon */
+    font-weight: bold; /* Asettaa lihavoidun fontin */
+    width: 100% !important; /* Venyy koko rivin leveydelle */
+}
+
+button {
+    background-color:inherit; /* Asettaa vihreän taustavärin */
+    color: white; /* Asettaa tekstin väriksi valkoisen */
+    padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
+    margin: 12px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
+    border:rgba(18, 79, 90, 0.5); /* Poistaa reunuksen */
+    border-style: solid;
+    border-radius: 12px;
+    cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
+    font-size: 16px; /* Asettaa fonttikoon */
+    font-weight: bold; /* Asettaa lihavoidun fontin */
+}
+
+/* NAVBAR */
+#myTopnav {
+    overflow: hidden;
+    background-color: #333;
+    position: sticky;
+    top: 0;
+}
+  
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+
+#modal-container {
+    background-color: #ebe5e5;
+  }
+
+#modal-container h2 {
+    margin: 0;
+    padding-top: 1rem;
+}
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
+
 th, td {
     border: 1px solid black;
     padding: 8px;

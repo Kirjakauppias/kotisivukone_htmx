@@ -29,32 +29,32 @@ if (empty($_SESSION['modal_key'])) {
    <script src="htmx.js" defer></script>
 </head>
 <body>
-   <h1>Tervetuloa <?php echo htmlspecialchars($_SESSION['adminusername'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
-   <!-- Uloskirjautumis -painike josta ohjataan logout.php -tiedostoon ja sitä kautta takaisin index.php -tiedostoon -->
-   <button class="btn-logout"><a href="adminLogout.php">Kirjaudu ulos</a></button>
-   <br>
-   
-   <button
+   <div class="topnav" id="myTopnav">
+   <a href="" alt="Näytä käyttäjät"
       hx-get="adminModals/showUserModal.php" 
       hx-target="#modal-container" 
       hx-trigger="click"
    >
       Näytä käyttäjät
-   </button>
-   <button
+   </a>
+   <a
+      href="" alt="Näytä blogit"
       hx-get="adminModals/showBlogModal.php" 
       hx-target="#modal-container" 
       hx-trigger="click"
    >
       Näytä blogit
-   </button>
-   <button
+   </a>
+   <a href="" alt="Näytä julkaisut"
       hx-get="adminModals/showArticleModal.php" 
       hx-target="#modal-container" 
       hx-trigger="click"
    >
       Näytä julkaisut
-   </button>
+   </a>
+   <a href="adminLogout.php">Kirjaudu ulos</a>
+   </div>
+   
   
 
    <div id="modal-container">
