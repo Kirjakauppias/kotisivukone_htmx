@@ -156,7 +156,7 @@ th {
     background-color: #f4f4f4;
 }
 
-#blog-cards {
+#blog-cards, #user-cards, #article-cards {
     display: flex; 
     flex-wrap: wrap; 
     gap: 20px;
@@ -184,6 +184,20 @@ th {
     font-variant: small-caps;
 }
 
+#cards a {
+    background-color:  #b9abab;
+    color: rgb(2, 2, 2) !important;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none !important;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+#cards a:hover, a:active {
+    background-color: rgb(116, 161, 131);
+}
+
 @media screen and (max-width: 1181px) {
     .topnav a:not(:first-child) {display: none;}
     .topnav a.icon {
@@ -208,6 +222,6 @@ th {
 
     .innernav a {
         font-size: 15px !important;
-        padding: 12px 14px !important;
+        padding: 9px 10px !important;
     }
 }

@@ -33,11 +33,19 @@ if (empty($_SESSION['modal_key'])) {
       <a href="" alt="home" class="imagelink"><img src="adminImages/tp.png"></a>
 
       <a href="" alt="Näytä käyttäjät"
+         hx-get="adminModals/showUserCardsModal.php" 
+         hx-target="#modal-container" 
+         hx-trigger="click"
+      >
+         Käyttäjät
+      </a>
+
+      <a href="" alt="Näytä käyttäjät"
          hx-get="adminModals/showUserModal.php" 
          hx-target="#modal-container" 
          hx-trigger="click"
       >
-         Näytä käyttäjät
+         Käyttäjät (taulukko)
       </a>
       <a
          href="" alt="Näytä blogit"
@@ -45,21 +53,28 @@ if (empty($_SESSION['modal_key'])) {
          hx-target="#modal-container" 
          hx-trigger="click"
       >
-         Näytä blogit
+         Blogit
       </a> <a
          href="" alt="Näytä blogit"
          hx-get="adminModals/showBlogModal.php" 
          hx-target="#modal-container" 
          hx-trigger="click"
       >
-         Näytä blogit (taulukkona)
+         Blogit (taulukko)
+      </a>
+      <a href="" alt="Näytä julkaisut"
+         hx-get="adminModals/showArticleCardsModal.php" 
+         hx-target="#modal-container" 
+         hx-trigger="click"
+      >
+         Julkaisut 
       </a>
       <a href="" alt="Näytä julkaisut"
          hx-get="adminModals/showArticleModal.php" 
          hx-target="#modal-container" 
          hx-trigger="click"
       >
-         Näytä julkaisut
+         Julkaisut (taulukko)
       </a>
       <a href="adminLogout.php">Kirjaudu ulos</a>
       <!-- 

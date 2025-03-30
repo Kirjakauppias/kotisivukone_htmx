@@ -19,29 +19,27 @@ $sort_order = $_GET['sort_order'] ?? 'DESC'; // Oletus: laskeva ensin (uusimmat 
 $new_sort_order = ($sort_order === 'ASC') ? 'DESC' : 'ASC';
 
 // **3. Sallitut sarakkeet, joilla voi järjestää**
-$allowed_columns = ['name', 'slug', 'description', 'views','created_at', 'updated_at', 'deleted_at'];
+$allowed_columns = ['firstname', 'lastname', 'username', 'email', 'role', 'last_login', 'created_at', 'updated_at', 'deleted_at'];
 if (!in_array($order_by, $allowed_columns)) {
     $order_by = 'created_at'; // Jos parametrina tullut sarake ei ole sallittu, käytetään oletusarvoa.
 }
 
-// **4. Haetaan kaikki blogit tietokannasta valitun järjestyksen mukaan**
-$sql = "SELECT b.blog_id, u.username, b.name, b.slug, b.description, b.views, b.created_at, b.updated_at, b.deleted_at 
-        FROM BLOG b
-        JOIN USER u ON b.user_id = u.user_id
+// **4. Haetaan kaikki käyttäjät tietokannasta valitun järjestyksen mukaan**
+$sql = "SELECT user_id, firstname, lastname, username, email, role, last_login, created_at, updated_at, deleted_at 
+        FROM USER 
         ORDER BY $order_by $sort_order";
 $result = $conn->query($sql);
 ?>
 
-
 <!-- Kortit omassa divissä -->
-<div id="blog-card-container">
+<div id="user-card-container">
 
     <!-- Lajittelulinkit omassa divissä -->
     <div class="innernav" id="myInnernav">
         <?php foreach ($allowed_columns as $column): ?>
             <a href="#" 
-               hx-get="adminModals/showBlogCardsModal.php?order_by=<?= $column ?>&sort_order=<?= $new_sort_order ?>" 
-               hx-target="#blog-card-container" 
+               hx-get="adminModals/showUserCardsModal.php?order_by=<?= $column ?>&sort_order=<?= $new_sort_order ?>" 
+               hx-target="#user-card-container" 
                hx-swap="innerHTML" 
             >
                 <?= ucfirst(str_replace('_', ' ', $column)) ?>
@@ -49,30 +47,30 @@ $result = $conn->query($sql);
         <?php endforeach; ?>
     </div>
         
-    <div id="blog-cards">
+    <div id="user-cards">
         <!-- Tarkistetaan, onko blogeja -->
         <?php if ($result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
             <div id="cards">
-                <h3><?= htmlspecialchars($row['name']) ?></h3>
-                <p><strong>Käyttäjä:</strong> <?= htmlspecialchars($row['username']) ?></p>
-                <p><strong>Slug:</strong> <?= htmlspecialchars($row['slug']) ?></p>
-                <p><strong>Kuvaus:</strong> <?= htmlspecialchars($row['description']) ?></p>
-                <p><strong>Katselukerrat:</strong> <?= htmlspecialchars($row['views']) ?></p>
-                <p><strong>Luotu:</strong> <?= htmlspecialchars($row['created_at']) ?></p>
-                <p><strong>Päivitetty:</strong> <?= $row['updated_at'] ? htmlspecialchars($row['updated_at']) : 'Ei päivitystä' ?></p>
+                <h3><?= htmlspecialchars($row['username']) ?></h3>
+                <p><strong>Etunimi:</strong> <?= htmlspecialchars($row['firstname']) ?></p>
+                <p><strong>Sukunimi:</strong> <?= htmlspecialchars($row['lastname']) ?></p>
+                <p><strong>Sähköposti:</strong> <?= htmlspecialchars($row['email']) ?></p>
+                <p><strong>Rooli:</strong> <?= htmlspecialchars($row['role']) ?></p>
+                <p><strong>Kirjautunut:</strong> <?= $row['last_login'] ? htmlspecialchars($row['last_login']) : 'Ei kirjautumista.' ?></p>
+                <p><strong>Luotu:</strong> <?= $row['created_at'] ?></p>
+                <p><strong>Päivitetty:</strong> <?= $row['updated_at'] ? htmlspecialchars($row['updated_at']) : 'Ei päivitystä.' ?></p>
                 <p><strong>Tila:</strong> <?= $row['deleted_at'] ? 'Poistettu' : 'Aktiivinen' ?></p>
                 <a href="#" 
-                   hx-get="adminModals/editBlogModal.php?blog_id=<?= $row['blog_id'] ?>" 
+                   hx-get="adminModals/editUserModal.php?user_id=<?= $row['user_id'] ?>" 
                    hx-target="#modal-container" 
-                   hx-swap="innerHTML" 
-                >
+                   hx-swap="innerHTML">
                    Muokkaa
                 </a>
             </div>
             <?php endwhile; ?>
         <?php else: ?>
-            <p>Ei blogeja löytynyt.</p>
+            <p>Ei käyttäjiä löytynyt.</p>
         <?php endif; ?>
     </div>
 </div>
