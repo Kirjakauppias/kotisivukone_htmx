@@ -60,7 +60,7 @@ button {
 /* NAVBAR */
 #myTopnav {
     overflow: hidden;
-    background-color: #d6c7ba;
+    background-color: #b9abab;
     position: sticky;
     top: 0;
 }
@@ -103,7 +103,7 @@ button {
 /* INNER NAVBAR */
 #myInnernav {
     overflow: hidden;
-    background-color:#e6d8cd;
+    background-color:#ebe5e5;
     top: 0;
     padding-left: 63px;
 }
@@ -161,24 +161,27 @@ th {
     flex-wrap: wrap; 
     gap: 20px;
     justify-content: center;
-    background-color: blanchedalmond;
+    background-color: #ebe5e5;
 }
 
 #cards {
     border: 1px solid #ddd;  
     border-radius: 8px; 
-    background-color: #f9f9f9; width: 300px; 
+    background-color: white;
+    width: 300px; 
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-    background-color: cornsilk;
     padding-bottom: 4px;
 }
 
 #cards h3 {
-    background-color: #000000;
+    background-color: #656161;
     color: white;
     margin: 0;
     border-radius: 8px 8px 0 0;
     padding: 6px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 17px;
+    font-variant: small-caps;
 }
 
 @media screen and (max-width: 1181px) {
