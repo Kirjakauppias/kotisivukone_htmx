@@ -43,7 +43,7 @@ $result = $conn->query($sql);
                hx-get="adminModals/showBlogCardsModal.php?order_by=<?= $column ?>&sort_order=<?= $new_sort_order ?>" 
                hx-target="#blog-card-container" 
                hx-swap="innerHTML" 
-               style="margin-right: 10px; color: #007bff; text-decoration: underline;">
+            >
                 <?= ucfirst(str_replace('_', ' ', $column)) ?>
             </a>
         <?php endforeach; ?>
