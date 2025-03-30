@@ -30,29 +30,47 @@ if (empty($_SESSION['modal_key'])) {
 </head>
 <body>
    <div class="topnav" id="myTopnav">
-   <a href="" alt="Näytä käyttäjät"
-      hx-get="adminModals/showUserModal.php" 
-      hx-target="#modal-container" 
-      hx-trigger="click"
-   >
-      Näytä käyttäjät
-   </a>
-   <a
-      href="" alt="Näytä blogit"
-      hx-get="adminModals/showBlogModal.php" 
-      hx-target="#modal-container" 
-      hx-trigger="click"
-   >
-      Näytä blogit
-   </a>
-   <a href="" alt="Näytä julkaisut"
-      hx-get="adminModals/showArticleModal.php" 
-      hx-target="#modal-container" 
-      hx-trigger="click"
-   >
-      Näytä julkaisut
-   </a>
-   <a href="adminLogout.php">Kirjaudu ulos</a>
+      <a href="" alt="home" class="imagelink"><img src="adminImages/tp.png"></a>
+
+      <a href="" alt="Näytä käyttäjät"
+         hx-get="adminModals/showUserModal.php" 
+         hx-target="#modal-container" 
+         hx-trigger="click"
+      >
+         Näytä käyttäjät
+      </a>
+      <a
+         href="" alt="Näytä blogit"
+         hx-get="adminModals/showBlogCardsModal.php" 
+         hx-target="#modal-container" 
+         hx-trigger="click"
+      >
+         Näytä blogit
+      </a> <a
+         href="" alt="Näytä blogit"
+         hx-get="adminModals/showBlogModal.php" 
+         hx-target="#modal-container" 
+         hx-trigger="click"
+      >
+         Näytä blogit (taulukkona)
+      </a>
+      <a href="" alt="Näytä julkaisut"
+         hx-get="adminModals/showArticleModal.php" 
+         hx-target="#modal-container" 
+         hx-trigger="click"
+      >
+         Näytä julkaisut
+      </a>
+      <a href="adminLogout.php">Kirjaudu ulos</a>
+      <!-- 
+            Tämä on responsiivisen navigaatiopalkin painike, 
+            joka näkyy mobiililaitteilla. Kun käyttäjä klikkaa 
+            painiketta, kutsutaan JavaScript-funktiota `myFunction()`, 
+            joka vaihtaa navigaatiopalkin näkyvyyttä.
+        -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i> <!-- Font Awesome -ikonina hampurilaisvalikko -->
+        </a>
    </div>
    
   
@@ -69,7 +87,22 @@ if (empty($_SESSION['modal_key'])) {
 </body>
 </html>
 
+<script>
+    // Funktio navigoinnin responsiivisuuteen
+    function myFunction() {
+        // Haetaan navigaatiopalkki sen ID:n perusteella
+        var x = document.getElementById("myTopnav");
 
+        // Tarkistetaan, onko navigaatiopalkin nykyinen luokka "topnav"
+        if (x.className === "topnav") {
+            // Jos on, lisätään "responsive"-luokka, joka näyttää valikon
+            x.className += " responsive";
+        } else {
+            // Jos "responsive" -luokka on jo lisätty, poistetaan se
+            x.className = "topnav";
+        }
+    }
+</script>
 
 <?php
 /*

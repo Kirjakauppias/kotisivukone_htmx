@@ -22,6 +22,7 @@ isAdminLogged($conn); // Tarkistetaan, onko admin kirjautunut sisään ja että 
 </head>
 <body>
     <div class="admin-login-container">
+        <img src="adminImages/tp.png">
         <h1>Järjestelmävalvojan kirjautuminen</h1>
         <!-- Näytetään kirjautumislomake -->
         <form

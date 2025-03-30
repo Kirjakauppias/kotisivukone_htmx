@@ -8,10 +8,14 @@ body {
     background-color: #ebe5e5;
     max-width: 500px;
     margin: auto;
-    padding: 15rem 2rem 1rem 2rem;
+    padding: 1rem 2rem 1rem 2rem;
     
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
+}
+
+.admin-login-container img {
+    height: 200px;
 }
  form {
     padding: 1rem 3rem 0 3rem;
@@ -56,24 +60,35 @@ button {
 /* NAVBAR */
 #myTopnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: #d6c7ba;
     position: sticky;
     top: 0;
 }
-  
+  .imagelink {
+    margin-top: 0 !important;
+    padding-left: 8px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.imagelink img {
+      height: 40px;
+    
+  }
   .topnav a {
     float: left;
     display: block;
-    color: #f2f2f2;
+    color: #000000;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 20px;
   }
   
   .topnav a:hover {
     background-color: #ddd;
     color: black;
+    margin-top: 0;
   }
   
   .topnav a.active {
@@ -82,6 +97,39 @@ button {
   }
   
   .topnav .icon {
+    display: none;
+  }
+
+/* INNER NAVBAR */
+#myInnernav {
+    overflow: hidden;
+    background-color: #d6c7ba;
+    top: 0;
+    padding-left: 63px;
+}
+
+  .innernav a {
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  .innernav a:hover {
+    background-color: #ddd;
+    color: black;
+    margin-top: 0;
+  }
+  
+  .innernav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  .innernav .icon {
     display: none;
   }
 
@@ -106,4 +154,48 @@ th, td {
 }
 th {
     background-color: #f4f4f4;
+}
+
+#blog-cards {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px;
+    justify-content: center;
+    background-color: blanchedalmond;
+}
+
+#cards {
+    border: 1px solid #ddd;  
+    border-radius: 8px; 
+    background-color: #f9f9f9; width: 300px; 
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    background-color: cornsilk;
+    padding-bottom: 4px;
+}
+
+#cards h3 {
+    background-color: #000000;
+    color: white;
+    margin: 0;
+    border-radius: 8px 8px 0 0;
+    padding: 6px;
+}
+
+@media screen and (max-width: 1181px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
 }
