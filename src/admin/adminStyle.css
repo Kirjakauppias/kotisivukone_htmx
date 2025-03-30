@@ -18,6 +18,8 @@ body {
     height: 200px;
 }
  form {
+    width: 300px;
+    margin: 0 auto;
     padding: 1rem 3rem 0 3rem;
  }
 
@@ -45,8 +47,8 @@ input[type=submit] {
 }
 
 button {
-    background-color:inherit; /* Asettaa vihreän taustavärin */
-    color: white; /* Asettaa tekstin väriksi valkoisen */
+    background-color: #b9abab;; /* Asettaa vihreän taustavärin */
+    color: rgb(0, 0, 0); /* Asettaa tekstin väriksi valkoisen */
     padding: 14px 20px; /* Lisää täytettä painikkeen ympärille */
     margin: 12px 0; /* Lisää pystysuoraa marginaalia ylä- ja alapuolelle */
     border:rgba(18, 79, 90, 0.5); /* Poistaa reunuksen */
@@ -55,6 +57,10 @@ button {
     cursor: pointer; /* Näyttää osoittimen kätenä hover-tilassa */
     font-size: 16px; /* Asettaa fonttikoon */
     font-weight: bold; /* Asettaa lihavoidun fontin */
+}
+
+button:hover {
+    background-color: rgb(116, 161, 131);
 }
 
 /* NAVBAR */
@@ -196,6 +202,11 @@ th {
 
 #cards a:hover, a:active {
     background-color: rgb(116, 161, 131);
+}
+
+#edit-user-modal form{
+    width: 300px;
+    margin: 0 auto;
 }
 
 @media screen and (max-width: 1181px) {
