@@ -147,6 +147,7 @@ button:hover {
 #modal-container {
     background-color: #ebe5e5;
     min-height: 100vh;
+    overflow-x: auto; /* Salli vaakasuuntainen vieritys */
   }
 
 #modal-container h2 {
