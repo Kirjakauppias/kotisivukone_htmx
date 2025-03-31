@@ -226,6 +226,7 @@ if (empty($_SESSION['modal_key'])) {
     <div class="footer-container">
         <div class="footer-details">
             <h2>Tietoa</h2> 
+            <a href="terms.html" alt="Käyttöehdot">Käyttöehdot</a>
             <a href="tietoturvaseloste.html" alt="Tietoturvaseloste">Tietoturvaseloste</a>
             <p>2025 Mikko Lepistö</p>
             <p>metarktis@gmail.com</p>
