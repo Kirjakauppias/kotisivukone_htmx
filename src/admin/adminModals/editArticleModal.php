@@ -16,6 +16,7 @@ $article = getArticleJoinBlog($conn, $article_id);
 if ($article) { ?>
 
     <div id="edit-blog-modal">
+        <div id="form-container">
         <h2>Muokkaa julkaisua: <?= htmlspecialchars($article['title']) ?></h2>
         
         <form id="edit-article-form" hx-post="adminVerifications/updateArticleVf.php" hx-target="#update-article-response" hx-swap="outerHTML">
@@ -30,7 +31,9 @@ if ($article) { ?>
             
             <button type="submit">Päivitä</button>
         </form>
+        </div>
         
+        <div id="form-container">
         <h3>Julkaisun kuva</h3>
         <?php 
         if ($article['deleted_at'] === null && !empty($article['image_path'])) { ?>
@@ -44,7 +47,8 @@ if ($article) { ?>
              <input type="hidden" name="article_id" value="<?= $article['article_id'] ?>">
              <button type="submit" style="<?= $article['image_path']  && $article['deleted_at'] === null ? '' : 'display:none' ?>">Poista kuva</button>
          </form>
-            
+        </div>
+        <div id="form-container">
         <h3>Julkaisun hallinta</h3>
         <?php if ($article['deleted_at'] === null) { ?>
 
@@ -61,6 +65,7 @@ if ($article) { ?>
             </form>
 
         <?php } ?>
+        </div>
         
         <div id="update-article-response"></div>
         <div id="toggle-article-image-response"></div>

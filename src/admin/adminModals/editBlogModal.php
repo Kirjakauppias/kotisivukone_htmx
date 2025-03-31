@@ -16,6 +16,7 @@ $blog = getBlogJoinUser($conn, $blog_id);
 if ($blog) { ?>
 
     <div id="edit-blog-modal">
+        <div id="form-container">
         <h2>Muokkaa blogia: <?= htmlspecialchars($blog['name']) ?></h2>
 
         <form id="edit-blog-form" hx-post="adminVerifications/updateBlogVf.php" hx-target="#update-blog-response" hx-swap="outerHTML">
@@ -30,7 +31,9 @@ if ($blog) { ?>
 
             <button type="submit">Päivitä</button>
         </form>
+        </div>
 
+        <div id="form-container">
         <h3>Blogin hallinta</h3>
         <?php if ($blog['deleted_at'] === null) { ?>
             <form id="toggle-blog-form" hx-post="../../verifications/delete-blog-vf.php" hx-target="#toggle-blog-response" hx-swap="innerHTML">
@@ -45,7 +48,8 @@ if ($blog) { ?>
                     <button type="submit">Palauta blogi</button>
                 </form>
             <?php } ?>
-
+        </div>
+        
         <div id="update-blog-response"></div>
         <div id="toggle-blog-response"></div>
     </div>

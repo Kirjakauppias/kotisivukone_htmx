@@ -18,9 +18,14 @@ body {
     height: 200px;
 }
  form {
-    width: 300px;
-    margin: 0 auto;
     padding: 1rem 3rem 0 3rem;
+ }
+
+ #form-container {
+    background-color: antiquewhite;
+    width: 450px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
  }
 
 input[type=text], input[type=password], input[type=email], input[type=file], textarea {
@@ -74,7 +79,7 @@ button:hover {
     margin-top: 0 !important;
     padding-left: 8px !important;
     padding-top: 5px !important;
-    padding-bottom: 5px !important;
+    padding-bottom: 6px !important;
 }
 
 .imagelink img {
@@ -141,6 +146,7 @@ button:hover {
 
 #modal-container {
     background-color: #ebe5e5;
+    min-height: 100vh;
   }
 
 #modal-container h2 {
@@ -214,6 +220,7 @@ th {
     .topnav a.icon {
       float: right;
       display: block;
+      height: 23px;
     }
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {

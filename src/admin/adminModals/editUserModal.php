@@ -17,6 +17,7 @@ $user = getUser($conn, $user_id);
 if ($user) { ?>
 
     <div id="edit-user-modal">
+        <div id="form-container">
         <h2>Muokkaa käyttäjää: <?= htmlspecialchars($user['username']) ?></h2>
 
         <form id="edit-user-form" hx-post="adminVerifications/updateUserVf.php" hx-target="#update-user-response" hx-swap="innerHTML">
@@ -40,7 +41,9 @@ if ($user) { ?>
 
             <button type="submit">Päivitä tiedot</button>
         </form>
+        </div>
 
+        <div id="form-container">
         <h3>Vaihda salasana</h3>
         <form id="password-change-form" hx-post="adminVerifications/updatePasswordVf.php" hx-target="#update-password-response" hx-swap="innerHTML">
             <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
@@ -53,7 +56,9 @@ if ($user) { ?>
 
             <button type="submit">Vaihda salasana</button>
         </form>
+        </div>
 
+        <div id="form-container">
         <h3>Käyttäjätilin hallinta</h3>
 
         <?php if ($user['deleted_at'] === null) { ?>
@@ -67,6 +72,8 @@ if ($user) { ?>
                     <button type="submit">Palauta käyttäjä</button>
                 </form>
             <?php } ?>
+        </div>
+        
         <div id="update-user-response"></div>
         <div id="update-password-response"></div>
         <div id="toggle-account-response"></div>
