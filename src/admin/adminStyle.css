@@ -244,4 +244,9 @@ th {
         font-size: 15px !important;
         padding: 9px 10px !important;
     }
+
+    .admin-login-container {
+        min-height: 100vh;
+    }
+
 }
