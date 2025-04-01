@@ -19,6 +19,7 @@ body {
 }
  form {
     padding: 1rem 3rem 0 3rem;
+    margin-left: 0;
  }
 
  #form-container {
@@ -213,7 +214,7 @@ th {
 }
 
 #edit-user-modal form{
-    width: 300px;
+    width: 250px;
     margin: 0 auto;
 }
 
