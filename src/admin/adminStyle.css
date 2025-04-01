@@ -251,11 +251,7 @@ th {
 }
 @media screen and (max-width: 425px) {
     #form-container {
-        max-width: 400px;
-    }
-
-    @media screen and (max-width: 424px) {
-    #form-container {
-        max-width: 300px;
+        max-width: 95%;
     }
 }
+

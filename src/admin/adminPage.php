@@ -117,6 +117,17 @@ if (empty($_SESSION['modal_key'])) {
             x.className = "topnav";
         }
     }
+
+    // Suljetaan valikko, kun linkkiä klikataan (mutta ei hampurilaisikonia)
+    document.addEventListener("click", function(e) {
+      // Haetaan navigaatiopalkki sen ID:n perusteella
+      var x = document.getElementById("myTopnav");
+
+      // Jos klikattu elementti on navigaatiolinkki eikä hampurilaisikoni
+      if(e.target.closest(".topnav.responsive a") && !e.target.closest(".icon")) {
+         x.className = "topnav"; // Sulje valikko
+      }
+    });
 </script>
 
 <?php
