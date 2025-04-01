@@ -214,7 +214,6 @@ th {
 }
 
 #edit-user-modal form{
-    width: 250px;
     margin: 0 auto;
 }
 
@@ -249,5 +248,14 @@ th {
     .admin-login-container {
         min-height: 100vh;
     }
+}
+@media screen and (max-width: 425px) {
+    #form-container {
+        max-width: 400px;
+    }
 
+    @media screen and (max-width: 424px) {
+    #form-container {
+        max-width: 300px;
+    }
 }
