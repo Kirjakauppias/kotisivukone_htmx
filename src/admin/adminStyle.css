@@ -217,6 +217,7 @@ th {
 
 #card-img-container {
   align-content: center;
+  padding-top: 3px;
 }
 #card-img-container p {
   margin-top: 0;
