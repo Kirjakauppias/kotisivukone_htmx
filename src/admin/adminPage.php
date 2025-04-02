@@ -16,6 +16,10 @@ if (empty($_SESSION['modal_key'])) {
    $_SESSION['modal_key'] = bin2hex(random_bytes(32)); // Luodaan satunnainen 64-merkkinen avain
 }
 
+// Hakee uusimmat artikkelit, blogit ja käyttäjät
+$latestArticles = fetchLatest($conn, 'ARTICLE', 'article_id, title, content, image_path, created_at, deleted_at');
+$latestBlogs = fetchLatest($conn, 'BLOG', 'blog_id, name, description, created_at');
+$latestUsers = fetchLatest($conn, 'USER', 'user_id, username, firstname, lastname, email, created_at');
 //debug();
 ?>
 
@@ -86,17 +90,86 @@ if (empty($_SESSION['modal_key'])) {
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i> <!-- Font Awesome -ikonina hampurilaisvalikko -->
         </a>
-   </div>
-   
-  
+    </div>
+    <div id="modal-container">
+        <h2>Viisi uusinta julkaisua</h2>
+        <div id="article-cards">
+            <?php if ($latestArticles->num_rows > 0): ?>
+                <?php while ($article = $latestArticles->fetch_assoc()): ?>
+                    <div id="cards">
+                        <h3><?= htmlspecialchars($article['title']) ?></h3>
+                        <div id="card-img-container" style="height: 100px;">
+                            <?php 
+                                        if ($article['deleted_at'] === null && !empty($article['image_path'])) { ?>
+                                            <img src="<?= ($article['image_path']) ?>" alt="Julkaisun kuva" style="width:100px; height:100px; border-radius:80%;">
+                                  <?php } else {
+                                    ?><p>Julkaisussa ei kuvaa</p>
+                                  <?php }
+                            ?>
+                        </div>
+                        <p><?= htmlspecialchars($article['content']) ?></p>
+                        <a href="#" 
+                           hx-get="adminModals/editArticleModal.php?article_id=<?= $article['article_id'] ?>" 
+                           hx-target="#modal-container" 
+                           hx-swap="innerHTML">
+                           Muokkaa
+                        </a> 
+                    </div>
+                    <?php endwhile; ?>
+                                
+            <?php else: ?>
+                <p>Ei julkaisuja.</p>
+            <?php endif; ?>
+        </div>
 
-   <div id="modal-container">
+        <h2>Viisi uusinta blogia</h2>
+        <div id="blog-cards">
+            <?php if ($latestBlogs->num_rows > 0): ?>
+                <?php while ($blog = $latestBlogs->fetch_assoc()): ?>
+                    <div id="cards">
+                        <h3><?= htmlspecialchars($blog['name']) ?></h3>
+                        <p><?= htmlspecialchars($blog['description']) ?></p>
+                        <a href="#" 
+                           hx-get="adminModals/editBlogModal.php?blog_id=<?= $blog['blog_id'] ?>" 
+                           hx-target="#modal-container" 
+                           hx-swap="innerHTML" 
+                        >
+                           Muokkaa
+                        </a>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Ei blogeja.</p>
+            <?php endif; ?>
+        </div>
 
-   </div>
+        <h2>Viisi uusinta käyttäjää</h2>
+        <div id="user-cards">
+            <?php if ($latestUsers->num_rows > 0): ?>
+                <?php while ($user = $latestUsers->fetch_assoc()): ?>
+                    <div id="cards">
+                        <h3><?= htmlspecialchars($user['username']) ?></h3>
+                        <p><strong>Etunimi:</strong> <?= htmlspecialchars($user['firstname']) ?></p>
+                        <p><strong>Sukunimi:</strong> <?= htmlspecialchars($user['lastname']) ?></p>
+                        <p><strong>Sähköposti:</strong> <?= htmlspecialchars($user['email']) ?></p>
+                        <a href="#" 
+                           hx-get="adminModals/editUserModal.php?user_id=<?= $user['user_id'] ?>" 
+                           hx-target="#modal-container" 
+                           hx-swap="innerHTML">
+                           Muokkaa
+                        </a> 
+                    </div>
+                <?php endwhile; ?>
+                
+            <?php else: ?>
+                <p>Ei käyttäjiä.</p>
+            <?php endif; ?>
+        </div>
+    </div>
 
-   
-   <!-- Näytetään alue johon tulostetaan mahdolliset virheilmoitukset -->
    <div id="response">
+   <!-- Näytetään alue johon tulostetaan mahdolliset virheilmoitukset -->
+   
            <!-- Tulostetaan mahdolliset virheilmoitukset -->
    </div>
 </body>

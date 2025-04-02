@@ -27,7 +27,7 @@ if ($article) { ?>
             <input type="text" name="title" value="<?= htmlspecialchars($article['title']) ?>" required>
             
             <label>Sisältö</label>
-            <textarea name="content" required><?= htmlspecialchars($article['content']) ?></textarea>
+            <textarea id="content" name="content" required><?= htmlspecialchars($article['content']) ?></textarea>
             
             <button type="submit">Päivitä</button>
         </form>
@@ -66,7 +66,7 @@ if ($article) { ?>
 
         <?php } ?>
         </div>
-        
+
         <div id="update-article-response"></div>
         <div id="toggle-article-image-response"></div>
         <div id="toggle-article-response"></div>

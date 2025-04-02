@@ -69,6 +69,8 @@ button:hover {
     background-color: rgb(116, 161, 131);
 }
 
+#content {height: 200px !important;}
+
 /* NAVBAR */
 #myTopnav {
     overflow: hidden;
@@ -213,6 +215,12 @@ th {
     background-color: rgb(116, 161, 131);
 }
 
+#card-img-container {
+  align-content: center;
+}
+#card-img-container p {
+  margin-top: 0;
+}
 #edit-user-modal form{
     margin: 0 auto;
 }

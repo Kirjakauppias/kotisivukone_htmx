@@ -252,6 +252,33 @@ if (empty($_SESSION['modal_key'])) {
             x.className = "topnav";
         }
     }
+
+    // Suljetaan valikko, kun linkkiä klikataan (mutta ei hampurilaisikonia)
+    document.addEventListener("click", function(e) {
+      // Haetaan navigaatiopalkki sen ID:n perusteella
+      var x = document.getElementById("myTopnav");
+
+      // Jos klikattu elementti on navigaatiolinkki eikä hampurilaisikoni
+      if(e.target.closest(".topnav.responsive a") && !e.target.closest(".icon")) {
+         x.className = "topnav"; // Sulje valikko
+      }
+    });
+</script>
+<script>/*
+    // Funktio navigoinnin responsiivisuuteen
+    function myFunction() {
+        // Haetaan navigaatiopalkki sen ID:n perusteella
+        var x = document.getElementById("myTopnav");
+
+        // Tarkistetaan, onko navigaatiopalkin nykyinen luokka "topnav"
+        if (x.className === "topnav") {
+            // Jos on, lisätään "responsive"-luokka, joka näyttää valikon
+            x.className += " responsive";
+        } else {
+            // Jos "responsive" -luokka on jo lisätty, poistetaan se
+            x.className = "topnav";
+        }
+    }*/
 </script>
 </body>
 </html>
