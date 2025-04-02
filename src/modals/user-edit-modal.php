@@ -31,7 +31,7 @@ checkIfModalAllowed(); // Tarkistetaan, onko URL:ssa parametrina modal_key
   <div class="modal-content">
   <span class="close" hx-get="modals/close-modal.php" hx-target="#modal-container">&times;</span>
   <div class="imgcontainer">
-    <img src="images/register_avatar.png" alt="Avatar" class="avatar">
+    <img src="images/tp.png" alt="Logo" class="avatar">
   </div>
         <form 
           hx-post="./verifications/user-edit-vf.php" 

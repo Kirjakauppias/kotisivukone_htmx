@@ -90,7 +90,7 @@ if (empty($_SESSION['modal_key'])) {
 
     <!-- Responsiivinen navigointipalkki -->
     <div class="topnav" id="myTopnav">
-        <a href="#home" class="active">Etusivu</a>
+        <a href="#home" class="active"><img src="images/tp.png" alt="logo"></a>
         <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivun navigaatio -->
         <?php if(!$loggedIn): ?>
             <a href="#contact">Yhteystiedot</a>

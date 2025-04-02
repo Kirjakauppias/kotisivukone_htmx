@@ -20,7 +20,7 @@ $userData = getUserByUserId($conn, $user_id);
   <div class="modal-content">
   <span class="close" hx-get="modals/close-modal.php" hx-target="#modal-container">&times;</span>
   <div class="imgcontainer">
-    <img src="images/password_avatar.jpg" alt="Avatar" class="avatar">
+    <img src="images/tp.png" alt="Logo" class="avatar">
   </div>
         <form 
           hx-post="./verifications/password-vf.php" 

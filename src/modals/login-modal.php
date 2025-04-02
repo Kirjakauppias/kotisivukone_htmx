@@ -8,7 +8,7 @@ session_start(); // Aloitetaan sessio.
     <div class="modal-content">
         <span class="close" hx-get="modals/close-modal.php" hx-target="#modal-container">&times;</span>
         <div class="imgcontainer">
-            <img src="images/login.png" alt="Avatar" class="avatar">
+            <img src="images/tp.png" alt="Logo" class="avatar">
         </div>
         <form 
             hx-post="./verifications/login-vf.php" 

@@ -94,8 +94,16 @@ footer img {
   
   .topnav .icon {
     display: none;
+    height: 48px !important;
   }
 
+  .active {
+    padding: 2px 2px 2px 2px !important;
+  }
+
+  .active img {
+    height: 44px;
+  }
 /* Lomaketyylit */
 label {
     font-weight: bold;
@@ -160,12 +168,11 @@ button:hover, input[type=submit]:hover {
 /* Kirjautumislomakkeen avatar */
 .imgcontainer {
     text-align: center; /* Keskitetään sisältö (kuva) */
-    margin: 24px 0 12px 0; /* Lisää marginaalia ylä- ja alapuolelle */
+    margin: 0 0 12px 0; /* Lisää marginaalia alapuolelle */
 }
 
 img.avatar {
-    width: 40%; /* Asettaa kuvan leveydeksi 40% vanhemman elementin leveydestä */
-    border-radius: 50%; /* Pyöristää kuvan reunat ympyräksi */
+    height: 150px; /* Asettaa kuvan korkeudeksi 150px */
 }
 
 /* Onnistuneiden viestien tyylit */
