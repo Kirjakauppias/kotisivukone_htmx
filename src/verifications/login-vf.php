@@ -17,20 +17,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = htmlspecialchars(trim($_POST['username'] ?? ''));
     $password = trim($_POST['password']);
     // Tarkistetaan HTTP-header:
-    $csrf_token = $_POST['csrf_token'] ?? '';
+    //$csrf_token = $_POST['csrf_token'] ?? '';
 
     // Virheilmoitusten taulukko, tyhjä.
     $errors = []; 
 
     // Tarkistetaan CSRF-token
-    if ($csrf_token !== $_SESSION['csrf_token']) {
+    /*if ($csrf_token !== $_SESSION['csrf_token']) {
         $errors[] = "Virheellinen CSRF-token";
-    }
+    }*/
 
     // Tarkistetaan tokenin voimassaolo:
-    if (time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
+    /*if (time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
         $errors[] = "Istunto on vanhentunut. Lataa sivu uudelleen.";
-    }
+    }*/
 
     // Tarkistetaan, että kentät eivät ole tyhjiä
     if (empty($username) || empty($password)) {
@@ -60,8 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['status'] = $user['status'];
 
         // Generoidaan uusi CSRF-token.
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-        $_SESSION['csrf_token_time'] = time();
+        //$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        //$_SESSION['csrf_token_time'] = time();
 
         // Viedään käyttäjä etusivulle jolloin koko sivu päivittyy ja session-tiedot mukana
         header('HX-Redirect: index.php');

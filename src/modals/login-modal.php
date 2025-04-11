@@ -23,7 +23,7 @@ session_start(); // Aloitetaan sessio.
             <input type="password" id="password" name="password" autocomplete="current-password" required>
 
             <!-- Lisätään lomakkeeseen piilotettu kenttä joka lisää CSRF-tokenin -->
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <!--<input type="hidden" name="csrf_token" value="<?php // echo $_SESSION['csrf_token']; ?>">-->
 
             <input type="submit" value="Kirjaudu">
 

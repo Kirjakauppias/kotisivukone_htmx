@@ -47,7 +47,7 @@ session_start(); // Aloitetaan sessio
               <input type="password" id="re_password" name="re_password" autocomplete="off" required minlength="8">
           
             <!-- Lisätään CSRF-token joka tarkistetaan palvelinpuolella -->
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <!--<input type="hidden" name="csrf_token" value="<?php //echo $_SESSION['csrf_token']; ?>">-->
             <p>* pakolliset kentät</p>
           
             <input type="submit" value="Lisää tili">

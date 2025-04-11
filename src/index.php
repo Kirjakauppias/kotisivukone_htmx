@@ -23,10 +23,11 @@ $loggedIn = loggedIn($conn);
 
 // Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
 // Luodaan tokenille aikaraja.
+/*
 if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Luodaan satunnainen token
     $_SESSION['csrf_token_time'] = time(); // Aikaleima tokenin vanhentumisen seurantaan
-}
+}*/
 
 // Tarkistetaan, onko sessiossa jo validi "modal_key"
 if (empty($_SESSION['modal_key'])) {
@@ -39,16 +40,16 @@ if (empty($_SESSION['modal_key'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token']; ?>">
+    <!--meta name="csrf-token" content="<?//php echo $_SESSION['csrf_token']; ?>">-->
     <title>Tarinan paikka</title>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="htmx.js" defer></script>
     <script>
-        // Lisätään CSFR-token kaikkiin HTMX:n tekemisiin pyyntöihin
+        /* Lisätään CSFR-token kaikkiin HTMX:n tekemisiin pyyntöihin
         document.addEventListener('htmx:configRequest', (event) => {
             event.detail.headers['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        });
+        });*/
     </script>
 </head>
 <body>

@@ -28,7 +28,7 @@ if (!in_array($order_by, $allowed_columns)) {
 $sql = "SELECT b.blog_id, u.username, b.name, b.slug, b.description, b.views, b.created_at, b.updated_at, b.deleted_at 
         FROM BLOG b
         JOIN USER u ON b.user_id = u.user_id
-        ORDER BY $order_by $sort_order";
+        ORDER BY b.$order_by $sort_order";
 $result = $conn->query($sql);
 ?>
 

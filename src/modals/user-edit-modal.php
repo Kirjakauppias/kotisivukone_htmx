@@ -50,6 +50,8 @@ checkIfModalAllowed(); // Tarkistetaan, onko URL:ssa parametrina modal_key
             
               <!-- E-mailin oikea muoto -->
               <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email);?>" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+
+              <input type="hidden" name="$user_id" value="<?= $_SESSION['user_id'] ?>">
           
               <input type="submit" value="Päivitä tietosi">
 
