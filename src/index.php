@@ -4,7 +4,6 @@ declare(strict_types=1); // Varmistaa että PHP käsittelee tiukasti tyypitettyj
 // Asetetaan HTTP-otsikot tietoturvan parantamiseksi
 // Lisätään X-Frame-Options header estämään clickjacking
 header('X-Frame-Options: DENY');
-//header("Content-Security-Policy: default-src 'self'; style-src 'self';"); // CSP:n käyttöönotto voi parantaa tietoturvaa
 
 // Konfiguroidaan istunnon tietoturva-asetukset
 ini_set('session.cookie_secure', '1'); // Evästeitä lähetetään vain HTTPS-yhteyksillä
@@ -20,14 +19,6 @@ require_once './database/db_enquiry.php'; // Tietokantakyselyt
 
 // Laitetaan muuttujaan tieto siitä että onko käyttäjä kirjautunut sisään.
 $loggedIn = loggedIn($conn);
-
-// Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
-// Luodaan tokenille aikaraja.
-/*
-if (!isset($_SESSION['csrf_token']) || time() - ($_SESSION['csrf_token_time'] ?? 0) > 300) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Luodaan satunnainen token
-    $_SESSION['csrf_token_time'] = time(); // Aikaleima tokenin vanhentumisen seurantaan
-}*/
 
 // Tarkistetaan, onko sessiossa jo validi "modal_key"
 if (empty($_SESSION['modal_key'])) {
@@ -45,12 +36,6 @@ if (empty($_SESSION['modal_key'])) {
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="htmx.js" defer></script>
-    <script>
-        /* Lisätään CSFR-token kaikkiin HTMX:n tekemisiin pyyntöihin
-        document.addEventListener('htmx:configRequest', (event) => {
-            event.detail.headers['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        });*/
-    </script>
 </head>
 <body>
     <!-- Banneri -->
@@ -265,22 +250,6 @@ if (empty($_SESSION['modal_key'])) {
       }
     });
 </script>
-<script>/*
-    // Funktio navigoinnin responsiivisuuteen
-    function myFunction() {
-        // Haetaan navigaatiopalkki sen ID:n perusteella
-        var x = document.getElementById("myTopnav");
-
-        // Tarkistetaan, onko navigaatiopalkin nykyinen luokka "topnav"
-        if (x.className === "topnav") {
-            // Jos on, lisätään "responsive"-luokka, joka näyttää valikon
-            x.className += " responsive";
-        } else {
-            // Jos "responsive" -luokka on jo lisätty, poistetaan se
-            x.className = "topnav";
-        }
-    }*/
-</script>
 </body>
 </html>
 <!--
@@ -288,25 +257,21 @@ Index -sivun algoritmi:
 
     Otetaan käyttöön tiukka tyyppimääritys. declare(strict_types=1);
     Asetetaan HTTP-otsikot tietoturvan parantamiseksi.
-    Lisätään X-Frame-Options header estämään clickjacking. (Ei vielä käytössä.)
     Konfiguroidaan istunnon tietoturva-asetukset.
     Ladataan virheidenkäsittely (config.php)
     Aloitetaan sessio.
     Ladataan tarvittavat tietokantayhteydet ja funktiot.
     Tarkistetaan, onko käyttäjä kirjautunut sisään ja että käyttäjän ID on tietokannassa.
-    Varmistetaan, että CSRF-token luodaan ja tallennetaan istunnossa.
     Luodaan tokenille aikaraja.
     Tarkistetaan, onko sessiossa jo validi "modal_key".
         -Jos ei ole, luodaan satunnainen avain ja tallennetaan se sessioon.
     Aloitetaan HTML-tiedosto ja määritellään dokumentin kieli lang="en".
     Määritellään merkistökoodauksen UTF-8:ksi.
     Määritellään sivun skaalaus mobiililaitteille.
-    Sisällytään CSRF-tunniste metatietoina.
     Asetetaan sivun otsikko.
     Ladataan ulkoinen CSS-tiedosto.
     Ladataan Font Awesome -ikonikirjasto.
     Ladataan HTMX-kirjasto.
-    Lisätään CSFR-token kaikkiin HTMX:n tekemisiin pyyntöihin.
     Näytetään banneri jossa on sivun otsikko.
     Tarkistetaan, onko käyttäjä kirjautunut sisään $loggedIn-muuttujan kautta.
     Jos käyttäjä ei ole kirjautunut: 
