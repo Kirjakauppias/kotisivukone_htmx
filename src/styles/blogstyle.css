@@ -43,6 +43,19 @@ h2 {
     width: 100%;
 }
 
+.img-banner {
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 1); 
+    height: 50px;
+    position: sticky;
+    top: 0;
+}
+.logo-img {
+    height: 50px;
+    width: 50px;
+    opacity: 1;
+}
+
 main {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office2.jpg");
     background-position: center;

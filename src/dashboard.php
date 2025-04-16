@@ -38,7 +38,7 @@ requireLogin($conn);
                 // 27.2 Haetaan käyttäjän blogin nimestä luotu slug ja määritellään muuttuja
                 $slug = getSlug($conn, $_SESSION['user_id']);
                 // 27.2. Tulostetaan linkki jossa on osoitteena käyttäjän blogin slug
-                echo "<a href='blogit/$slug' target='_blank'>
+                echo "<a href='blogit/$slug'>
                     <section class='section-link-blog'>
                         <img src='images/dashboard/blog.svg' alt='user-image'>
                         <h3>Blogi-sivusi!</h3>
