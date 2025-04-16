@@ -54,9 +54,9 @@ h2 {
     z-index: 1000; /* pitää sen muiden elementtien yläpuolella */
 }
 .logo-img {
+    padding: 2px;
     height: 50px;
     width: 50px;
-    opacity: 1;
 }
 
 main {
