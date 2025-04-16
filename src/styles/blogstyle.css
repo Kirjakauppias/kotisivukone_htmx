@@ -44,6 +44,7 @@ h2 {
 }
 
 .img-banner {
+    text-align: center;
     position: fixed;
     bottom: 0;
     left: 0;
