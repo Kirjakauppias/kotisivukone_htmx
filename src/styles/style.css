@@ -588,6 +588,10 @@ ul p {
         grid-template-columns: 1fr;
         max-width: 300px;
     }
+
+    .blog-card {
+        width: 100% !important;
+    }
   }
 
   @media screen and (max-width: 600px) {
