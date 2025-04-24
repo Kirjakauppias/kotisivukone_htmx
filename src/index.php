@@ -164,6 +164,12 @@ if (empty($_SESSION['modal_key'])) {
 <main>
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
     <?php if(!$loggedIn): ?>
+        <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
+        <div class="blog-grid-container">
+        <div id="blog-grid" class="blog-grid">
+            <?php include 'fetch_blogs.php'; ?>
+        </div>
+        </div>
         <!-- Esittelyotsikko -->
         <div class="presentation">
             <p>Luo ilmainen blogi!</p>
@@ -172,6 +178,8 @@ if (empty($_SESSION['modal_key'])) {
             <br>
             <a href="https://tarinanpaikka.up.railway.app/blogit/mikon-blogi" target="_blank">Lue täältä uusimmat muutokset</a>
         </div>
+        
+
         <!-- Esittelylaatikot -->
         <div class="row">
           <div class="column">

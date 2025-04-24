@@ -183,6 +183,14 @@ function requireLoginModals($conn) {
     }
 }
 
+// Funktio uusimpien tietojen hakemiseen
+function fetchLatest($conn, $table, $columns, $limit = 5) {
+    $sql = "SELECT $columns FROM $table ORDER BY created_at DESC LIMIT ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $limit);
+    $stmt->execute();
+    return $stmt->get_result();
+ }
 
 
 /*

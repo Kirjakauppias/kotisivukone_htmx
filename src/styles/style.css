@@ -17,7 +17,8 @@ h1 {
 }
 
 main {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office2.jpg");
+    background-image: linear-gradient(rgba(5, 58, 16, 0.5), rgba(0, 0, 0, 0.5));
+    /*background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office2.jpg");*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -285,7 +286,7 @@ ul p {
     padding-top: 3rem;
     margin-left: 25px;
     color:#fff;
-    margin-bottom: 10rem;
+    /*margin-bottom: 10rem;*/
 }
 .presentation p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -303,6 +304,79 @@ ul p {
     font-size: 16px;
     padding: 3px;
  }
+
+/* 24.4.25 BLOGIEN ESITTELY -GRID */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    max-width: 800px;  /* tai 3 x kortin leveys + väli esim: 3 * 240px + 2 * 1rem */
+    margin: 0 auto;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.blog-card {
+    background-color: #ebbfff4d;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: 165px;
+    width: 240px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.blog-card a:link, a:hover, a:visited, a:active {
+    color: #f2f2f2;
+    text-decoration: none;
+}
+.blog-card h1 {
+    letter-spacing: normal !important;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+}
+.blog-card img {
+    padding-top: 16px;
+    width: 100px;
+    /*height: 100px;*/
+    /*object-fit: cover;*/
+    /*display: block;*/
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover img {
+    transform: scale(1.05);
+}
+
+.blog-description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.blog-card:hover .blog-description {
+    opacity: 1;
+}
+
+.load-more {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.75rem 2rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 /* ESITTELY -GRID */
 .row {
     display: flex;
@@ -446,7 +520,7 @@ ul p {
 /* PIENEMMÄN RUUDUN TYYLIT */
   @media screen and (max-width: 1600px){
     .presentation {
-        margin-bottom: 6rem;
+        /*margin-bottom: 6rem;*/
     }
   }
   @media screen and (max-width: 1514px) {
@@ -455,7 +529,7 @@ ul p {
     }
     .presentation {
         padding-top: 3rem;
-        margin-bottom: 6rem;
+        /*margin-bottom: 6rem;*/
     }
   }
 
@@ -509,6 +583,11 @@ ul p {
         letter-spacing: 3px;
         font-size: 20px;
     }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
   }
 
   @media screen and (max-width: 600px) {
@@ -529,6 +608,7 @@ ul p {
     .user-interface-icons {
         margin: 0 auto;
     }
+
   }
 
   @media screen and (max-width: 500px){
