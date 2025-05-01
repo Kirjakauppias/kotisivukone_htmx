@@ -306,6 +306,7 @@ ul p {
  }
 
 /* 24.4.25 BLOGIEN ESITTELY -GRID */
+.blog-banner {text-align: center;}
 .blog-grid-container {
     align-items: center;
 }
@@ -323,7 +324,6 @@ ul p {
 
 .blog-card {
     background-color: white;
-    position: relative;
     overflow: hidden;
     cursor: pointer;
     height: 75px;
