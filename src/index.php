@@ -169,15 +169,16 @@ $result = $stmt->get_result();
 <main>
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
     <?php if(!$loggedIn): ?>
+
         <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
-        <div class="blog-grid-container">
     <div id="blog-grid" class="blog-grid">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="blog-card">
                 <a href="blogit/<?= htmlspecialchars($row['slug']) ?>">
                     <h1><?= htmlspecialchars($row['name']) ?></h1>
-                    <img src="images/tp.png">
-                    <div class="blog-description"><?= htmlspecialchars($row['description']) ?></div>
+                    <p><?= htmlspecialchars($row['description']) ?></p>
+                    <!--<img src="images/tp.png">-->
+                    <!--<div class="blog-description"><?= htmlspecialchars($row['description']) ?></div>-->
                 </a>
             </div>
         <?php endwhile; ?>
