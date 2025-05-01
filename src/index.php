@@ -25,6 +25,11 @@ if (empty($_SESSION['modal_key'])) {
     // Jos ei ole, luodaan satunnainen avain ja tallennetaan se sessioon
     $_SESSION['modal_key'] = bin2hex(random_bytes(32)); // Luodaan satunnainen 64-merkkinen avain
 }
+
+// Alkuun haetaan 6 uusinta blogia
+$stmt = $conn->prepare("SELECT blog_id, name, slug, description FROM BLOG WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT 6");
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 <html lang="en">
@@ -166,9 +171,29 @@ if (empty($_SESSION['modal_key'])) {
     <?php if(!$loggedIn): ?>
         <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
         <div class="blog-grid-container">
-        <div id="blog-grid" class="blog-grid">
-            <?php include 'fetch_blogs.php'; ?>
-        </div>
+    <div id="blog-grid" class="blog-grid">
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="blog-card">
+                <a href="blogit/<?= htmlspecialchars($row['slug']) ?>">
+                    <h1><?= htmlspecialchars($row['name']) ?></h1>
+                    <img src="images/tp.png">
+                    <div class="blog-description"><?= htmlspecialchars($row['description']) ?></div>
+                </a>
+            </div>
+        <?php endwhile; ?>
+    </div>
+
+    <button id="load-more"
+            class="load-more"
+            data-offset="6"
+            onclick="loadMoreBlogs()">
+        Lisää blogeja
+    </button>
+    <!-- Piilotettava viesti kun ei ole enempää -->
+    <p id="no-more-message" style="display: none; text-align: center; margin-top: 1rem;">
+        Ei enempää blogeja.
+    </p>
+</div>
         </div>
         <!-- Esittelyotsikko -->
         <div class="presentation">
@@ -257,6 +282,26 @@ if (empty($_SESSION['modal_key'])) {
          x.className = "topnav"; // Sulje valikko
       }
     });
+
+    // Funktio joka lataa blogeja
+    function loadMoreBlogs() {
+    const button = document.getElementById('load-more');
+    const offset = parseInt(button.getAttribute('data-offset'), 10);
+
+    fetch(`fetch_blogs.php?offset=${offset}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('blog-grid')
+                .insertAdjacentHTML('beforeend', data.html);
+
+            if (data.hasMore) {
+                button.setAttribute('data-offset', offset + 6);
+            } else {
+                button.style.display = 'none';
+                document.getElementById('no-more-message').style.display = 'block';
+            }
+        });
+    }
 </script>
 </body>
 </html>
