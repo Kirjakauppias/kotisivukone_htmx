@@ -663,4 +663,7 @@ ul p {
         width: 100% !important;
         border-radius: 0 !important;
     }
+    .blog-card h1 {
+        background-color: #ebbfff4d;
+    }
   }
