@@ -15,7 +15,7 @@
     </div> <!-- /Banneri-->
     <main>
         <div class="img-banner">
-                <a href="../index.php"><img src="../images/tp.png" alt="logo" class="logo-img"></a>
+                <a href="../index.php"><img src="../images/home.png" alt="logo" class="logo-img"></a>
         </div>
         <div class="article-container">
             {articles} <!-- Tänne generoidaan kaikki artikkelit PHP:n kautta -->
