@@ -321,7 +321,7 @@ ul p {
 }
 
 .blog-card {
-    background-color: #ebbfff4d;
+    background-color: white;
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -664,6 +664,6 @@ ul p {
         border-radius: 0 !important;
     }
     .blog-card h1 {
-        background-color: #ebbfff4d;
+        background-color: black;
     }
   }
