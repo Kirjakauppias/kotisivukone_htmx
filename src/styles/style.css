@@ -17,8 +17,8 @@ h1 {
 }
 
 main {
-    background-image: linear-gradient(rgba(5, 58, 16, 0.5), rgba(0, 0, 0, 0.5));
-    /*background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office2.jpg");*/
+    /*background-image: linear-gradient(rgba(5, 58, 16, 0.5), rgba(0, 0, 0, 0.5));*/
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/office2.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -318,6 +318,7 @@ ul p {
     margin: 0 auto;
     padding: 1rem;
     justify-content: center;
+    text-align: center;
 }
 
 .blog-card {
@@ -662,7 +663,7 @@ ul p {
         width: 100% !important;
     }
     .blog-card h1 {
-        background-color: #375b3b;
+        background-color: #39633e;
         text-transform: uppercase;
         font-size: 18px;
         padding: 3px;

@@ -170,8 +170,9 @@ $result = $stmt->get_result();
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
     <?php if(!$loggedIn): ?>
 
-        <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
+    <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
     <div id="blog-grid" class="blog-grid">
+        <h1>Uusimmat blogit</h1>
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="blog-card">
                 <a href="blogit/<?= htmlspecialchars($row['slug']) ?>">
