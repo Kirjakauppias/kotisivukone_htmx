@@ -326,10 +326,10 @@ ul p {
     background-color: white;
     overflow: hidden;
     cursor: pointer;
-    height: 75px;
     width: 240px;
     text-align: center;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
 }
 
 .blog-card a:link, a:hover, a:visited, a:active {
@@ -338,15 +338,18 @@ ul p {
 }
 
 .blog-card h1 {
-    background-color: #333;
+    background-color: #39633e;
     letter-spacing: normal !important;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
     font-size: 1.2rem;
+    text-transform: uppercase;
+    padding: 3px;
 }
 
 .blog-card p {
     color:#212422;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 .blog-card img {
     padding-top: 16px;
@@ -662,6 +665,7 @@ ul p {
     .blog-card {
         width: 100% !important;
     }
+
     .blog-card h1 {
         background-color: #39633e;
         text-transform: uppercase;
