@@ -171,15 +171,16 @@ $result = $stmt->get_result();
     <?php if(!$loggedIn): ?>
 
     <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
-    <div class="blog-banner"><h1>Uusimmat blogit</h1></div>
     <div id="blog-grid" class="blog-grid">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="blog-card">
                 <a href="blogit/<?= htmlspecialchars($row['slug']) ?>">
+                    <section class="blog-card-section">
                     <h1><?= htmlspecialchars($row['name']) ?></h1>
                     <p><?= htmlspecialchars($row['description']) ?></p>
                     <!--<img src="images/tp.png">-->
                     <!--<div class="blog-description"><?= htmlspecialchars($row['description']) ?></div>-->
+                    </section>
                 </a>
             </div>
         <?php endwhile; ?>
