@@ -84,6 +84,8 @@ $result = $stmt->get_result();
         <a href="#home" class="active"><img src="images/tp.png" alt="logo"></a>
         <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivun navigaatio -->
         <?php if(!$loggedIn): ?>
+            <a href="#blog-grid">Blogit</a>
+            <a href="#presentation">Esittely</a>
             <a href="#contact">Yhteystiedot</a>
         <?php endif; ?>
         <!-- 23.1.25: Jos käyttäjä on kirjautunut sisään, näytetään hallinta-navigaatio -->
@@ -199,7 +201,7 @@ $result = $stmt->get_result();
 </div>
         </div>
         <!-- Esittelyotsikko -->
-        <div class="presentation">
+        <div class="presentation" id="presentation">
             <p>Luo ilmainen blogi!</p>
             <p>Täällä voit kertoa tarinasi </p>
             <p class="orange">tai ideasi helposti.</p>
