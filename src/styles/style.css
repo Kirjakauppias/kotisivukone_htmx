@@ -607,10 +607,16 @@ ul p {
     .blog-grid {
         max-width: 555px;
         grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        gap: 0.5rem !important;
+        padding: 0.5rem !important;
     }
 
     .blog-card {
         width: 100% !important;
+    }
+
+    .blog-card h1 {
+        font-size: 16px !important;
     }
   }
 
