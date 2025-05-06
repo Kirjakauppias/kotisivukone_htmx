@@ -604,8 +604,8 @@ ul p {
     }
 
     .blog-grid {
-        grid-template-columns: 1fr;
         max-width: 555px;
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
     }
 
     .blog-card {
@@ -661,17 +661,12 @@ ul p {
         font-size: 10px;
     }
 
-    .blog-grid {
-        grid-template-columns: 1fr;
-        width: 85% !important;
-    }
-
     .blog-card {
         width: 100% !important;
     }
 
     .blog-card h1 {
-        background-color: #39633e;
+        /*background-color: #39633e;*/
         text-transform: uppercase;
         font-size: 18px;
         padding: 3px;
