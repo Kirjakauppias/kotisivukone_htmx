@@ -307,6 +307,17 @@ ul p {
  }
 
 /* 24.4.25 BLOGIEN ESITTELY -GRID */
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    max-width: 800px;  /* tai 3 x kortin leveys + väli esim: 3 * 240px + 2 * 1rem */
+    margin: 0 auto;
+    padding: 1rem;
+    justify-content: center;
+    text-align: center;
+}
+
 .article-card {
     background-color: #ffffff7a;
     overflow: hidden;
@@ -636,6 +647,13 @@ ul p {
         font-size: 20px;
     }
 
+    .article-grid {
+        max-width: 555px;
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        gap: 0.5rem !important;
+        padding: 0.5rem !important;
+    }
+
     .blog-grid {
         max-width: 555px;
         grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
@@ -702,6 +720,19 @@ ul p {
 
     .blog-card {
         width: 100% !important;
+    }
+
+    .article-card {
+        width: auto !important;
+        height: 211px !important;
+    }
+    
+    .article-card h1 {
+        font-size: 14px !important;
+    }
+
+    .article-img-tp-container {
+        height: 80% !important;
     }
 
     .blog-card h1 {

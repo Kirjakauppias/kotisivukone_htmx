@@ -190,7 +190,7 @@ $result = $stmt->get_result();
     <?php if(!$loggedIn): ?>
         <h1>Uusimmat julkaisut</h1>
         <!-- 6.5.25 ESITELLÄÄN UUSIMMAT JULKAISUT -->
-        <div id="blog-grid" class="blog-grid">
+        <div id="article-grid" class="article-grid">
         <?php while ($row = $articleResult->fetch_assoc()): ?>
             <div class="article-card">
             <a class="article-link" href="blogit/<?= htmlspecialchars($row['slug']) ?>">
