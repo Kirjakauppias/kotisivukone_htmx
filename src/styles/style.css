@@ -24,6 +24,7 @@ main {
     background-size: cover;
     /* position: relative;  Poissa jotta navbar sticky toimii */
     min-height: 100vh; /* Asettaa pääsisällön vähimmäiskorkeuden näytön korkeudeksi */
+    text-align: center;
 }
 
 footer {
@@ -306,6 +307,38 @@ ul p {
  }
 
 /* 24.4.25 BLOGIEN ESITTELY -GRID */
+.article-card {
+    background-color: #ffffff7a;
+    overflow: hidden;
+    cursor: pointer;
+    width: 240px;
+    height: 270px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
+}
+
+.article-card a:link, a:hover, a:visited, a:active {
+    color: #f2f2f2;
+    text-decoration: none;
+}
+.article-card a:hover {
+    opacity: 0.8; /* Himmentää painikkeen taustaväriä hover-tilassa */
+}
+
+.article-img {
+    width: 100% !important;
+    padding: 0 !important;
+}
+.article-img-tp-container {
+    height: 241px !important;
+    align-content: center;
+}
+
+.article-img-tp {
+    padding: 0 !important;
+    width: 100px !important;
+    opacity: 0.5 !important;
+}
 .blog-banner {text-align: center;}
 .blog-grid-container {
     align-items: center;
@@ -341,7 +374,7 @@ ul p {
 .blog-card a:hover {
     opacity: 0.8; /* Himmentää painikkeen taustaväriä hover-tilassa */
 }
-.blog-card h1 {
+.blog-card h1, .article-card h1 {
     background-color: #333;
     letter-spacing: normal !important;
     font-family: monospace;
@@ -356,7 +389,7 @@ ul p {
     margin-bottom: 15px;
     padding: 3px;
 }
-.blog-card img {
+.blog-card img, .article-card img {
     padding-top: 16px;
     width: 75px;
     /*height: 100px;*/

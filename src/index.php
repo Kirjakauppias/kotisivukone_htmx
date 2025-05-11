@@ -26,6 +26,23 @@ if (empty($_SESSION['modal_key'])) {
     $_SESSION['modal_key'] = bin2hex(random_bytes(32)); // Luodaan satunnainen 64-merkkinen avain
 }
 
+// Alkuun haetaan 6 uusinta julkaisua
+$article = $conn->prepare("SELECT 
+                            a.article_id, 
+                            a.blog_id, 
+                            a.title, 
+                            a.content, 
+                            a.image_path,
+                            b.slug 
+                        FROM ARTICLE a 
+                        JOIN BLOG b ON a.blog_id = b.blog_id 
+                        WHERE a.deleted_at IS NULL 
+                        ORDER BY a.created_at DESC 
+                        LIMIT 6
+");
+$article->execute();
+$articleResult = $article->get_result();
+
 // Alkuun haetaan 6 uusinta blogia
 $stmt = $conn->prepare("SELECT blog_id, name, slug, description FROM BLOG WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT 6");
 $stmt->execute();
@@ -171,7 +188,29 @@ $result = $stmt->get_result();
 <main>
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
     <?php if(!$loggedIn): ?>
+        <h1>Uusimmat julkaisut</h1>
+        <!-- 6.5.25 ESITELLÄÄN UUSIMMAT JULKAISUT -->
+        <div id="blog-grid" class="blog-grid">
+        <?php while ($row = $articleResult->fetch_assoc()): ?>
+            <div class="article-card">
+            <a class="article-link" href="blogit/<?= htmlspecialchars($row['slug']) ?>">
+                <div class="article-card-section">
+                    <h1><?= htmlspecialchars($row['title']) ?></h1>
 
+                    <?php if($row['image_path'] === null) {
+                        ?><div class="article-img-tp-container">
+                            <img class="article-img-tp" src="images/tp.png">
+                          </div>
+                    <?php }
+                            else { ?> <img class="article-img" src="<?=$row['image_path'] ?>"> <?php
+                            } ?>    
+                </div>
+            </a>
+                
+            </div>
+        <?php endwhile; ?>
+    </div>
+    <h1>Uusimmat blogit</h1>
     <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
     <div id="blog-grid" class="blog-grid">
         <?php while ($row = $result->fetch_assoc()): ?>
