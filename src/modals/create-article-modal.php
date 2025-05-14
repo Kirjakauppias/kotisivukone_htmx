@@ -33,11 +33,13 @@
     </div>
     <!-- Näytetään artikkelin luontilomake -->
     <!-- 6.3.25 Lisätään tiedostojen lähetys: enctype -->
+    <!-- 14.5.25 Lisätään lataus-ilmoitus: hx-indicator -->
     <form 
       hx-post="./verifications/create-article-vf.php" 
       hx-target="#response"
       hx-swap="innerHTML"
-      enctype="multipart/form-data" 
+      enctype="multipart/form-data"
+      hx-indicator="#loading-indicator" 
     >  
       <!-- Lähetetään julkaisun otsikko -->
       <label for="article_title">Julkaisun otsikko*</label>
@@ -65,6 +67,20 @@
         Peruuta
       </button>
     </form>
+
+    <!-- 14.5.25 Tämä viesti näkyy automaattisesti kun lomake lähetetään -->
+    <div id="loading-indicator" class="htmx-indicator" style="display:none; margin-top:1rem; color:#555;">
+      <span class="spinner" style="display:inline-block; width:1rem; height:1rem; border:2px solid #ccc; border-top-color:#333; border-radius:50%; animation: spin 1s linear infinite;"></span>
+      Ladataan artikkelia...
+    </div>
+
+    <style>
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+
+
     <!-- Lisätään "response" -elementti virheiden ja onnistumisviestien näyttämiseen. -->
     <div id="response" aria-live="polite" role="alert">
       <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut artikkelin luonti -->
@@ -72,6 +88,18 @@
   </div>
 <!-- Suljetaan modalin pääkontaineri. -->        
 </div>
+
+<script>
+  document.body.addEventListener('htmx:send', function() {
+    console.log('HTMX lähettää pyynnön');
+  });
+  document.body.addEventListener('htmx:beforeRequest', function() {
+    document.getElementById('loading-indicator').style.display = 'block';
+  });
+  document.body.addEventListener('htmx:afterSwap', function() {
+    document.getElementById('loading-indicator').style.display = 'none';
+  });
+</script>
 
 <!--
   create-article-modal.php algoritmi:
@@ -86,6 +114,7 @@
     Haetaan käyttäjän blogin tiedot tietokannasta.
     Jos blogia ei löydy, estetään pääsy modalin kautta.
     Luodaan modal-ikkuna julkaisun luomista varten.
+    Lisätään lataus -ilmoitus.
     Näytetään artikkelin luontilomake:
       -Otsikko (pakollinen).
       -Sisältö.
