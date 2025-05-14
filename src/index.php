@@ -221,7 +221,7 @@ $result = $stmt->get_result();
 
     <!-- Piilotettava viesti kun ei ole enempää -->
     <p id="no-more-message" style="display: none; text-align: center; margin-top: 1rem;">
-        Ei enempää blogeja.
+        Ei enempää julkaisuja.
     </p>
 
     <h1>Uusimmat blogit</h1>
