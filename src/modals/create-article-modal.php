@@ -52,7 +52,7 @@
       <!-- 6.3. Kuvan lataus -->
       <label for="article_image">Lisää kuva</label>
       <input type="file" id ="article_image" name="article_image" accept="image/*">
-      <p>* pakolliset kentät</p>
+      <p>* pakolliset kentät -  mobiiliyhteydellä lataus saattaa kestää kauemmin</p>
 
       <!-- Lähetetään blogin ID -->
       <input type="hidden" name="blog_id" value="<?php echo (int) $blog['blog_id']; ?>">
@@ -122,6 +122,7 @@
       -Piilotettu kenttä, joka sisältää blogin ID:n.
       -Lähetä -painike, joka sisältää tiedon create-article-vf.php:lle HTMX:n kautta.
       -Peruuta-painike, joka sulkee modalin ilman muutoksia.
+    Lisätään elementti jossa ilmoitetaan että julkaistua ollaan lataamassa.
     Lisätään "response" -elementti virheiden ja onnistumisviestien näyttämiseen.
     Suljetaan modalin pääkontaineri.
 -->
