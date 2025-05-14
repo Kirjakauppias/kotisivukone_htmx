@@ -101,6 +101,7 @@ $result = $stmt->get_result();
         <a href="#home" class="active"><img src="images/tp.png" alt="logo"></a>
         <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivun navigaatio -->
         <?php if(!$loggedIn): ?>
+            <a href="#articles">Julkaisut</a>
             <a href="#blog-grid">Blogit</a>
             <a href="#presentation">Esittely</a>
             <a href="#contact">Yhteystiedot</a>
@@ -188,7 +189,7 @@ $result = $stmt->get_result();
 <main>
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
     <?php if(!$loggedIn): ?>
-        <h1>Uusimmat julkaisut</h1>
+        <h1 id="articles">Uusimmat julkaisut</h1>
         <!-- 6.5.25 ESITELLÄÄN UUSIMMAT JULKAISUT -->
         <div id="article-grid" class="article-grid">
         <?php while ($row = $articleResult->fetch_assoc()): ?>
@@ -210,6 +211,19 @@ $result = $stmt->get_result();
             </div>
         <?php endwhile; ?>
     </div>
+
+    <button id="load-more"
+            class="load-more"
+            data-offset="6"
+            onclick="loadMoreArticles()">
+        Lisää julkaisuja
+    </button>
+
+    <!-- Piilotettava viesti kun ei ole enempää -->
+    <p id="no-more-message" style="display: none; text-align: center; margin-top: 1rem;">
+        Ei enempää blogeja.
+    </p>
+
     <h1>Uusimmat blogit</h1>
     <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
     <div id="blog-grid" class="blog-grid">
@@ -326,6 +340,26 @@ $result = $stmt->get_result();
          x.className = "topnav"; // Sulje valikko
       }
     });
+
+    // Funktio joka lataa julkaisuja
+    function loadMoreArticles() {
+    const button = document.getElementById('load-more');
+    const offset = parseInt(button.getAttribute('data-offset'), 10);
+
+    fetch(`fetch_articles.php?offset=${offset}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('article-grid')
+                .insertAdjacentHTML('beforeend', data.html);
+
+            if (data.hasMore) {
+                button.setAttribute('data-offset', offset + 6);
+            } else {
+                button.style.display = 'none';
+                document.getElementById('no-more-message').style.display = 'block';
+            }
+        });
+    }
 
     // Funktio joka lataa blogeja
     function loadMoreBlogs() {
