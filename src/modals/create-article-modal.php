@@ -69,11 +69,11 @@
     </form>
 
     <!-- 19.5.25 Tämä viesti näkyy automaattisesti kun lomake lähetetään -->
-    <div id="loading-indicator" class="htmx-indicator" style="display:none; margin-top:1rem; color:#555;">
-      <span class="spinner" style="display:inline-block; width:1rem; height:1rem; border:2px solid #ccc; border-top-color:#333; border-radius:50%; animation: spin 1s linear infinite;"></span>
-      Ladataan artikkelia...
+    <div id="loading-indicator" class="htmx-indicator">
+      <span class="spinner"></span>
+      Luodaan julkaisua...
     </div>
-
+    <!-- 19.5.25 Spinnerin tyyli -->
     <style>
       @keyframes spin {
         to { transform: rotate(360deg); }
@@ -88,7 +88,7 @@
   </div>
 <!-- Suljetaan modalin pääkontaineri. -->        
 </div>
-
+<!-- 19.5.25 Lisätty scripti jolla saadaan lataus -ilmoitus-->
 <script>
   document.body.addEventListener('htmx:send', function() {
     console.log('HTMX lähettää pyynnön');

@@ -212,7 +212,7 @@ $result = $stmt->get_result();
         <?php endwhile; ?>
     </div>
 
-    <button id="load-more"
+    <button id="load-more-articles"
             class="load-more"
             data-offset="6"
             onclick="loadMoreArticles()">
@@ -248,7 +248,7 @@ $result = $stmt->get_result();
         Lisää blogeja
     </button>
     <!-- Piilotettava viesti kun ei ole enempää -->
-    <p id="no-more-message" style="display: none; text-align: center; margin-top: 1rem;">
+    <p id="no-more-blogs" style="display: none; text-align: center; margin-top: 1rem;">
         Ei enempää blogeja.
     </p>
 </div>
@@ -343,7 +343,7 @@ $result = $stmt->get_result();
 
     // Funktio joka lataa julkaisuja
     function loadMoreArticles() {
-    const button = document.getElementById('load-more');
+    const button = document.getElementById('load-more-articles');
     const offset = parseInt(button.getAttribute('data-offset'), 10);
 
     fetch(`fetch_articles.php?offset=${offset}`)
@@ -376,7 +376,7 @@ $result = $stmt->get_result();
                 button.setAttribute('data-offset', offset + 6);
             } else {
                 button.style.display = 'none';
-                document.getElementById('no-more-message').style.display = 'block';
+                document.getElementById('no-more-blogs').style.display = 'block';
             }
         });
     }

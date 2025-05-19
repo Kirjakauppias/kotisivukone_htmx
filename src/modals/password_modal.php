@@ -26,6 +26,7 @@ $userData = getUserByUserId($conn, $user_id);
           hx-post="./verifications/password-vf.php" 
           hx-target="#response"
           hx-swap="innerHTML"
+          hx-indicator="#loading-indicator" 
         >  
             <label for="password">Uusi salasana</label>
         
@@ -48,13 +49,35 @@ $userData = getUserByUserId($conn, $user_id);
                 Peruuta
             </button>
         </form>
-          
+        <!-- 19.5.25 Tämä viesti näkyy automaattisesti kun lomake lähetetään -->
+        <div id="loading-indicator" class="htmx-indicator">
+            <span class="spinner"></span>
+            Päivitetään salasanaa...
+          </div>
+        <!-- 19.5.25 Lisätty spinneri -tyyli -->
+        <style>
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
+        </style>
+
         <div id="response" aria-live="polite" role="alert">
             <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut päivitys -->
         </div>
   </div>        
 </div><!--/container-->
-
+<!-- 19.5.25 Lisätty scripti jolla saadaan lataus -ilmoitus-->
+<script>
+  document.body.addEventListener('htmx:send', function() {
+    console.log('HTMX lähettää pyynnön');
+  });
+  document.body.addEventListener('htmx:beforeRequest', function() {
+    document.getElementById('loading-indicator').style.display = 'block';
+  });
+  document.body.addEventListener('htmx:afterSwap', function() {
+    document.getElementById('loading-indicator').style.display = 'none';
+  });
+</script>
 <!--
   password-modal.php algoritmi:
 

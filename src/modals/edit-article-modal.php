@@ -51,6 +51,7 @@
       hx-target="#response"
       hx-swap="innerHTML"
       enctype="multipart/form-data"
+      hx-indicator="#loading-indicator" 
     >  
       <input type="hidden" id="article_id" name="article_id">
       
@@ -79,13 +80,6 @@
           </button>
         </div>
       </div>
-
-      
-      <!--<div class="image-preview">
-          <img id="article-image-preview" src="" alt="Ei kuvaa" style="max-width: 100%; display: none;">
-          
-      </div>-->
-    
       <input type="submit" value="Päivitä julkaisu">
 
       
@@ -107,6 +101,18 @@
       Poista julkaisu
     </button>
     </form>
+    <!-- 19.5.25 Tämä viesti näkyy automaattisesti kun lomake lähetetään -->
+    <div id="loading-indicator" class="htmx-indicator">
+      <span class="spinner"></span>
+      Päivitetään artikkelia...
+    </div>
+    <!-- 19.5.25 Lisätty spinneri -tyyli -->
+    <style>
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+
     <div id="response" aria-live="polite" role="alert">
       <!-- Tässä näytetään mahdolliset virheilmoitukset ja onnistunut artikkelin luonti -->
     </div>
@@ -152,6 +158,17 @@
         deleteArticleBtn.style.display = "none"; // Piilotetaan "Poista julkaisu" -nappi
     }
 }
+
+// 19.5.25 Lisätty scripti jolla saadaan lataus -ilmoitus
+document.body.addEventListener('htmx:send', function() {
+    console.log('HTMX lähettää pyynnön');
+  });
+  document.body.addEventListener('htmx:beforeRequest', function() {
+    document.getElementById('loading-indicator').style.display = 'block';
+  });
+  document.body.addEventListener('htmx:afterSwap', function() {
+    document.getElementById('loading-indicator').style.display = 'none';
+  });
 </script>
 
 <!--

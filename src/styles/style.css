@@ -231,6 +231,23 @@ img.avatar {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lisää varjon sisällön ympärille */
 }
 
+/* MODAL -LOADER TYYLIT */
+.htmx-indicator {
+    display: none;
+    margin-top: 1rem;
+    color: #555;
+}
+
+.spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
 /* Käyttöohjeistusikkuna*/
 
 .user-guide-modal-content {
