@@ -68,7 +68,7 @@
       </button>
     </form>
 
-    <!-- 14.5.25 Tämä viesti näkyy automaattisesti kun lomake lähetetään -->
+    <!-- 19.5.25 Tämä viesti näkyy automaattisesti kun lomake lähetetään -->
     <div id="loading-indicator" class="htmx-indicator" style="display:none; margin-top:1rem; color:#555;">
       <span class="spinner" style="display:inline-block; width:1rem; height:1rem; border:2px solid #ccc; border-top-color:#333; border-radius:50%; animation: spin 1s linear infinite;"></span>
       Ladataan artikkelia...
