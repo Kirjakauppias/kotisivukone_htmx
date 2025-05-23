@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://tarinanpaikka.up.railway.app/sitemap.xml

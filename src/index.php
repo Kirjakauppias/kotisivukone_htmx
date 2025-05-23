@@ -53,6 +53,8 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 20.5.25 Google-search -->
+    <meta name="robots" content="index, follow">
     <!--meta name="csrf-token" content="<?//php echo $_SESSION['csrf_token']; ?>">-->
     <title>Tarinan paikka</title>
     <link rel="stylesheet" href="./styles/style.css">
