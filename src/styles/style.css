@@ -403,7 +403,7 @@ ul p {
 .blog-card a:hover {
     opacity: 0.8; /* Himmentää painikkeen taustaväriä hover-tilassa */
 }
-.blog-card h1, .article-card h1 {
+.blog-card h2, .article-card h2 {
     background-color: #333;
     letter-spacing: normal !important;
     font-family: monospace;
@@ -475,7 +475,7 @@ ul p {
     background-image: linear-gradient(rgba(241, 240, 240, 0.5), rgba(202, 197, 197, 0.5));
 }
 
-.column h1 {
+.column h2 {
     margin-top: 3px;
     margin-bottom: 7px;
     color: yellow;

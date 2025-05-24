@@ -48,15 +48,28 @@ $stmt = $conn->prepare("SELECT blog_id, name, slug, description FROM BLOG WHERE 
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
-
-<html lang="en">
+<!-- Asetetaan kieliasetukset fi -->
+<html lang="fi">
 <head>
+    <!-- Open Graph meta-tagit / SEO -->
+    <meta property="og:title" content="Tarinan paikka - luo oma blogi helposti" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tarinanpaikka.up.railway.app/" />
+    <meta property="og:image" content="https://tarinanpaikka.up.railway.app/images/tp.png" />
+    <meta property="og:description" content="Tarinan paikka on alusta, jossa voit luoda ja jakaa omia tarinoitasi ja blogikirjoituksia helposti. Liity mukaan ilmaiseksi!" />
+    <meta property="og:site_name" content="Tarinan paikka" />
+    <meta property="og:locale" content="fi_FI" />
+
+    <title>Tarinan paikka - Luo oma blogi helposti</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 20.5.25 Google-search -->
-    <meta name="robots" content="index, follow">
     <!--meta name="csrf-token" content="<?//php echo $_SESSION['csrf_token']; ?>">-->
-    <title>Tarinan paikka</title>
+    <!-- 20.5.25 Google-search / SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Tarinan paikka on helppo ja turvallinen alusta oman blogin luomiseen - täysin ilmaiseksi.">
+    <meta name="author" content="Mikko Lepistö">
+    <link rel="canonical" href="https://tarinanpaikka.up.railway.app/" />
+    <!-- Haetaan tyyliasetukst ja kirjastot -->
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="htmx.js" defer></script>
@@ -100,7 +113,7 @@ $result = $stmt->get_result();
 
     <!-- Responsiivinen navigointipalkki -->
     <div class="topnav" id="myTopnav">
-        <a href="#home" class="active"><img src="images/tp.png" alt="logo"></a>
+        <a href="#home" class="active"><img src="images/tp.png" alt="blogin_logo"></a>
         <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivun navigaatio -->
         <?php if(!$loggedIn): ?>
             <a href="#articles">Julkaisut</a>
@@ -191,21 +204,21 @@ $result = $stmt->get_result();
 <main>
     <!-- Jos käyttäjä ei ole kirjautunut sisään, näytetään esittelysivu -->
     <?php if(!$loggedIn): ?>
-        <h1 id="articles">Uusimmat julkaisut</h1>
+        <h2 id="articles">Uusimmat julkaisut</h2>
         <!-- 6.5.25 ESITELLÄÄN UUSIMMAT JULKAISUT -->
         <div id="article-grid" class="article-grid">
         <?php while ($row = $articleResult->fetch_assoc()): ?>
             <div class="article-card">
             <a class="article-link" href="blogit/<?= htmlspecialchars($row['slug']) ?>">
                 <div class="article-card-section">
-                    <h1><?= htmlspecialchars($row['title']) ?></h1>
+                    <h2><?= htmlspecialchars($row['title']) ?></h2>
 
                     <?php if($row['image_path'] === null) {
                         ?><div class="article-img-tp-container">
-                            <img class="article-img-tp" src="images/tp.png">
+                            <img class="article-img-tp" src="images/tp.png" alt="blogin logo">
                           </div>
                     <?php }
-                            else { ?> <img class="article-img" src="<?=$row['image_path'] ?>"> <?php
+                            else { ?> <img class="article-img" src="<?=$row['image_path'] ?>" alt="artikkelissa oleva kuva"> <?php
                             } ?>    
                 </div>
             </a>
@@ -226,14 +239,14 @@ $result = $stmt->get_result();
         Ei enempää julkaisuja.
     </p>
 
-    <h1>Uusimmat blogit</h1>
+    <h2>Uusimmat blogit</h2>
     <!-- 24.4.25 ESITELLÄÄN UUSIMMAT BLOGIT -->
     <div id="blog-grid" class="blog-grid">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="blog-card">
                 <a href="blogit/<?= htmlspecialchars($row['slug']) ?>">
                     <section class="blog-card-section">
-                    <h1><?= htmlspecialchars($row['name']) ?></h1>
+                    <h2><?= htmlspecialchars($row['name']) ?></h2>
                     <p><?= htmlspecialchars($row['description']) ?></p>
                     <!--<img src="images/tp.png">-->
                     <!--<div class="blog-description"><?= htmlspecialchars($row['description']) ?></div>-->
@@ -268,8 +281,8 @@ $result = $stmt->get_result();
         <!-- Esittelylaatikot -->
         <div class="row">
           <div class="column">
-            <img src="images/webicon_small.png">
-            <h1>Helppokäyttöinen</h1>
+            <img src="images/webicon_small.png" alt="helppokäyttöisyys-ikoni">
+            <h2>Helppokäyttöinen</h2>
             <p>Rekisteröidy, luo blogi ja ala kirjoittamaan. Kaikki ilman koodaamista.</p>
             <a href="" alt="omat tiedot"
                 hx-get="modals/user-guide-modal.php" 
@@ -280,18 +293,18 @@ $result = $stmt->get_result();
             </a>
           </div>
           <div class="column">
-            <img src="images/responsiveicon_small.png">
-            <h1>Mobiiliystävällinen</h1>
+            <img src="images/responsiveicon_small.png" alt="mobiiliystävällinen-ikoni">
+            <h2>Mobiiliystävällinen</h2>
             <p>Responsiivinen ulkoasu näyttää hyvältä kaikilla laitteilla.</p>
           </div>
           <div class="column">
-            <img src="images/safeicon_small.png">
-            <h1>Turvallinen</h1>
+            <img src="images/safeicon_small.png" alt="turvallisuus-ikoni">
+            <h2>Turvallinen</h2>
             <p>Huolehdimme että tietoturva on parasta mahdollista. Jatkuvasti.</p>
           </div>
           <div class="column">
-            <img src="images/effecticon_small.png">
-            <h1>Oman näköinen blogi</h1>
+            <img src="images/effecticon_small.png" alt="muokattavuus-ikoni">
+            <h2>Oman näköinen blogi</h2>
             <p>Voit muokata blogin ulkoasua mieleiseksi (tulossa myöhemmin).</p>
           </div>
         </div><!-- /row-->
@@ -304,7 +317,7 @@ $result = $stmt->get_result();
 <footer id="contact">
     <div class="footer-container">
         <div class="footer-details">
-            <h2>Tietoa</h2> 
+            <h3>Tietoa</h3> 
             <a href="terms.html" alt="Käyttöehdot">Käyttöehdot</a>
             <a href="tietoturvaseloste.html" alt="Tietoturvaseloste">Tietoturvaseloste</a>
             <p>2025 Mikko Lepistö</p>

@@ -28,7 +28,7 @@ while ($row = $articleResult->fetch_assoc()) {
     $articlesHtml .= '<div class="article-card">';
     $articlesHtml .= '<a class="article-link" href="blogit/' . htmlspecialchars($row['slug']) . '">';
     $articlesHtml .= '<div class="article-card-section">';
-    $articlesHtml .= '<h1>' . htmlspecialchars($row['title']) . '</h1>';
+    $articlesHtml .= '<h2>' . htmlspecialchars($row['title']) . '</h2>';
     if($row['image_path'] === null) {
         $articlesHtml .= '<div class="article-img-tp-container">';
         $articlesHtml .= '<img class="article-img-tp" src="images/tp.png">';

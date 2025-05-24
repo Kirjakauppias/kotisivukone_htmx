@@ -20,7 +20,7 @@ while ($row = $result->fetch_assoc()) {
     $blogsHtml .= '<div class="blog-card">';
     $blogsHtml .= '<section class="blog-card-section">';
     $blogsHtml .= '<a href="blogit/' . htmlspecialchars($row['slug']) . '">';
-    $blogsHtml .= '<h1>' . htmlspecialchars($row['name']) . '</h1>';
+    $blogsHtml .= '<h2>' . htmlspecialchars($row['name']) . '</h2>';
     $blogsHtml .= '<p>' . htmlspecialchars($row['description']) . '</p>';
     $blogsHtml .= '</section>';
     $blogsHtml .= '</a></div>';
